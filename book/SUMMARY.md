@@ -19,6 +19,8 @@
 * [2021]()
     * [Diablo II Resurrected on Linux](./posts/d2r.md)
     * [Quake on Linux](./posts/quake.md)
+* [2020]()
+    * [Working with humans](./posts/working-with-humans.md)
 * [2019]()
     * [Picking pixels on X11](./posts/xcolor/index.md)
     * [Picking pixels on macOS](./posts/pixel-picker/index.md)
