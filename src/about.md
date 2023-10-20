@@ -92,3 +92,7 @@ Well, if you're still perusing, here's some projects I've enjoyed doing:
 * <https://github.com/acheronfail/morrsse>
 * <https://github.com/acheronfail/ftrace>
 * <https://github.com/acheronfail/rotp>
+
+---
+
+$$ \rho\frac{D\vec v}{Dt} = -\nabla p + \nabla \cdot T + \vec f $$
