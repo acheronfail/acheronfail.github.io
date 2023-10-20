@@ -8,6 +8,10 @@ src = "src"
 
 [build]
 create-missing = true
+extra-watch-dirs = ["preprocessors"]
+
+[preprocessor.embeds]
+command = "preprocessors/embeds.mjs"
 
 [preprocessor.katex]
 after = ["links"]
@@ -22,6 +26,7 @@ curly-quotes = true
 mathjax-support = false
 additional-css = [
   "node_modules/katex/dist/katex.min.css",
+  "preprocessors/embeds.css",
   "theme/pagetoc.css"
 ]
 additional-js = [

@@ -13,6 +13,6 @@ Uses [mdbook](https://rust-lang.github.io/mdBook/).
   * [ ] no need to repeat paths when nesting?
   * [ ] tests for files in `src` that don't exist in `SUMMARY`
 * [ ] better inline code styles in headers
-* [ ] shortcodes/snippets
-  * [ ] youtube links
-* [ ] table of contents for each page?
+* [ ] pre-commit hook for testing
+* [x] shortcodes/snippets
+  * [x] youtube links
