@@ -92,7 +92,7 @@ cat /var/usbdisk/sda1/td-w8970/openwrt-lantiq-xrx200-TDW8970-sysupgrade-1.image 
 
 > It's normal for the first `cat` command above to print:
 >
-> ```
+> ```txt
 > cat: write error: No space left on device
 > ```
 >
