@@ -13,13 +13,21 @@ create-missing = true
 after = ["links"]
 no-css = true
 
+[preprocessor.pagetoc]
+
 [output.html]
 default-theme = "dark"
 preferred-dark-theme = "ayu"
 curly-quotes = true
 mathjax-support = false
-additional-css = ["node_modules/katex/dist/katex.min.css"]
-additional-js = ["node_modules/katex/dist/katex.min.js"]
+additional-css = [
+  "node_modules/katex/dist/katex.min.css",
+  "theme/pagetoc.css"
+]
+additional-js = [
+  "node_modules/katex/dist/katex.min.js",
+  "theme/pagetoc.js"
+]
 no-section-label = false
 git-repository-url = "https://github.com/acheronfail/acheronfail.github.io"
 git-repository-icon = "fa-github"
