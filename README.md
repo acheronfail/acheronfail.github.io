@@ -4,7 +4,7 @@ Uses [mdbook](https://rust-lang.github.io/mdBook/).
 
 ## To Do
 
-* [ ] date that each page was last updated
+* [x] date that each page was last updated
 * [ ] codeblock titles
   * [ ] add them in retroactively
 * [ ] markdown support within `div.warning` blocks
@@ -16,3 +16,6 @@ Uses [mdbook](https://rust-lang.github.io/mdBook/).
 * [ ] pre-commit hook for testing
 * [x] shortcodes/snippets
   * [x] youtube links
+* [ ] use `bun` in preprocessor scripts (currently has some stdin issues)
+  * https://github.com/oven-sh/bun/issues/5240
+  * https://github.com/oven-sh/bun/issues/1607

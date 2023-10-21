@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "execa": "^8.0.1",
     "katex": "^0.16.9"
   },
   "devDependencies": {
