@@ -32,7 +32,8 @@ jobs:
       # clone
       - name: Checkout
         uses: actions/checkout@v3
-      # mdbook
+      # install dependencies
+      - uses: extractions/setup-just@v1
       - name: Install latest mdbook
         run: |
           tag=$(curl 'https://api.github.com/repos/rust-lang/mdbook/releases/latest' | jq -r '.tag_name')
@@ -40,10 +41,9 @@ jobs:
           mkdir mdbook
           curl -sSL $url | tar -xz --directory=./mdbook
           echo `pwd`/mdbook >> $GITHUB_PATH
-      - name: Test Book
-        run: mdbook test
-      - name: Build Book
-        run: mdbook build
+      # checks
+      - run: just test
+      - run: just build
       # pages
       - name: Setup Pages
         uses: actions/configure-pages@v3
