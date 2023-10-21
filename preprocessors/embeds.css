@@ -1,4 +1,4 @@
 .embed iframe {
+  aspect-ratio: 16 / 9;
   width: 100%;
-  min-height: 300px;
 }
