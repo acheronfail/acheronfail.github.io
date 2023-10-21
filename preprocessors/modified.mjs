@@ -11,10 +11,15 @@ const DATE_FORMAT = '%A %B %d %Y, %H:%M';
 
 runPreprocessor(async (_context, book) => {
   await forEachChapter(book, async (chapter) => {
-    const filePath = relative(process.cwd(), join(PATH_SRC, chapter.path));
-    const modified = await $`git log -1 ${`--date=format:${DATE_FORMAT}`} --pretty=format:%cd -- ${filePath}`;
-    const markdown = `<div class="modified">Last updated: ${modified.stdout}</div>`;
+    const argFile = relative(process.cwd(), join(PATH_SRC, chapter.path));
+    const argDate = `--date=format:${DATE_FORMAT}`;
 
-    chapter.content += `\n${markdown}`;
+    const { stdout: creation } = await $`git log -1 --diff-filter=A --follow ${argDate} --format=%cd -- ${argFile}`;
+    const { stdout: modified } = await $`git log -1 ${argDate} --pretty=format:%cd -- ${argFile}`;
+
+    chapter.content += `\n<div class="modified">
+      Created: ${creation}
+      ${creation != modified ? `<br/>Last updated: ${modified}` : ''}
+</div>`;
   });
 });
