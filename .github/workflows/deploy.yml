@@ -32,6 +32,18 @@ jobs:
       # clone
       - name: Checkout
         uses: actions/checkout@v3
+      # cache
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            ~/.cargo/.crates.toml
+            ~/.cargo/.crates2.json
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       # install dependencies
       - uses: extractions/setup-just@v1
       - uses: oven-sh/setup-bun@v1
