@@ -1,0 +1,10 @@
+.cb-title {
+  text-transform: uppercase;
+  font-size: 0.8em;
+  padding: 0.25rem 1rem;
+  background-color: var(--table-header-bg);
+}
+
+.cb-wrapper pre {
+  margin-top: 0;
+}

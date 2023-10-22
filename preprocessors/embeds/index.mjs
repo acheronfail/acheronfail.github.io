@@ -2,7 +2,7 @@
 
 import { join, relative } from 'path';
 import { readdirSync } from 'fs';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_SRC } from './common.mjs';
+import { runPreprocessor, forEachChapter, declareSupports, PATH_SRC } from '../common.mjs';
 
 declareSupports(['html']);
 

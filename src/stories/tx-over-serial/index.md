@@ -30,7 +30,7 @@ For what it's worth, the process of flashing the device without opening the case
 1. First, download the [15.05 OpenWrt image] for the router
 2. Next, once you have a root shell via the [StatPost](https://openwrt.org/toh/tp-link/td-w8970_v1#statpost) approach, backup your router's original firmware:
 
-```bash
+```bash,title="on router"
 # Insert a USB or HDD into one of the USB ports of the router, it will be
 # mounted at /var/usbdisk/*
 cat /dev/mtd0 > /var/usbdisk/sda1/td-w8970/mtd0
@@ -44,14 +44,14 @@ cat /dev/mtd6 > /var/usbdisk/sda1/td-w8970/mtd6
 
 3. Check the size of `/dev/mtd1`
 
-```bash
-# On my router, it's 1310720 bytes
+```bash,title="on router"
+# For my router, it's 1310720 bytes
 ls -l /var/usbdisk/sda1/td-w8970/mtd1
 ```
 
 4. Prepare the 15.05 OpenWrt image
 
-```bash
+```bash,title="prepare image"
 # Split the install image into two parts. We do this since the image won't fit
 # all into /dev/mtd1, and we will put the remaining into /dev/mtd2
 dd if=openwrt-lantiq-xrx200-TDW8970-sysupgrade.image bs=1310720 skip=1 of=openwrt-lantiq-xrx200-TDW8970-sysupgrade-1.image
@@ -67,14 +67,14 @@ So, please don't do what I did, and please ensure that you do this! 🙏
 
 Get the length of `mtd2`:
 
-```bash
+```bash,title="on router"
 # On my router, it's 6684672 bytes
 ls -l /var/usbdisk/sda1/td-w8970/mtd2
 ```
 
 And as the page suggests, let's extend the image we'll write to `mtd2` with `0xff` characters:
 
-```bash
+```bash,title="prepare image"
 # Let's extend the second part that we created earlier
 # First, we'll create a file full of 0xff bytes that's the right size
 # (td uses octal, and 0xff in octal is \377)
@@ -91,7 +91,7 @@ mv mtd2.image openwrt-lantiq-xrx200-TDW8970-sysupgrade.image
 It's crunch time. With the files we created on the computer, let's move them to the USB device
 and proceed to flash the router.
 
-```bash
+```bash,title="on router"
 cat /var/usbdisk/sda1/td-w8970/openwrt-lantiq-xrx200-TDW8970-sysupgrade.image > /dev/mtdblock1
 cat /var/usbdisk/sda1/td-w8970/openwrt-lantiq-xrx200-TDW8970-sysupgrade-1.image > /dev/mtdblock2
 ```
@@ -132,7 +132,7 @@ But hey, the serial connection seems stable, and things are looking fine to me s
 
 When I connect to the TTY (if you don't know, [OpenWrt has a good guide](https://openwrt.org/docs/techref/hardware/port.serial)), I see this:
 
-```txt
+```txt,title="serial output"
 ROM VER: 1.1.4
 CFG 01
 
@@ -236,7 +236,7 @@ With some more searching, I discovered someone had quite a similar issue to me, 
 With that in mind, all I had to do was print every byte of the file in hexadecimal, and rebuild it later on.
 That's easy enough:
 
-```bash
+```bash,title="on computer"
 # openwrt.bin is the new 21.02.2 image file
 xxd -g1 openwrt.bin > openwrt.txt
 
@@ -247,7 +247,7 @@ sed -i 's/\(.\)\{16\}$//g' openwrt.txt
 
 Let's test this can be converted back without `xxd` (since the router doesn't have that):
 
-```bash
+```bash,title="on computer"
 # Rebuild it
 for b in $(cat openwrt.txt); do printf "\x$b"; done > "openwrt_rebuilt.bin"
 
@@ -266,7 +266,7 @@ How do we transmit the file over serial?
 Remember I said it was the dumb way? Well now you can be the judge of that!
 Here's a simple script to automate sending commands over the serial interface:
 
-```bash
+```bash,title="on computer"
 while read line || [[ $line ]]; do echo -e "echo \"$line\" >> openwrt.txt" > /dev/ttyUSB0; done < openwrt.txt
 ```
 
@@ -280,7 +280,7 @@ while read line || [[ $line ]]; do echo -e "echo \"$line\" >> openwrt.txt" > /de
 
 Whoa, hold on hold on! What's happening in that serial console? Looks like a mess:
 
-```txt
+```txt,title="serial output"
 root@(none):/tmp# echo "d0 dd ab 00 b4 8a 09 20 4e 9d 61 81 8c 42 23 cc" >> openwrt.txt
 o "4c be c6 c9 a7 7d 09 ec 51 0e 8f 0a a1 16 d2 0d" >> openwrt.txt
 echo "39 2b ca 1e 72 8d a8 64 a6 a9 2a a4 d2 22 ae c8" >> openwrt.txt
@@ -295,13 +295,13 @@ Looks like we're transmitting too fast - we're sending the text for the next com
 
 I played around with a few settings, and was able to get a stable speed of commands with `sleep 0.005` in between each iteration:
 
-```bash
+```bash,title="on computer"
 while read line || [[ $line ]]; do echo -e "echo \"$line\" >> openwrt.txt" > /dev/ttyUSB0; sleep 0.005; done < openwrt.txt
 ```
 
 Ahh, this looks much better:
 
-```txt
+```txt,title="serial output"
 root@(none):/tmp# echo "02 00 00 00 76 65 72 2e 20 31 2e 30 00 ff ff ff" >> openwrt.txt
 root@(none):/tmp# echo "ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff" >> openwrt.txt
 root@(none):/tmp# echo "ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff" >> openwrt.txt
@@ -338,7 +338,7 @@ incrementally while cleaning up each part to save on memory:
 
 </div>
 
-```bash
+```bash,title="on computer"
 # split ASCII file into 10 parts
 split -n 10 openwrt.txt
 
@@ -350,7 +350,7 @@ This took around 10 minutes per file over my serial connection.
 
 Excellent! So now we have `xaa`, `xab`, ..., `xaj` on the router. Let's rebuild them one by one:
 
-```bash
+```bash,title="on router"
 # incrementally convert parts back to binary files, deleting them as we go
 for f in x??; do echo $f; for b in $(cat $f); do printf "\x$b"; done > "${f}.bin"; rm $f; done;
 
@@ -369,7 +369,7 @@ sysupgrade -v openwrt.bin
 
 Oh I am _so ready for this to work now!_ Here we go:
 
-```txt
+```txt,title="serial output"
 root@(none):/tmp# sysupgrade -v -n ./openwrt.bin
 killall: watchdog: no process killed
 Sending TERM to remaining processes ... ubusd 
@@ -425,7 +425,7 @@ OHHHH YESSSS. FINALLY. FANTASTIC.
 
 After I let it boot, I hit `<Enter>` and this is the glory with which I'm presented:
 
-```txt
+```txt,title="hallelujah"
 BusyBox v1.33.2 (2022-02-16 20:29:10 UTC) built-in shell (ash)
 
   _______                     ________        __

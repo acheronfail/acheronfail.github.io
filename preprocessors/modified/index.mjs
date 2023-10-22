@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { join, relative } from 'path';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_SRC } from './common.mjs';
+import { runPreprocessor, forEachChapter, declareSupports, PATH_SRC } from '../common.mjs';
 import { $ } from 'execa';
 
 declareSupports(['html']);

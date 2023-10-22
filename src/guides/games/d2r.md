@@ -12,7 +12,7 @@ I had to do this twice and it bothered me to have to look a few things up again,
 
 Installing Battle.net on Linux is straightforward, I usually do it via Lutris:
 
-```bash
+```bash,title="Shell"
 $ pacman -S lutris
 ```
 
@@ -33,7 +33,7 @@ There's a [Pull Request here](https://github.com/HansKristian-Work/vkd3d-proton/
 
 Sometimes showing is easier than telling:
 
-```bash
+```bash,title="Shell"
 # Clone the fork that contains the fix
 $ git clone git@github.com:K0bin/vkd3d-proton.git
 $ cd vkd3d-proton

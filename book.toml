@@ -11,9 +11,11 @@ create-missing = true
 extra-watch-dirs = ["preprocessors"]
 
 [preprocessor.embeds]
-command = "preprocessors/embeds.mjs"
+command = "preprocessors/embeds/index.mjs"
 [preprocessor.modified]
-command = "preprocessors/modified.mjs"
+command = "preprocessors/modified/index.mjs"
+[preprocessor.codeblocks]
+command = "preprocessors/codeblocks/index.mjs"
 
 [preprocessor.katex]
 after = ["links"]
@@ -28,8 +30,9 @@ curly-quotes = true
 mathjax-support = false
 additional-css = [
   "node_modules/katex/dist/katex.min.css",
-  "preprocessors/embeds.css",
-  "preprocessors/modified.css",
+  "preprocessors/embeds/index.css",
+  "preprocessors/codeblocks/index.css",
+  "preprocessors/modified/index.css",
   "theme/pagetoc.css"
 ]
 additional-js = [

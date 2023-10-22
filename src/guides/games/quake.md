@@ -16,7 +16,7 @@ First off, go and get the game. This guide will assume you'll be using [the vers
 
 To make things simple, here's a script that performs the full extraction for you:
 
-```bash
+```bash,title="extract_quake.sh"
 #!/usr/bin/env bash
 
 set -xe
@@ -55,7 +55,7 @@ There's also the third commercial (now free) expansion, [Abyss of Pandemonium](h
 You can [download it here](https://www.quaddicted.com/filebase/aopfm_v2.zip).
 It's fairly straightforward to install into the same directory:
 
-```bash
+```bash,title="extract_aopfm_v2.sh"
 #!/usr/bin/env bash
 
 # Extract the expansion
@@ -92,23 +92,19 @@ With `darkplaces`, here are a few tips:
 
 > If you have a multi-monitor setup, or otherwise just want to run the game in a window, append `-window` to the command line.
 
-```bash
-#QUAKE
+```bash,title="QUAKE"
 darkplaces-sdl -basedir ~/.quakespasm
 ```
 
-```bash
-#1st Expansion
+```bash,title="1st Expansion"
 darkplaces-sdl -basedir ~/.quakespasm -game hipnotic
 ```
 
-```bash
-#2nd Expansion
+```bash,title="2nd Expansion"
 darkplaces-sdl -basedir ~/.quakespasm -game rogue
 ```
 
-```bash
-#3rd Expansion
+```bash,title="3rd Expansion"
 darkplaces-sdl -basedir ~/.quakespasm -game impel
 ```
 
