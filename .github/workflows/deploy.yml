@@ -32,6 +32,9 @@ jobs:
       # clone
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          # fetch all history so preprocessor.modified works
+          fetch-depth: 0
       # cache
       - uses: actions/cache@v3
         with:
