@@ -10,7 +10,10 @@
     - [D2R](./guides/games/d2r.md)
     - [Nox](./guides/games/nox.md)
     - [Quake](./guides/games/quake.md)
-- [Transferring Files over Serial](./guides/tx-over-serial/index.md)
+
+# Stories
+
+- [Transferring Files over Serial](./stories/tx-over-serial/index.md)
 
 # Snippets
 
