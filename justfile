@@ -6,18 +6,22 @@ _default:
 
 # install and setup dependencies
 setup: (_check "cargo" "bun")
+  cargo install mdbook
   cargo install mdbook-katex
   cargo install mdbook-pagetoc
   bun install
 
 # start a local server for developing
+alias serve := dev
 dev:
   mdbook serve
 
 # run the tests
+alias t := test
 test:
   mdbook test
 
 # build the book
+alias b := build
 build:
   mdbook build
