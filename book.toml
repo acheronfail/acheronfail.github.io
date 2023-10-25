@@ -16,6 +16,8 @@ command = "preprocessors/embeds/index.mjs"
 command = "preprocessors/modified/index.mjs"
 [preprocessor.codeblocks]
 command = "preprocessors/codeblocks/index.mjs"
+[preprocessor.image-captions]
+command = "preprocessors/image-captions/index.mjs"
 
 [preprocessor.katex]
 after = ["links"]
@@ -31,8 +33,9 @@ mathjax-support = false
 additional-css = [
   "node_modules/katex/dist/katex.min.css",
   "preprocessors/embeds/index.css",
-  "preprocessors/codeblocks/index.css",
   "preprocessors/modified/index.css",
+  "preprocessors/codeblocks/index.css",
+  "preprocessors/image-captions/index.css",
   "theme/pagetoc.css"
 ]
 additional-js = [

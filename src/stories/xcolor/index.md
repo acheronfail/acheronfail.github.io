@@ -1,5 +1,6 @@
 # Building an X11 Colour Picker
 
+<!-- TODO: link to macOS color picker when that's done -->
 
 One day, I wanted a colour picker on Linux. When I used OS X in the past, I built my own [pixel picker](https://github.com/acheronfail/pixel-picker) to satisfy my needs.
 
@@ -13,14 +14,14 @@ This means I have to move the cursor while looking elsewhere at the preview, and
 
 This had a small preview that followed the cursor, and looked like this:
 
-![screenshot of a small crosshair with a small circular preview next to it](./original-picker-1.png)
+![xcolor's original picker](./original-picker-1.png)
 
 This was closer to what I expected. Though, it did have some limitations:
 
 * the preview only showed a single colour at a time (this made it difficult to know exactly which pixel was selected)
 * sometimes the preview would be hard to spot in certain situations (see below picture)
 
-![same as previous image, but the preview is difficult to see due to it blending in with its surroundings](./original-picker-2.png)
+![a preview that is similar to the background and is harder to see](./original-picker-2.png)
 
 Thus began my journey of improving [`xcolor`].
 
@@ -85,9 +86,9 @@ What's more surprising, is that it's _super fast_!!
 
 Here's what is looks like:
 
-![a larger circle with a single center pixel highlighted](./new-picker.png)
+![the new picker!](./new-picker.png)
 
-![the same circle, but not hovering over a more colourful portion of the screen](./new-picker-2.png)
+![the new picker again - this time with colours!](./new-picker-2.png)
 
 Since we're in total control of what we're drawing - it's just pixels - it was easy to add some configuration options.
 
@@ -95,11 +96,11 @@ For example, the border color of the preview changes depending on the pixels, so
 
 Here's what that looks like, as well as zooming it in further:
 
-![the picker circle, but now magnified so each pixel is much larger](./new-picker-magnified.png)
+![the picker, but now magnified so each pixel is much larger](./new-picker-magnified.png)
 
 And here's another example when the preview size is larger:
 
-![a larger picker](./new-picker-magnified-2.png)
+![a picker with increased size](./new-picker-magnified-2.png)
 
 What's really cool about this, is that it moves around the screen _extremely fast_: as fast as your cursor moves. Because, well, it IS your cursor!
 

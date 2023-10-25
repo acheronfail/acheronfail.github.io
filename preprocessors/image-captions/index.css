@@ -1,0 +1,16 @@
+.image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.image img {
+  border: 1px solid var(--table-header-bg);
+}
+
+.image .caption {
+  margin: 1em;
+  font-size: 0.9em;
+  font-style: italic;
+}
