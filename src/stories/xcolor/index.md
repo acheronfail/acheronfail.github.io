@@ -120,7 +120,7 @@ Rust makes these kinds of abstractions super simple. Here's a small example:
 
 ```rust
 # use std::ops::{Index, Deref};
-
+#
 // represents x and y coordinates
 type Point = (usize, usize);
 
