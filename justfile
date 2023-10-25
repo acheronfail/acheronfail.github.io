@@ -6,7 +6,6 @@ _default:
 
 # install and setup dependencies
 setup: (_check "cargo" "bun")
-  cargo install mdbook
   cargo install mdbook-katex
   cargo install mdbook-pagetoc
   bun install
