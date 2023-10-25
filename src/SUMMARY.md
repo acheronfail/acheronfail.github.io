@@ -15,7 +15,7 @@
 
 - [Transferring Files over Serial](./stories/tx-over-serial/index.md)
 <!-- - [Picking pixels on macOS](./stories/_pixel-picker.md) -->
-<!-- - [Picking pixels on X11](./stories/_xcolor.md) -->
+- [Picking pixels on X11](./stories/xcolor/index.md)
 
 # Snippets
 
