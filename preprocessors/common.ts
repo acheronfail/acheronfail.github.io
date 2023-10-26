@@ -1,47 +1,45 @@
 import { inspect } from 'util';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { Book, Chapter, Context, Section, SectionChapter } from './types';
 
 export const PATH_SRC = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'src');
 
-export function runPreprocessor(callback) {
-  async function inner() {
-    const [context, book] = JSON.parse(await readAllStdin());
+export async function runPreprocessor(callback: (context: Context, book: Book) => void | Promise<void>) {
+  try {
+    const [context, book] = JSON.parse(await readProcessStdin());
     await callback(context, book);
     process.stdout.write(JSON.stringify(book));
+    process.exit(0);
+  } catch (err) {
+    log(err);
+    process.exit(1);
   }
-
-  inner().then(
-    () => process.exit(0),
-    (err) => {
-      log(err);
-      process.exit(1);
-    }
-  );
 }
 
-export function declareSupports(outputs) {
+export function declareSupports(outputs: [string, ...string[]]) {
   // https://rust-lang.github.io/mdBook/for_developers/preprocessors.html
   if (process.argv[2] === 'supports') {
     process.exit(outputs.includes(process.argv[3]) ? 0 : 1);
   }
 }
 
-function readAllStdin() {
+// NOTE: this doesn't work - it hangs forever
+function readProcessStdin(): Promise<string> {
   return new Promise((resolve, reject) => {
-    const chunks = [];
+    const chunks: Buffer[] = [];
     process.stdin.on('error', (err) => reject(err));
-    process.stdin.on('close', () => resolve(Buffer.concat(chunks).toString('utf-8')));
+    process.stdin.on('end', () => resolve(Buffer.concat(chunks).toString('utf-8')));
     process.stdin.on('data', (chunk) => chunks.push(chunk));
   });
 }
 
 // recursively iterate over each chapter in the book
-export async function forEachChapter(book, callback) {
-  const recurse = (sections) =>
+export async function forEachChapter(book: Book, callback: (chapter: Chapter) => void | Promise<void>) {
+  const recurse = (sections: Section[]) =>
     sections
-      .filter((s) => typeof s !== 'string')
-      .filter((s) => 'Chapter' in s)
+      .filter((s): s is Exclude<Section, 'Separator'> => typeof s !== 'string')
+      .filter((s): s is SectionChapter => 'Chapter' in s)
       .map(async (s) => {
         await callback(s.Chapter);
         await Promise.all(recurse(s.Chapter.sub_items));
@@ -51,8 +49,8 @@ export async function forEachChapter(book, callback) {
 }
 
 // log to stderr
-export function log(...args) {
-  const things = [];
+export function log(...args: unknown[]) {
+  const things: string[] = [];
   for (const arg of args) {
     things.push(inspect(arg));
   }

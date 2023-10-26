@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env ./node_modules/.bin/tsx
 
-import { runPreprocessor, forEachChapter, declareSupports } from '../common.mjs';
+import { runPreprocessor, forEachChapter, declareSupports } from '../common';
 
 declareSupports(['html']);
 

@@ -3,7 +3,9 @@ export interface Book {
   __non_exhaustive: null;
 }
 
-export type Section = { PartTitle: string } | { Chapter: Chapter } | 'Separator';
+export type SectionTitle = { PartTitle: string };
+export type SectionChapter = { Chapter: Chapter };
+export type Section = SectionTitle | SectionChapter | 'Separator';
 
 export interface Chapter {
   name: string;

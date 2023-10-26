@@ -1,8 +1,8 @@
-#!/usr/bin/env node
+#!/usr/bin/env ./node_modules/.bin/tsx
 
 import { join, relative } from 'path';
 import { readdirSync } from 'fs';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_SRC } from '../common.mjs';
+import { runPreprocessor, forEachChapter, declareSupports, PATH_SRC } from '../common';
 
 declareSupports(['html']);
 
@@ -27,7 +27,7 @@ const EMBEDS = new Map([
     (chapter) => (_match, fileListPath) => {
       const realPath = join(PATH_SRC, chapter.path, fileListPath);
 
-      const list = [];
+      const list: { mdName: string; mdPath: string }[] = [];
       for (const entry of readdirSync(realPath, { withFileTypes: true })) {
         if (entry.isFile()) {
           list.push({

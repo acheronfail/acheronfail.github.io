@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "execa": "^8.0.1",
-    "katex": "^0.16.9"
+    "katex": "^0.16.9",
+    "tsx": "^3.14.0"
   },
   "devDependencies": {
     "@types/node": "^20.8.7",

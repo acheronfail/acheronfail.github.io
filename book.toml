@@ -11,13 +11,13 @@ create-missing = true
 extra-watch-dirs = ["preprocessors"]
 
 [preprocessor.embeds]
-command = "preprocessors/embeds/index.mjs"
+command = "preprocessors/embeds/index.ts"
 [preprocessor.modified]
-command = "preprocessors/modified/index.mjs"
+command = "preprocessors/modified/index.ts"
 [preprocessor.codeblocks]
-command = "preprocessors/codeblocks/index.mjs"
+command = "preprocessors/codeblocks/index.ts"
 [preprocessor.image-captions]
-command = "preprocessors/image-captions/index.mjs"
+command = "preprocessors/image-captions/index.ts"
 
 [preprocessor.katex]
 after = ["links"]
@@ -36,12 +36,9 @@ additional-css = [
   "preprocessors/modified/index.css",
   "preprocessors/codeblocks/index.css",
   "preprocessors/image-captions/index.css",
-  "theme/pagetoc.css"
+  "theme/pagetoc.css",
 ]
-additional-js = [
-  "node_modules/katex/dist/katex.min.js",
-  "theme/pagetoc.js"
-]
+additional-js = ["node_modules/katex/dist/katex.min.js", "theme/pagetoc.js"]
 no-section-label = false
 git-repository-url = "https://github.com/acheronfail/acheronfail.github.io"
 git-repository-icon = "fa-github"
@@ -55,15 +52,15 @@ enable = true     # include support for printable output
 page-break = true # insert page-break after each chapter
 
 [output.html.fold]
-enable = false    # whether or not to enable section folding
-level = 0         # the depth to start folding
+enable = false # whether or not to enable section folding
+level = 0      # the depth to start folding
 
 [output.html.playground]
-editable = true          # allows editing the source code
-copyable = true          # include the copy button for copying code snippets
-copy-js = true           # includes the JavaScript for the code editor
-line-numbers = false     # displays line numbers for editable code
-runnable = true          # displays a run button for rust code
+editable = true      # allows editing the source code
+copyable = true      # include the copy button for copying code snippets
+copy-js = true       # includes the JavaScript for the code editor
+line-numbers = false # displays line numbers for editable code
+runnable = true      # displays a run button for rust code
 
 # A prefix string per language (one or more chars).
 # Any line starting with whitespace+prefix is hidden.
@@ -71,15 +68,15 @@ runnable = true          # displays a run button for rust code
 python = "~"
 
 [output.html.search]
-enable = true            # enables the search feature
-limit-results = 30       # maximum number of search results
-teaser-word-count = 30   # number of words used for a search result teaser
-use-boolean-and = true   # multiple search terms must all match
-boost-title = 2          # ranking boost factor for matches in headers
-boost-hierarchy = 1      # ranking boost factor for matches in page names
-boost-paragraph = 1      # ranking boost factor for matches in text
-expand = true            # partial words will match longer terms
-heading-split-level = 3  # link results to heading levels
-copy-js = true           # include Javascript code for search
+enable = true           # enables the search feature
+limit-results = 30      # maximum number of search results
+teaser-word-count = 30  # number of words used for a search result teaser
+use-boolean-and = true  # multiple search terms must all match
+boost-title = 2         # ranking boost factor for matches in headers
+boost-hierarchy = 1     # ranking boost factor for matches in page names
+boost-paragraph = 1     # ranking boost factor for matches in text
+expand = true           # partial words will match longer terms
+heading-split-level = 3 # link results to heading levels
+copy-js = true          # include Javascript code for search
 
 [output.html.redirect]
