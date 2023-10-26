@@ -5,7 +5,7 @@
   align-items: center;
 }
 
-.image img {
+.image.border img {
   border: 1px solid var(--table-header-bg);
 }
 
