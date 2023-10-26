@@ -1,0 +1,11 @@
+/**
+ * Hide the numeric markers on the sidebar
+ */
+
+li.chapter-item {
+  padding-left: 1rem;
+}
+
+li.chapter-item > a > strong {
+  display: none;
+}

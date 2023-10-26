@@ -31,6 +31,7 @@ preferred-dark-theme = "ayu"
 curly-quotes = true
 mathjax-support = false
 additional-css = [
+  "src/index.css",
   "node_modules/katex/dist/katex.min.css",
   "preprocessors/embeds/index.css",
   "preprocessors/modified/index.css",
