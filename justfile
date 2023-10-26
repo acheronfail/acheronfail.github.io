@@ -12,15 +12,15 @@ setup: (_check "cargo" "bun")
 
 # start a local server for developing
 alias serve := dev
-dev:
+dev: (_check "mdbook")
   mdbook serve
 
 # run the tests
 alias t := test
-test:
+test: (_check "mdbook")
   mdbook test
 
 # build the book
 alias b := build
-build:
+build: (_check "mdbook")
   mdbook build

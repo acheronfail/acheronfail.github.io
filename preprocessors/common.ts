@@ -24,13 +24,13 @@ export function declareSupports(outputs: [string, ...string[]]) {
   }
 }
 
-// NOTE: this doesn't work - it hangs forever
+// read all stdin into a string
 function readProcessStdin(): Promise<string> {
   return new Promise((resolve, reject) => {
     const chunks: Buffer[] = [];
     process.stdin.on('error', (err) => reject(err));
-    process.stdin.on('end', () => resolve(Buffer.concat(chunks).toString('utf-8')));
     process.stdin.on('data', (chunk) => chunks.push(chunk));
+    process.stdin.on('end', () => resolve(Buffer.concat(chunks).toString('utf-8')));
   });
 }
 
