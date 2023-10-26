@@ -113,7 +113,7 @@ let anInconspicuousListOfPointersThatDoNotPointToPrivateAPIs: [UnsafeMutableRawP
 
 And then we can [jump through a few hoops](https://github.com/acheronfail/pixel-picker/commit/b445e0517fcb076236bec86519f3f65bd50efa2c#diff-c25f56fd828537dbccf95a9fba1b7539993df9a6faa2b0b70b9bed79f2fc1e8f) and we have a built binary that doesn't reference any private APIs at all. Neato!
 
-Too bad I only discovered _after this effort_ that if I wanted to publish an application on the Mac App Store I'd have to pay a yearly fee - _even if I listed the application for free!_. Madness.
+Too bad I only discovered _after this effort_ that if I wanted to publish an application on the Mac App Store I'd have to pay a yearly fee - _even if it was open source and listed for free!_ Madness.
 
 ### Urgh, UI application frameworks
 
