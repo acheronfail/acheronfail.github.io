@@ -9,6 +9,12 @@ setup: (_check "cargo" "bun")
   cargo install mdbook-katex
   cargo install mdbook-pagetoc
   bun install
+  if [ -z ${CI:-} ]; then just hooks; fi
+
+# setup hooks
+hooks:
+  echo -e "#!/usr/bin/env bash\njust test\n" > .git/hooks/pre-commit
+  chmod +x .git/hooks/pre-commit
 
 # start a local server for developing
 alias serve := dev
