@@ -24,6 +24,7 @@ dev: (_check "mdbook")
 # run the tests
 alias t := test
 test: (_check "mdbook")
+  bun test
   mdbook test
 
 # build the book

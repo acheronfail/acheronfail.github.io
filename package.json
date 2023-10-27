@@ -5,7 +5,9 @@
     "tsx": "^3.14.0"
   },
   "devDependencies": {
+    "@types/commonmark": "^0.27.8",
     "@types/node": "^20.8.7",
-    "bun-types": "^1.0.6"
+    "bun-types": "^1.0.6",
+    "commonmark": "^0.30.0"
   }
 }

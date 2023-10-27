@@ -1,8 +1,6 @@
 # Building an X11 Colour Picker
 
-<!-- TODO: link to macOS color picker when that's done -->
-
-One day, I wanted a colour picker on Linux. When I used OS X in the past, I built my own [pixel picker](https://github.com/acheronfail/pixel-picker) to satisfy my needs.
+One day, I wanted a colour picker on Linux. When I used OS X in the past, [I built my own pixel picker](../pixel-picker/) to satisfy my needs.
 
 From a colour picker, I really just have one requirement: _easily pick the colour of any pixel on the screen_.
 
