@@ -1,63 +1,17 @@
+/// <reference path="../node_modules/bun-types/types.d.ts" />
+
 import { expect, test, describe } from 'bun:test';
+import { getAllFiles, getAllLinks } from './util';
+import { dirname, resolve } from 'path';
 import { stat } from 'fs/promises';
-import { dirname, join, resolve } from 'path';
-import { NodeWalkingStep, Parser } from 'commonmark';
+import { Node, NodeWalkingStep, Parser } from 'commonmark';
 import c from 'chalk';
 
-let allFiles: Promise<string[]> | null = null;
-async function getAllFiles() {
-  if (allFiles) return allFiles;
-  return (allFiles = (async () => {
-    const text = await Bun.file('src/SUMMARY.md').text();
-    const ast = new Parser().parse(text);
-    const walker = ast.walker();
-
-    const files: string[] = [];
-    let event: NodeWalkingStep | null;
-    while ((event = walker.next())) {
-      if (event.entering && event.node.type === 'link') {
-        if (event.node.destination) {
-          files.push(join('src', event.node.destination));
-        }
-      }
-    }
-
-    return files;
-  })());
-}
-
-interface Link {
-  from: string;
-  to: string;
-}
-async function getAllLinks(): Promise<Link[]> {
-  return await Promise.all(
-    await getAllFiles().then((paths) =>
-      paths.map(async (path) => {
-        const text = await Bun.file(path).text();
-        const ast = new Parser().parse(text);
-        const walker = ast.walker();
-
-        const links: Link[] = [];
-        let event: NodeWalkingStep | null;
-        while ((event = walker.next())) {
-          if (event.entering && event.node.type === 'link') {
-            if (event.node.destination) {
-              links.push({
-                from: path,
-                to: event.node.destination,
-              });
-            }
-          }
-        }
-
-        return links;
-      })
-    )
-  ).then((list) => list.flat());
-}
-
 describe('markdown tests', () => {
+  /**
+   * Search for any keywords that indicate unfinished content.
+   */
+
   const RE_TODOS = /TODO|FIXME/gi;
   interface TodoSearchResult {
     path: string;
@@ -105,9 +59,12 @@ describe('markdown tests', () => {
     }
   });
 
+  /**
+   * Get all links from all pages, and then check they point to valid paths.
+   */
+
   test('internal links are valid', async () => {
     const internalLinks = await getAllLinks().then((links) => links.filter(({ to }) => ['/', '.'].includes(to[0])));
-
     const brokenLinks = await Promise.all(
       internalLinks.map(async ({ from, to, ...rest }) => {
         const resolved = resolve(from.endsWith('index.md') ? dirname(from) : from, to);
@@ -128,6 +85,67 @@ describe('markdown tests', () => {
       expect().fail(
         c.bold.yellow(`Found broken internal links:\n`) +
           brokenLinks.map(({ to, from }) => `  Invalid link: ${c.red(to)}\n\t${c.gray(`from ${from}`)}`).join('\n')
+      );
+    }
+  });
+
+  /**
+   * Ensure content inside `<div class="warning">` tags is properly parsed as markdown.
+   * See: https://talk.commonmark.org/t/bug-or-expected-markdown-sometimes-doesnt-work-inside-div-tags/4378/4
+   */
+
+  const RE_DIV_WARNING = /[\s\S]*?<div\s+class=".*?warning.*?">([\s\S]*)/im;
+  interface DivWarningError {
+    match: string;
+    path: string;
+    row: number;
+    col: number;
+  }
+  test('div.warning blocks contain markdown', async () => {
+    const files = await getAllFiles();
+    const results = await Promise.all(
+      files.map(async (path) => {
+        const text = await Bun.file(path).text();
+        const ast = new Parser().parse(text);
+        const walker = ast.walker();
+
+        const errors: DivWarningError[] = [];
+        let event: NodeWalkingStep | null;
+        while ((event = walker.next())) {
+          const { entering, node } = event;
+          if (entering && node.type === 'html_block') {
+            if (!node.literal) continue;
+            if (node.literal.startsWith('<!--')) continue;
+
+            // NOTE: we don't content within these warning blocks to be parsed as a single `html_block`, we want
+            // them to be parsed as individual blocks so their content is also parsed as markdown.
+            const match = RE_DIV_WARNING.exec(node.literal);
+            if (!match) continue;
+            if (match[1].length > 0) {
+              const [[row, col]] = node.sourcepos;
+              errors.push({
+                match: match[0],
+                row,
+                col,
+                path,
+              });
+            }
+          }
+        }
+
+        return errors;
+      })
+    ).then((results) => results.flat());
+
+    if (results.length > 0) {
+      expect().fail(
+        c.bold.yellow(`Found <div class="warning"> block whose content is not parsed as markdown:\n`) +
+          results
+            .map(
+              ({ path, row, col, match }) =>
+                `  Insert a newline after this opening tag: ${c.red(match)}\n\tat ${c.grey(`${path}:${row}:${col}`)}`
+            )
+            .join('\n')
       );
     }
   });
