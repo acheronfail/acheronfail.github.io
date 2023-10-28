@@ -30,29 +30,41 @@ export interface Link {
   to: string;
 }
 
-export async function getAllLinks(): Promise<Link[]> {
-  return await Promise.all(
+export interface AllLinks {
+  internal: Link[];
+  external: Link[];
+}
+
+export async function getAllLinks(): Promise<AllLinks> {
+  const allLinks: AllLinks = {
+    internal: [],
+    external: [],
+  };
+
+  await Promise.all(
     await getAllFiles().then((paths) =>
       paths.map(async (path) => {
         const text = await Bun.file(path).text();
         const ast = new Parser().parse(text);
         const walker = ast.walker();
 
-        const links: Link[] = [];
         let event: NodeWalkingStep | null;
         while ((event = walker.next())) {
-          if (event.entering && event.node.type === 'link') {
-            if (event.node.destination) {
-              links.push({
-                from: path,
-                to: event.node.destination,
-              });
+          const { entering, node } = event;
+          if (entering && node.type === 'link') {
+            if (node.destination) {
+              const isInternal = ['/', '.', '#'].includes(node.destination[0]) || !/[a-z]+:/i.test(node.destination);
+              if (isInternal) {
+                allLinks.internal.push({ from: path, to: node.destination });
+              } else {
+                allLinks.external.push({ from: path, to: node.destination });
+              }
             }
           }
         }
-
-        return links;
       })
     )
-  ).then((list) => list.flat());
+  );
+
+  return allLinks;
 }

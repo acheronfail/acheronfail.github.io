@@ -1,0 +1,58 @@
+import linkCheck from 'link-check';
+import { getAllLinks } from './util';
+import { promisify } from 'util';
+import pLimit from 'p-limit';
+
+/**
+ * Types for `link-check` module
+ */
+
+interface LinkCheckResult {
+  statusCode: number;
+  status: 'alive' | 'dead';
+  err: Error | null;
+  link: string;
+}
+type LinkCheckCallback = (err: Error | null, result: LinkCheckResult) => void;
+type LinkCheck = (url: string, callback: LinkCheckCallback) => void;
+
+/**
+ * Check all external links
+ */
+
+const links = await getAllLinks();
+const check = promisify(linkCheck as LinkCheck);
+const limit = pLimit(5);
+
+let count = 0;
+const failed: { link: string; err: string }[] = [];
+await Promise.all(
+  links.external.map(({ to: link }) =>
+    limit(async () => {
+      try {
+        const result = await check(link);
+        if (result.err) {
+          failed.push({ link, err: result.err.message });
+        } else if (result.statusCode !== 200) {
+          failed.push({ link, err: `Unexpected status code ${result.statusCode} for ${link}` });
+        } else if (result.status !== 'alive') {
+          failed.push({ link, err: `Unexpected status ${result.status} for ${link}` });
+        }
+      } catch (err) {
+        failed.push({ link, err: err instanceof Error ? err.message : `Unexpected error: ${err}` });
+      }
+
+      process.stderr.cursorTo(0);
+      process.stderr.clearLine(0);
+      process.stderr.write(`Checked: ${count++} / ${links.external.length}, failed: ${failed.length}`);
+    })
+  )
+);
+
+for (const { link, err } of failed) {
+  console.error(`FAIL(${link}): ${err}`);
+}
+
+process.stderr.cursorTo(0);
+process.stderr.clearLine(0);
+process.exit(failed.length > 0 ? 1 : 0);

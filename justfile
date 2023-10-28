@@ -23,9 +23,12 @@ dev: (_check "mdbook")
 
 # run the tests
 alias t := test
-test: (_check "mdbook")
+test: (_check "bun" "mdbook")
   bun test
   mdbook test
+
+test-links: (_check "bun")
+  bun run ./tests/test-external-links.ts
 
 # build the book
 alias b := build

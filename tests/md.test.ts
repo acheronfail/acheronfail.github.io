@@ -64,10 +64,14 @@ describe('markdown tests', () => {
    */
 
   test('internal links are valid', async () => {
-    const internalLinks = await getAllLinks().then((links) => links.filter(({ to }) => ['/', '.'].includes(to[0])));
+    const { internal } = await getAllLinks();
     const brokenLinks = await Promise.all(
-      internalLinks.map(async ({ from, to, ...rest }) => {
+      internal.map(async ({ from, to, ...rest }) => {
         const resolved = resolve(from.endsWith('index.md') ? dirname(from) : from, to);
+        if (to.startsWith('#')) {
+          throw new Error(`Hash checking not yet implemented, link was: ${to}`);
+        }
+
         return {
           from,
           to,
