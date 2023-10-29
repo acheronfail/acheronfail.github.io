@@ -5,24 +5,11 @@ import pLimit from 'p-limit';
 import c from 'chalk';
 
 /**
- * Types for `link-check` module
- */
-
-interface LinkCheckResult {
-  statusCode: number;
-  status: 'alive' | 'dead';
-  err: Error | null;
-  link: string;
-}
-type LinkCheckCallback = (err: Error | null, result: LinkCheckResult) => void;
-type LinkCheck = (url: string, callback: LinkCheckCallback) => void;
-
-/**
  * Check all external links
  */
 
 const links = await getAllLinks();
-const check = promisify(linkCheck as LinkCheck);
+const check = promisify(linkCheck);
 const limit = pLimit(5);
 
 let count = 0;
@@ -33,7 +20,7 @@ await Promise.all(
       process.stderr.clearLine(0);
       process.stderr.cursorTo(0);
       process.stderr.write(
-        `Checked: ${count++} / ${links.external.length}, failed: ${failed.length} ${c.grey(link.slice(0, 40))}...`
+        `Checked: ${count++} / ${links.external.length}, failed: ${failed.length} ${c.grey(link.slice(0, 40) + '...')}`
       );
 
       try {

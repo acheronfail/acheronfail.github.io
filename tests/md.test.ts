@@ -4,7 +4,7 @@ import { expect, test, describe } from 'bun:test';
 import { getAllFiles, getAllLinks } from './util';
 import { dirname, resolve } from 'path';
 import { stat } from 'fs/promises';
-import { Node, NodeWalkingStep, Parser } from 'commonmark';
+import { NodeWalkingStep, Parser } from 'commonmark';
 import c from 'chalk';
 
 describe('markdown tests', () => {
