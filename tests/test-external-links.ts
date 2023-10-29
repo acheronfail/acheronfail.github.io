@@ -1,3 +1,5 @@
+/// <reference path="../types/link-check.d.ts" />
+
 import linkCheck from 'link-check';
 import { getAllLinks } from './util';
 import { promisify } from 'util';
