@@ -14,8 +14,11 @@ runPreprocessor(async (_context, book) => {
     const argFile = relative(process.cwd(), join(PATH_SRC, chapter.path));
     const argDate = `--date=format:${DATE_FORMAT}`;
 
-    const { stdout: creation } = await $`git log -1 --diff-filter=A --follow ${argDate} --format=%cd -- ${argFile}`;
-    const { stdout: modified } = await $`git log -1 ${argDate} --pretty=format:%cd -- ${argFile}`;
+    let { stdout: creation } = await $`git log -1 --diff-filter=A --follow ${argDate} --format=%cd -- ${argFile}`;
+    let { stdout: modified } = await $`git log -1 ${argDate} --pretty=format:%cd -- ${argFile}`;
+
+    if (!creation) creation = '???';
+    if (!modified) modified = creation;
 
     chapter.content += `\n<div class="modified">
       Created: ${creation}
