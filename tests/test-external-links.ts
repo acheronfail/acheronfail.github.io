@@ -2,6 +2,7 @@ import linkCheck from 'link-check';
 import { getAllLinks } from './util';
 import { promisify } from 'util';
 import pLimit from 'p-limit';
+import c from 'chalk';
 
 /**
  * Types for `link-check` module
@@ -29,6 +30,12 @@ const failed: { link: string; err: string }[] = [];
 await Promise.all(
   links.external.map(({ to: link }) =>
     limit(async () => {
+      process.stderr.clearLine(0);
+      process.stderr.cursorTo(0);
+      process.stderr.write(
+        `Checked: ${count++} / ${links.external.length}, failed: ${failed.length} ${c.grey(link.slice(0, 40))}...`
+      );
+
       try {
         const result = await check(link);
         if (result.err) {
@@ -41,10 +48,6 @@ await Promise.all(
       } catch (err) {
         failed.push({ link, err: err instanceof Error ? err.message : `Unexpected error: ${err}` });
       }
-
-      process.stderr.cursorTo(0);
-      process.stderr.clearLine(0);
-      process.stderr.write(`Checked: ${count++} / ${links.external.length}, failed: ${failed.length}`);
     })
   )
 );
@@ -53,6 +56,6 @@ for (const { link, err } of failed) {
   console.error(`FAIL(${link}): ${err}`);
 }
 
-process.stderr.cursorTo(0);
 process.stderr.clearLine(0);
+process.stderr.cursorTo(0);
 process.exit(failed.length > 0 ? 1 : 0);
