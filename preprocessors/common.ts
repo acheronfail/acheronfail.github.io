@@ -3,7 +3,7 @@ import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { Book, Chapter, Context, Section, SectionChapter } from './types';
 
-export const PATH_SRC = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'src');
+export const PATH_SRC = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'book');
 
 export async function runPreprocessor(callback: (context: Context, book: Book) => void | Promise<void>) {
   try {

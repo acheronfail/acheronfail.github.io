@@ -3,11 +3,13 @@
 import { join } from 'path';
 import { NodeWalkingStep, Parser } from 'commonmark';
 
+const BOOK_DIR = 'book';
+
 let allFiles: Promise<string[]> | null = null;
 export async function getAllFiles() {
   if (allFiles) return allFiles;
   return (allFiles = (async () => {
-    const text = await Bun.file('src/SUMMARY.md').text();
+    const text = await Bun.file(join(BOOK_DIR, 'SUMMARY.md')).text();
     const ast = new Parser().parse(text);
     const walker = ast.walker();
 
@@ -16,7 +18,7 @@ export async function getAllFiles() {
     while ((event = walker.next())) {
       if (event.entering && event.node.type === 'link') {
         if (event.node.destination) {
-          files.push(join('src', event.node.destination));
+          files.push(join(BOOK_DIR, event.node.destination));
         }
       }
     }

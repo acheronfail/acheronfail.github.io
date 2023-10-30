@@ -4,9 +4,10 @@ authors = ["acheronfail"]
 description = "description"
 language = "en"
 multilingual = false
-src = "src"
+src = "book"
 
 [build]
+build-dir = "dist"
 create-missing = true
 extra-watch-dirs = ["preprocessors"]
 
@@ -31,7 +32,7 @@ preferred-dark-theme = "ayu"
 curly-quotes = true
 mathjax-support = false
 additional-css = [
-  "src/index.css",
+  "book/index.css",
   "node_modules/katex/dist/katex.min.css",
   "preprocessors/embeds/index.css",
   "preprocessors/modified/index.css",
