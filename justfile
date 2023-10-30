@@ -9,6 +9,7 @@ setup: (_check "cargo" "bun")
   cargo install mdbook-katex
   cargo install mdbook-pagetoc
   bun install
+  cd lib/rttw && bun install
   if [ -z ${CI:-} ]; then just hooks; fi
 
 # setup hooks

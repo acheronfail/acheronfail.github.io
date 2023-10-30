@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import { Book, Chapter, Context, Section, SectionChapter } from './types';
 
 export const PATH_BOOK = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'book');
-export const PATH_SRC = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'src');
+export const PATH_LIB = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'lib');
 
 export async function runPreprocessor(callback: (context: Context, book: Book) => void | Promise<void>) {
   try {

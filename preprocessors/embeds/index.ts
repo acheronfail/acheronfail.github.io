@@ -3,7 +3,7 @@
 import { dirname, join, relative } from 'path';
 import { readdir, readFile } from 'fs/promises';
 import { $ } from 'execa';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, log, PATH_SRC } from '../common';
+import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, log, PATH_LIB } from '../common';
 import { Chapter } from '../types';
 
 declareSupports(['html']);
@@ -14,7 +14,7 @@ const EMBEDS = new Map<RegExp, (chapter: Chapter) => (match: RegExpMatchArray) =
     /{{\s*app\(name="(?<name>[0-9a-zA-Z]+)"\)\s*}}/gi,
     (chapter) => async (match) => {
       const { name } = match.groups!;
-      const inputPath = join(PATH_SRC, name, 'index.ts');
+      const inputPath = join(PATH_LIB, name, 'index.ts');
       const outputName = `${name}.bundle.js`;
       const outputPath = join(dirname(join(PATH_BOOK, chapter.path)), outputName);
       await $`bun build --target=browser ${inputPath} --outfile ${outputPath}`;

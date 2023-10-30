@@ -9,7 +9,7 @@ src = "book"
 [build]
 build-dir = "dist"
 create-missing = true
-extra-watch-dirs = ["preprocessors", "src"]
+extra-watch-dirs = ["preprocessors", "lib"]
 
 [preprocessor.embeds]
 command = "preprocessors/embeds/index.ts"
@@ -27,6 +27,7 @@ no-css = true
 [preprocessor.pagetoc]
 
 [output.html]
+theme = "./theme"
 default-theme = "dark"
 preferred-dark-theme = "ayu"
 curly-quotes = true
