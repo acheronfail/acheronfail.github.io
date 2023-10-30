@@ -9,7 +9,7 @@ src = "book"
 [build]
 build-dir = "dist"
 create-missing = true
-extra-watch-dirs = ["preprocessors"]
+extra-watch-dirs = ["preprocessors", "src"]
 
 [preprocessor.embeds]
 command = "preprocessors/embeds/index.ts"

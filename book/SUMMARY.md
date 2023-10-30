@@ -10,6 +10,10 @@
 - [Picking pixels on macOS](./stories/pixel-picker/index.md)
 - [Picking pixels on X11](./stories/xcolor/index.md)
 
+<!-- # Toys
+
+- [Return True to Win](./toys/rttw/index.md) -->
+
 # Guides
 
 - [Games](./guides/games/index.md)
