@@ -1,7 +1,7 @@
 #!/usr/bin/env ./node_modules/.bin/tsx
 
 import { join, relative } from 'path';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK } from '../common';
+import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, isFile } from '../common';
 import { $ } from 'execa';
 
 declareSupports(['html']);
@@ -14,8 +14,16 @@ runPreprocessor(async (_context, book) => {
     const argFile = relative(process.cwd(), join(PATH_BOOK, chapter.path));
     const argDate = `--date=format:${DATE_FORMAT}`;
 
-    let { stdout: creation } = await $`git log -1 --diff-filter=A --follow ${argDate} --format=%cd -- ${argFile}`;
-    let { stdout: modified } = await $`git log -1 ${argDate} --pretty=format:%cd -- ${argFile}`;
+    let [{ stdout: creation }, { stdout: modified }, exists] = await Promise.all([
+      $`git log -1 --diff-filter=A --follow ${argDate} --format=%cd -- ${argFile}`,
+      $`git log -1 ${argDate} --pretty=format:%cd -- ${argFile}`,
+      isFile(argFile),
+    ]);
+
+    // git won't error if the path isn't recognised, so sanity check it ourselves
+    if (!exists) {
+      throw new Error(`Failed to find file: ${argFile}`);
+    }
 
     if (!creation) creation = '???';
     if (!modified) modified = creation;

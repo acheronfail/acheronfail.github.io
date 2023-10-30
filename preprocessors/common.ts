@@ -1,10 +1,18 @@
 import { inspect } from 'util';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { stat } from 'fs/promises';
 import { Book, Chapter, Context, Section, SectionChapter } from './types';
 
 export const PATH_BOOK = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'book');
 export const PATH_LIB = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'lib');
+
+export function isFile(path: string): Promise<boolean> {
+  return stat(path).then(
+    (stat) => stat.isFile(),
+    () => false
+  );
+}
 
 export async function runPreprocessor(callback: (context: Context, book: Book) => void | Promise<void>) {
   try {
