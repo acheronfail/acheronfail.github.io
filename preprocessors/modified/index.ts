@@ -1,7 +1,7 @@
 #!/usr/bin/env ./node_modules/.bin/tsx
 
 import { join, relative } from 'path';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_LIB } from '../common';
+import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK } from '../common';
 import { $ } from 'execa';
 
 declareSupports(['html']);
@@ -11,7 +11,7 @@ const DATE_FORMAT = '%A %B %d %Y, %H:%M';
 
 runPreprocessor(async (_context, book) => {
   await forEachChapter(book, async (chapter) => {
-    const argFile = relative(process.cwd(), join(PATH_LIB, chapter.path));
+    const argFile = relative(process.cwd(), join(PATH_BOOK, chapter.path));
     const argDate = `--date=format:${DATE_FORMAT}`;
 
     let { stdout: creation } = await $`git log -1 --diff-filter=A --follow ${argDate} --format=%cd -- ${argFile}`;
