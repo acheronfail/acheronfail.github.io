@@ -99,6 +99,7 @@ const getBounds = ({ prefix, suffix }: PuzzleFacet, docLength: number): Bounds =
 
 // extension to only allow edits between certain ranges
 // https://discuss.codemirror.net/t/migrating-readonly-textmarkers-from-codemirror-5-to-6/7337/5
+// FIXME: undo transactions are getting clipped and not processed correctly
 const readOnlySections = EditorState.transactionFilter.of((tr) => {
   // Get the previous value for the puzzle and the current one, to check for changes
   // I don't like that this check must happen on every transaction, surely there's a
