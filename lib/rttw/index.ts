@@ -25,6 +25,9 @@ root.addEventListener('keydown', (event) => event.stopPropagation());
 
 // Setup puzzle selector
 const puzzleSelector = root.appendChild(document.createElement('select'));
+puzzleSelector.addEventListener('change', () => {
+  view.dispatch({ effects: updatePuzzleEffect() });
+});
 puzzleSelector.append(
   ...season1.map((puzzle) => {
     const option = document.createElement<'option'>('option');
@@ -33,28 +36,46 @@ puzzleSelector.append(
     return option;
   })
 );
-function updatePuzzle() {
+
+function runInBrowser(input: string) {
+  try {
+    const value = eval(input);
+    return value;
+  } catch (err) {
+    return err instanceof Error ? err.message : err.toString();
+  }
+}
+
+function updatePuzzleEffect(solution?: string) {
   const puzzle = season1.find((p) => p.name === puzzleSelector.value);
   if (!puzzle) {
     throw new Error(`Failed to find puzzle, select value: ${puzzleSelector.value}`);
   }
 
-  view.dispatch({
-    effects: puzzleCompartment.reconfigure(
-      puzzleFacet.of({
-        prefix: `// This is your function...\n${puzzle.source}\n\n// ... now make it return \`true\`!\n${puzzle.name}(`,
-        suffix: `);\n\n// Result: TODO\n// Length: TODO\n`,
-      })
-    ),
-  });
+  const prefix = `// This is your function...\n${puzzle.source}\n\n// ... now make it return \`true\`!\n${puzzle.name}(`;
+  const result = solution ? runInBrowser(prefix + solution + ');') : undefined;
+  const resultText = result === true ? `${result} 🎉` : result ?? '<no input>';
+
+  return puzzleCompartment.reconfigure(
+    puzzleFacet.of({
+      prefix,
+      suffix: `);\n\n// Result: ${resultText}\n// Length: ${solution?.length ?? 0}`,
+    })
+  );
 }
-puzzleSelector.addEventListener('change', updatePuzzle);
+
+function getBounds({ prefix, suffix }: PuzzleFacet, docLength: number) {
+  return {
+    from: prefix.length,
+    to: Math.max(0, docLength - suffix.length),
+  };
+}
 
 const state = EditorState.create({
   extensions: [
     basicSetup,
     javascript(),
-    puzzleCompartment.of(puzzleFacet.of({ prefix: '==>', suffix: '<==' })),
+    puzzleCompartment.of(puzzleFacet.of(defaultPuzzle())),
     // extension to only allow edits between certain ranges
     // https://discuss.codemirror.net/t/migrating-readonly-textmarkers-from-codemirror-5-to-6/7337/5
     EditorState.transactionFilter.of((tr) => {
@@ -90,8 +111,7 @@ const state = EditorState.create({
         ];
       }
 
-      const fromBound = currentPuzzle.prefix.length;
-      const toBound = Math.max(0, tr.newDoc.length - currentPuzzle.suffix.length);
+      const { from: fromBound, to: toBound } = getBounds(currentPuzzle, tr.newDoc.length);
 
       // check any changes are out of bounds
       let oob = false;
@@ -118,9 +138,15 @@ const state = EditorState.create({
       );
       return [{ selection }];
     }),
+    EditorView.updateListener.of((update) => {
+      if (!update.docChanged) return;
+      const { from: fromBound, to: toBound } = getBounds(update.state.facet(puzzleFacet), update.state.doc.length);
+      const solution = update.state.doc.sliceString(fromBound, toBound);
+      view.dispatch({ effects: updatePuzzleEffect(solution) });
+    }),
   ],
 });
 
-const view = new EditorView({ state, parent: root, extensions: [] });
-updatePuzzle();
+const view = new EditorView({ state, parent: root });
+view.dispatch({ effects: updatePuzzleEffect() });
 view.focus();
