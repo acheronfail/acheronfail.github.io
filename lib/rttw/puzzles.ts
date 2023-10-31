@@ -1,4 +1,4 @@
-interface Puzzle {
+export interface Puzzle {
   index: number;
   name: string;
   source: string;
