@@ -2,6 +2,7 @@ import { EditorView, basicSetup } from 'codemirror';
 import { Text, Compartment, EditorSelection, EditorState, Facet, StateEffect } from '@codemirror/state';
 import { javascript } from '@codemirror/lang-javascript';
 import { season1, Puzzle } from './puzzles';
+import inspect from 'browser-util-inspect';
 
 const root: HTMLElement = document.querySelector('#app-rttw')!;
 // TODO: better theme
@@ -41,7 +42,7 @@ puzzleSelector.append(
 function runInBrowser(input: string) {
   try {
     const value = eval(input);
-    return value;
+    return value === true ? true : inspect(value);
   } catch (err) {
     return err instanceof Error ? err.message : err.toString();
   }
@@ -56,7 +57,7 @@ function getPuzzle() {
   return puzzle;
 }
 
-function createPuzzleState(puzzle: Puzzle, resultText: string, solutionLen: number): PuzzleFacet {
+function createPuzzleState(puzzle: Puzzle, resultText = '<no input>', solutionLen = 0): PuzzleFacet {
   const prefix = `// This is your function...\n${puzzle.source}\n\n// ... now make it return \`true\`!\n${puzzle.name}(`;
   const suffix = `);\n\n// Result: ${resultText}\n// Length: ${solutionLen}`;
   return { prefix, suffix };
@@ -64,8 +65,7 @@ function createPuzzleState(puzzle: Puzzle, resultText: string, solutionLen: numb
 
 function initializePuzzle(): EditorState {
   const puzzle = getPuzzle();
-  const puzzleState = createPuzzleState(puzzle, '<no input>', 0);
-
+  const puzzleState = createPuzzleState(puzzle);
   return EditorState.create({
     doc: puzzleState.prefix + puzzleState.suffix,
     extensions: [
@@ -81,7 +81,7 @@ function initializePuzzle(): EditorState {
 function updatePuzzle(solution: string): StateEffect<unknown> {
   const puzzle = getPuzzle();
   const result = runInBrowser(`${puzzle.source}\n${puzzle.name}(${solution});`);
-  const resultText = result === true ? `${result} 🎉` : result ?? '<no input>';
+  const resultText = result === true ? `${result} 🎉` : result;
   const solutionLen = solution.replace(/\s/g, '').length;
   return puzzleCompartment.reconfigure(puzzleFacet.of(createPuzzleState(puzzle, resultText, solutionLen)));
 }
