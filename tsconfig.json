@@ -1,0 +1,10 @@
+{
+  "extends": ["@tsconfig/strictest/tsconfig"],
+  "exclude": ["**/dist/**/*", "**/theme/**/*"],
+  "compilerOptions": {
+    "composite": true,
+    "module": "Node16",
+    "types": ["node", "bun-types"],
+    "lib": []
+  }
+}

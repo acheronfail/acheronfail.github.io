@@ -1,7 +1,5 @@
-/// <reference path="../types/link-check.d.ts" />
-
 import linkCheck from 'link-check';
-import { getAllLinks } from './util';
+import { getAllLinks } from './util.js';
 import { promisify } from 'util';
 import pLimit from 'p-limit';
 import c from 'chalk';

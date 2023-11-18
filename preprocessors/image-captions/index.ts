@@ -1,6 +1,6 @@
 #!/usr/bin/env ./node_modules/.bin/tsx
 
-import { runPreprocessor, forEachChapter, declareSupports } from '../common';
+import { runPreprocessor, forEachChapter, declareSupports } from '../common.js';
 
 declareSupports(['html']);
 

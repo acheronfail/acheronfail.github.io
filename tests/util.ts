@@ -1,5 +1,3 @@
-/// <reference path="../node_modules/bun-types/types.d.ts" />
-
 import { join } from 'path';
 import { NodeWalkingStep, Parser } from 'commonmark';
 
@@ -55,7 +53,7 @@ export async function getAllLinks(): Promise<AllLinks> {
           const { entering, node } = event;
           if (entering && node.type === 'link') {
             if (node.destination) {
-              const isInternal = ['/', '.', '#'].includes(node.destination[0]) || !/[a-z]+:/i.test(node.destination);
+              const isInternal = ['/', '.', '#'].includes(node.destination[0]!) || !/[a-z]+:/i.test(node.destination);
               if (isInternal) {
                 allLinks.internal.push({ from: path, to: node.destination });
               } else {

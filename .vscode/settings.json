@@ -2,7 +2,6 @@
   "editor.formatOnSave": true,
   "zenMode.centerLayout": true,
   "zenMode.fullScreen": false,
-  "workbench.sideBar.location": "left",
   "editor.formatOnSaveMode": "file",
   "[markdown]": {
     "editor.rulers": [80],

@@ -1,7 +1,5 @@
-/// <reference path="../node_modules/bun-types/types.d.ts" />
-
 import { expect, test, describe } from 'bun:test';
-import { getAllFiles, getAllLinks } from './util';
+import { getAllFiles, getAllLinks } from './util.js';
 import { dirname, resolve } from 'path';
 import { stat } from 'fs/promises';
 import { NodeWalkingStep, Parser } from 'commonmark';
@@ -125,7 +123,7 @@ describe('markdown tests', () => {
             // them to be parsed as individual blocks so their content is also parsed as markdown.
             const match = RE_DIV_WARNING.exec(node.literal);
             if (!match) continue;
-            if (match[1].length > 0) {
+            if (match[1] && match[1].length > 0) {
               const [[row, col]] = node.sourcepos;
               errors.push({
                 match: match[0],

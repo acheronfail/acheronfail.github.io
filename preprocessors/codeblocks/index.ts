@@ -1,6 +1,6 @@
 #!/usr/bin/env ./node_modules/.bin/tsx
 
-import { declareSupports, runPreprocessor, forEachChapter } from '../common';
+import { declareSupports, runPreprocessor, forEachChapter } from '../common.js';
 
 const RE_CODEBLOCK = /^```(?<info>.*)\n([\s\S]+?)```$/gim;
 const RE_TITLE = /title="(?<title>.+)"/i;

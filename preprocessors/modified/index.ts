@@ -1,7 +1,7 @@
 #!/usr/bin/env ./node_modules/.bin/tsx
 
 import { join, relative } from 'path';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, isFile } from '../common';
+import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, isFile } from '../common.js';
 import { $ } from 'execa';
 
 declareSupports(['html']);

@@ -2,7 +2,7 @@ import { inspect } from 'util';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { stat } from 'fs/promises';
-import { Book, Chapter, Context, Section, SectionChapter } from './types';
+import { Book, Chapter, Context, Section, SectionChapter } from './types.js';
 
 export const PATH_BOOK = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'book');
 export const PATH_LIB = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'lib');
@@ -29,7 +29,7 @@ export async function runPreprocessor(callback: (context: Context, book: Book) =
 export function declareSupports(outputs: [string, ...string[]]) {
   // https://rust-lang.github.io/mdBook/for_developers/preprocessors.html
   if (process.argv[2] === 'supports') {
-    process.exit(outputs.includes(process.argv[3]) ? 0 : 1);
+    process.exit(outputs.includes(process.argv[3]!) ? 0 : 1);
   }
 }
 
