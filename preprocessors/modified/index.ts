@@ -1,4 +1,4 @@
-#!/usr/bin/env ./node_modules/.bin/tsx
+#!/usr/bin/env bun
 
 import { join, relative } from 'path';
 import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, isFile } from '../common.js';

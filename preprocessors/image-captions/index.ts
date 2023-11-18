@@ -1,4 +1,4 @@
-#!/usr/bin/env ./node_modules/.bin/tsx
+#!/usr/bin/env bun
 
 import { runPreprocessor, forEachChapter, declareSupports } from '../common.js';
 

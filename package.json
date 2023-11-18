@@ -2,8 +2,7 @@
   "type": "module",
   "dependencies": {
     "execa": "^8.0.1",
-    "katex": "^0.16.9",
-    "tsx": "^3.14.0"
+    "katex": "^0.16.9"
   },
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.2",
