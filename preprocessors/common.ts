@@ -3,9 +3,9 @@ import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { stat } from 'fs/promises';
 import { Book, Chapter, Context, Section, SectionChapter } from './types.js';
+import mdbook from '../book.toml';
 
-export const PATH_BOOK = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'book');
-export const PATH_LIB = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'lib');
+export const PATH_BOOK = resolve(dirname(fileURLToPath(import.meta.url)), '..', mdbook.book.src);
 
 export function isFile(path: string): Promise<boolean> {
   return stat(path).then(

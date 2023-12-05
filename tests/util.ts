@@ -1,7 +1,9 @@
-import { join } from 'path';
+import { dirname, join, resolve } from 'path';
 import { NodeWalkingStep, Parser } from 'commonmark';
+import { fileURLToPath } from 'url';
+import mdbook from '../book.toml';
 
-const BOOK_DIR = 'book';
+const BOOK_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '..', mdbook.book.src);
 
 let allFiles: Promise<string[]> | null = null;
 export async function getAllFiles() {

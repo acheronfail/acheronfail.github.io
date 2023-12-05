@@ -1,7 +1,6 @@
 # Summary
 
-# Home
-
+- [Home](./home.md)
 - [About](./about.md)
 
 # Stories
