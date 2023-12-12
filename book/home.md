@@ -37,7 +37,7 @@
   },
   "links": [
     "<a href="about.html">stuff</a>",
-    "<a href="https://js-puzzles.github.io/JS-Puzzles/">js-puzzles</a>",
+    "<a href="https://js-puzzles.github.io/">js-puzzles</a>",
   ]
 }
 
