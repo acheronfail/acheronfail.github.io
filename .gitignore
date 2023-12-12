@@ -2,3 +2,5 @@ dist
 node_modules
 theme
 *.bundle.js
+jspm_packages
+.serverless

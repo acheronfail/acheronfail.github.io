@@ -3,8 +3,10 @@
   "exclude": ["**/dist/**/*", "**/theme/**/*"],
   "compilerOptions": {
     "composite": true,
+    "noEmit": true,
     "module": "Node16",
     "types": ["node", "bun-types"],
+    "checkJs": true,
     "lib": []
   }
 }

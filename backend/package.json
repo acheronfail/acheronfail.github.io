@@ -1,0 +1,15 @@
+{
+  "name": "@acheronfail/backend",
+  "type": "module",
+  "private": true,
+  "main": "deploy.js",
+  "devDependencies": {
+    "@pulumi/aws": "^6.13.1",
+    "@pulumi/pulumi": "^3.95.0",
+    "@types/aws-lambda": "^8.10.130",
+    "aws-sdk": "^2.1512.0",
+    "esbuild": "^0.19.8",
+    "serverless": "^3.38.0",
+    "serverless-esbuild": "^1.50.0"
+  }
+}

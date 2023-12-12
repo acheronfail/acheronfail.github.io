@@ -1,0 +1,5 @@
+name: acheronfail-github-io
+runtime: nodejs
+description: Just a toy
+config:
+  aws:region: ap-southeast-2

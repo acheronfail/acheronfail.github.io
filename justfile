@@ -34,3 +34,11 @@ test-links: (_check "bun")
 alias b := build
 build: (_check "mdbook")
   mdbook build
+
+# deploy the backend
+deploy: build (_check "bun")
+  cd backend && bunx pulumi up
+
+# deploy the backend
+undeploy: (_check "bun")
+  cd backend && bunx pulumi down

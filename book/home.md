@@ -1,6 +1,5 @@
+<!-- TODO: not the best experience on mobile -->
 <style>
-  main {
-  }
   pre code {
     background: none !important;
     font-family: monospace !important;
