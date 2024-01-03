@@ -83,7 +83,7 @@ I had many `signature is marginal trust` issues when installing packages with `p
 
 I was able to fix this by locally signing the key:
 
-```bash
+```bash,title="Locally sign key"
 pacman-key --lsign-key $(pacman-key --list-sig Build | head -2 | tail -1)
 ```
 
@@ -98,7 +98,7 @@ Useful information:
 
 Brief overview of my process (not exact commands, just a summary):
 
-```bash
+```bash,title="Bootstrap Arch base System"
 # Partition `/dev/vda` with `fdisk`
 # Created two partitions: /dev/vda1 (1G), and /dev/vda2 (rest)
 fdisk /dev/vda
@@ -164,7 +164,7 @@ As long as an `Xorg` server is running, `spice-vdagentd` is running (should auto
 
 The `spice-vdagent` and `qemu-guest-agent` packages also automatically support this. If you need to trigger a resolution change manually, it's as easy as running:
 
-```bash
+```bash,title="Arch Guest VM"
 xrandr --output Virtual-1 --auto
 ```
 
@@ -174,7 +174,7 @@ By default no soundcards are found. This is actually because archlinuxarm's `lin
 
 [Here's a brief overview](https://github.com/utmapp/UTM/discussions/5183#discussioncomment-7968515) of how I did it:
 
-```bash
+```bash,title="Arch Guest VM"
 # clone archlinuxarm's packages repository
 git clone https://github.com/archlinuxarm/PKGBUILDs
 # enter directory containing `linux-aarch64`'s PKGBUILD
@@ -183,7 +183,7 @@ cd PKGBUILDs/core/linux-aarch64
 
 Then update the package name, and also ensure that `CONFIG_SND_VIRTIO` is on, I set it to `m` (compile as a module). Here's a diff of the `PKGBUILD`:
 
-```diff
+```diff,title="Patch linux-aarch64 with CONFIG_SND_VIRTIO=m"
 From fae13fc75ab3fd9699d0e1817917d523d8c8e7c4 Mon Sep 17 00:00:00 2001
 From: acheronfail <acheronfail@gmail.com>
 Date: Fri, 29 Dec 2023 09:04:24 +1030
@@ -247,19 +247,19 @@ Bear in mind compiling the kernel can take a while... It took my VM a little ove
 
 Setting up Rosetta x86_64 emulation is fairly straightforward on an Arch system. The first thing to do is to mount the `rosetta` into the guest. You can do this a single time with:
 
-```bash
+```bash,title="Arch Guest VM"
 mount -t virtiofs rosetta /media/rosetta
 ```
 
 And configure it to automatically mount at boot by adding this to `/etc/fstab`:
 
-```txt
+```txt,title="in /etc/fstab"
 rosetta	/media/rosetta	virtiofs	ro,nofail	0	0
 ```
 
 Next [we have to register the x86_64 binary format with `binfmt`](https://docs.kernel.org/admin-guide/binfmt-misc.html):
 
-```bash
+```bash,title="Arch Guest VM"
 # Create /etc/binfmt.d/rosetta.conf:
 mkdir -p /etc/binfmt.d/
 echo ':rosetta:M::\\x7fELF\\x02\\x01\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x02\\x00\\x3e\\x00:\\xff\\xff\\xff\\xff\\xff\\xfe\\xfe\\x00\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xff\\xfe\\xff\\xff\\xff:/media/rosetta/rosetta:CF' > /etc/binfmt.d/rosetta.conf
@@ -270,7 +270,7 @@ systemctl enable systemd-binfmt.service
 
 Next time you boot, you should be able to run x86_64 binaries without trouble at all. This is especially useful for things like docker. Here's an example running an x86_64 docker image in the aarch64 VM:
 
-```bash
+```bash,title="Arch Guest VM"
 # Running aarch64 docker container (native arch):
 docker run --rm -ti --platform "linux/arm64" ubuntu uname -a
 Linux e92da6d4353c 6.2.0-1-aarch64-virt-ARCH #1 SMP PREEMPT_DYNAMIC Fri Dec 29 08:34:59 ACDT 2023 aarch64 aarch64 aarch64 GNU/Linux
@@ -284,13 +284,13 @@ Linux 46e44ec1d041 6.2.0-1-aarch64-virt-ARCH #1 SMP PREEMPT_DYNAMIC Fri Dec 29 0
 
 This is also very easy. Ensure you've configured a share directory in UTM's settings for the VM. Once you've done that, just:
 
-```bash
+```bash,title="Arch Guest VM"
 mount -t virtiofs share /media/share
 ```
 
 And configure it to automatically mount at boot by adding this to `/etc/fstab`:
 
-```txt
+```txt,title="in /etc/fstab"
 share	/media/share	virtiofs	ro,nofail	0	0
 ```
 
@@ -306,7 +306,7 @@ My solution was to use a program called `sleepwatcher` on the macOS host, and up
 
 **First, install and configure sleepwatcher on the host:**
 
-```bash
+```bash,title="macOS Host"
 # first, install sleepwatcher on macOS host
 brew install sleepwatcher
 
@@ -318,8 +318,7 @@ Now that `sleepwatcher` is setup on the macOS host, if a script exists at `~/.wa
 
 **Create script to set time in VM on wakeup:**
 
-```bash
-# on the host:
+```bash,title="macOS Host"
 cat ~/.wakeup
 #!/usr/bin/env bash
 
@@ -337,8 +336,7 @@ Also since this uses `ssh`, remember to copy your host's public SSH key to the V
 
 I've set it so any user that's part of the `wheel` group can use `date` without a `sudo` password:
 
-```bash
-# in the VM:
+```bash,title="Arch Guest VM"
 cat /etc/sudoers | grep date
 %wheel ALL=(root) NOPASSWD: /usr/bin/date *
 ```
