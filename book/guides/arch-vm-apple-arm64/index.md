@@ -242,7 +242,7 @@ And configure it to automatically mount at boot by adding this to `/etc/fstab`:
 rosetta	/media/rosetta	virtiofs	ro,nofail	0	0
 ```
 
-Next we have to register the x86_64 binary format with `binfmt`:
+Next [we have to register the x86_64 binary format with `binfmt`](https://docs.kernel.org/admin-guide/binfmt-misc.html):
 
 ```bash
 # Create /etc/binfmt.d/rosetta.conf:
