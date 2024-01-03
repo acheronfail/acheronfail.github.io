@@ -19,11 +19,13 @@ This isn't a complete step-by-step guide to installing Arch Linux in a VM on an 
 
 Here's a brief overview of things I tried, with some of the drawbacks:
 
-| backend              |                             OpenGL | input capture support | x86_64 support |
-| :------------------- | ---------------------------------: | --------------------: | -------------: |
-| virtualise (`qemu`)  | low version, some apps didn't work |    mouse and keyboard |           none |
-| virtualize (`apple`) |                               best |         only keyboard |    via rosetta |
-| emulate (`qemu`)     | low version, some apps didn't work |    mouse and keyboard |    full (slow) |
+| backend              |                             OpenGL | input capture support | x86_64 support | USB Passthrough |
+| :------------------- | ---------------------------------: | --------------------: | -------------: | --------------: |
+| virtualise (`qemu`)  | low version, some apps didn't work |    mouse and keyboard |           none |   full support* |
+| virtualize (`apple`) |                               best |         only keyboard |    via rosetta |      no support |
+| emulate (`qemu`)     | low version, some apps didn't work |    mouse and keyboard |    full (slow) |   full support* |
+
+* `*`: There's currently [a bug with UTM](https://github.com/utmapp/UTM/issues/3995) where it can't pass through m.2 drives, everything else I tried seems to work though.
 
 > I couldn't get a LUKS decryption prompt working at all with the `virtualize (apple)` backend. I'll have to have a deeper look into that at a later date...
 
