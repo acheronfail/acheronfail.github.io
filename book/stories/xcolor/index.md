@@ -8,6 +8,12 @@ There were existing tools like [gpick] and [colorpicker], but - in my opinion - 
 
 This means I have to move the cursor while looking elsewhere at the preview, and it's not a nice experience for me. [^usability] This did not spark joy.
 
+- [Building an X11 Colour Picker](#building-an-x11-colour-picker)
+  - [It's not a simple soluton](#its-not-a-simple-soluton)
+  - [Thinking outside the box](#thinking-outside-the-box)
+    - [Creating the cursor](#creating-the-cursor)
+  - [A shout out to Rust](#a-shout-out-to-rust)
+
 **Then, I found [`xcolor`]**.
 
 This had a small preview that followed the cursor, and looked like this:

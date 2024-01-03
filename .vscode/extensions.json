@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    // for maintaining markdown tables, and markdown table of contents
+    "yzhang.markdown-all-in-one"
+  ],
+  "unwantedRecommendations": []
+}

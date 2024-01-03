@@ -2,6 +2,21 @@
 
 This isn't a complete step-by-step guide to installing Arch Linux in a VM on an ARM Mac, but it should have enough information for you to figure the rest out yourself, and save you some time figuring out how to do things.
 
+- [Creating a Arch Linux VM on an ARM MacBook](#creating-a-arch-linux-vm-on-an-arm-macbook)
+- [Create the VM](#create-the-vm)
+  - [Step 1: Requirements](#step-1-requirements)
+  - [Step 2: Create the VM in UTM](#step-2-create-the-vm-in-utm)
+  - [Step 3: Boot the VM with a Serial interface](#step-3-boot-the-vm-with-a-serial-interface)
+  - [Step 4: Bootstrap Arch Linux](#step-4-bootstrap-arch-linux)
+  - [Step 5: Final Arch configuration](#step-5-final-arch-configuration)
+    - [Sharing clipboard between macOS host and Arch guest](#sharing-clipboard-between-macos-host-and-arch-guest)
+    - [Auto-resizing the guest display](#auto-resizing-the-guest-display)
+    - [Getting sound to work in the Arch guest](#getting-sound-to-work-in-the-arch-guest)
+    - [Setup Rosetta for x86\_64 emulation in the VM](#setup-rosetta-for-x86_64-emulation-in-the-vm)
+    - [Setup Shared Directories](#setup-shared-directories)
+    - [Automatic time synchronisation](#automatic-time-synchronisation)
+- [Potentially useful links](#potentially-useful-links)
+
 Here's a brief overview of things I tried, with some of the drawbacks:
 
 | backend              |                             OpenGL | input capture support | x86_64 support |

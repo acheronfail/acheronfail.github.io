@@ -10,6 +10,13 @@ That wasn't so fun.
 
 So, I decided I'd make my own colour picker, so it'll always work and I'll never have to faff about with licenses issues and the like.
 
+- [Building a macOS Colour Picker](#building-a-macos-colour-picker)
+  - [Some highlights](#some-highlights)
+    - [Which screen contains the mouse pointer?](#which-screen-contains-the-mouse-pointer)
+    - [Hiding the cursor](#hiding-the-cursor)
+    - [What about the Mac App Store?](#what-about-the-mac-app-store)
+    - [Urgh, UI application frameworks](#urgh-ui-application-frameworks)
+
 ## Some highlights
 
 I won't share every little details with you - my [pixel picker] is open source, so if you're interested you can look at it in detail. I'll share some of the more interesting bits I discovered along the way.

@@ -24,10 +24,7 @@ command = "preprocessors/image-captions/index.ts"
 after = ["links"]
 no-css = true
 
-[preprocessor.pagetoc]
-
 [output.html]
-theme = "./theme"
 default-theme = "dark"
 preferred-dark-theme = "ayu"
 curly-quotes = true
@@ -39,9 +36,8 @@ additional-css = [
   "preprocessors/modified/index.css",
   "preprocessors/codeblocks/index.css",
   "preprocessors/image-captions/index.css",
-  "theme/pagetoc.css",
 ]
-additional-js = ["node_modules/katex/dist/katex.min.js", "theme/pagetoc.js"]
+additional-js = ["node_modules/katex/dist/katex.min.js"]
 no-section-label = false
 git-repository-url = "https://github.com/acheronfail/acheronfail.github.io"
 git-repository-icon = "fa-github"

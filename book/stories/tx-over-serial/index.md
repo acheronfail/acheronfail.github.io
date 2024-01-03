@@ -4,7 +4,14 @@ I had an internet connection that required a DSL modem to use, and so I looked a
 
 Little did I know this router had a far greater obstacle than I expected...
 
-<!-- more -->
+- [Transferring files over a serial connection](#transferring-files-over-a-serial-connection)
+  - [Flashing OpenWrt without opening the case](#flashing-openwrt-without-opening-the-case)
+  - [Unbricking the router](#unbricking-the-router)
+    - [Alright! Now we have a shell again!](#alright-now-we-have-a-shell-again)
+    - [Transferring the new firmware over serial](#transferring-the-new-firmware-over-serial)
+      - [The first problem](#the-first-problem)
+      - [The second problem](#the-second-problem)
+      - [The third problem](#the-third-problem)
 
 What I neglected to notice on the page for the [TP-Link TD-W8970 v1] was _how to install OpenWrt_ on the device. 😅
 
