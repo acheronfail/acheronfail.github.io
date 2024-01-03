@@ -1,8 +1,8 @@
-# Creating a Arch Linux VM on an ARM MacBook
+# Creating an Arch Linux VM on an ARM MacBook
 
 This isn't a complete step-by-step guide to installing Arch Linux in a VM on an ARM Mac, but it should have enough information for you to figure the rest out yourself, and save you some time figuring out how to do things.
 
-- [Creating a Arch Linux VM on an ARM MacBook](#creating-a-arch-linux-vm-on-an-arm-macbook)
+- [Creating an Arch Linux VM on an ARM MacBook](#creating-an-arch-linux-vm-on-an-arm-macbook)
 - [Create the VM](#create-the-vm)
   - [Step 1: Requirements](#step-1-requirements)
   - [Step 2: Create the VM in UTM](#step-2-create-the-vm-in-utm)
