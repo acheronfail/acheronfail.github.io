@@ -11,7 +11,7 @@
 
 # Guides
 
-- [Arch in macOS VM](./guides/arch-vm-apple-arm64.md)
+- [Arch in macOS VM](./guides/arch-vm-apple-arm64/index.md)
 - [Games](./guides/games/index.md)
     - [D2R](./guides/games/d2r.md)
     - [Nox](./guides/games/nox.md)
