@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'bun:test';
-import { getAllFiles, getAllLinks } from './util.js';
+import { File, getAllFiles, getAllHtmlHeaders, getAllMarkdownLinks } from './util.js';
 import { dirname, resolve } from 'path';
 import { stat } from 'fs/promises';
 import { NodeWalkingStep, Parser } from 'commonmark';
@@ -20,15 +20,15 @@ describe('markdown tests', () => {
   }
 
   test('no TODO or FIXME in files referenced from summary', async () => {
-    const checkForTodos = async (path: string) => {
-      const text = await Bun.file(path).text();
+    const checkForTodos = async ({ markdownPath }: File) => {
+      const text = await Bun.file(markdownPath).text();
       const matches: TodoSearchResult[] = [];
 
       text.split('\n').forEach((line, index) => {
         let match: RegExpExecArray | null;
         while ((match = RE_TODOS.exec(line))) {
           matches.push({
-            path,
+            path: markdownPath,
             line,
             what: match[0],
             row: index + 1,
@@ -62,13 +62,25 @@ describe('markdown tests', () => {
    */
 
   test('internal links are valid', async () => {
-    const { internal } = await getAllLinks();
+    const { internal } = await getAllMarkdownLinks();
+    const htmlHeaders = await getAllHtmlHeaders();
     const brokenLinks = await Promise.all(
       internal.map(async ({ from, to, ...rest }) => {
         const resolved = resolve(from.endsWith('index.md') ? dirname(from) : from, to);
         if (to.startsWith('#')) {
-          console.warn(`Hash checking not yet implemented, link was: ${to}`);
-          return { from, to, ...rest, resolved: to, exists: true };
+          const headers = htmlHeaders.find((h) => h.markdownPath === from);
+          if (!headers) {
+            throw new Error(`Failed to find html headers for md file: ${from}`);
+          }
+
+          const toId = to.substring(1);
+          return {
+            from,
+            to,
+            ...rest,
+            resolved: toId,
+            exists: headers.headerIds.some((id) => id === toId),
+          };
         }
 
         return {
@@ -107,8 +119,8 @@ describe('markdown tests', () => {
   test('div.warning blocks contain markdown', async () => {
     const files = await getAllFiles();
     const results = await Promise.all(
-      files.map(async (path) => {
-        const text = await Bun.file(path).text();
+      files.map(async ({ markdownPath }) => {
+        const text = await Bun.file(markdownPath).text();
         const ast = new Parser().parse(text);
         const walker = ast.walker();
 
@@ -130,7 +142,7 @@ describe('markdown tests', () => {
                 match: match[0],
                 row,
                 col,
-                path,
+                path: markdownPath,
               });
             }
           }

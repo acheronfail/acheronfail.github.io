@@ -1,5 +1,5 @@
 import linkCheck from 'link-check';
-import { getAllLinks } from './util.js';
+import { getAllMarkdownLinks } from './util.js';
 import { promisify } from 'util';
 import pLimit from 'p-limit';
 import c from 'chalk';
@@ -8,7 +8,7 @@ import c from 'chalk';
  * Check all external links
  */
 
-const links = await getAllLinks();
+const links = await getAllMarkdownLinks();
 const check = promisify(linkCheck);
 const limit = pLimit(5);
 

@@ -23,7 +23,7 @@ dev: (_check "mdbook")
 
 # run the tests
 alias t := test
-test: (_check "bun" "mdbook")
+test: (_check "bun" "mdbook") build
   bun test
   mdbook test
 
