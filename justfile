@@ -7,7 +7,6 @@ _default:
 # install and setup dependencies
 setup: (_check "cargo" "bun")
   cargo install mdbook-katex
-  cargo install mdbook-pagetoc
   bun install
   if [ -z ${CI:-} ]; then just hooks; fi
 
