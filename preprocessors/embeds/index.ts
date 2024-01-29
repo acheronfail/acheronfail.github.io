@@ -17,7 +17,7 @@ const EMBEDS = new Map<RegExp, (chapter: Chapter) => (match: RegExpMatchArray) =
         const match = /\[.+?\]\((\.\/)?(?<mdPath>posts\/.+?)\)/.exec(line);
         if (match) {
           const href = match.groups!['mdPath']!.replace(/\.md$/i, '.html');
-          return encodeURIComponent(href);
+          return encodeURIComponent(href).replace(/%2F/gi, '/');
         }
       }
 
