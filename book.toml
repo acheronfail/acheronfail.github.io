@@ -13,6 +13,9 @@ extra-watch-dirs = ["preprocessors"]
 
 [preprocessor.embeds]
 command = "preprocessors/embeds/index.ts"
+[preprocessor.comments]
+command = "preprocessors/comments/index.ts"
+after = ['modified']
 [preprocessor.modified]
 command = "preprocessors/modified/index.ts"
 [preprocessor.codeblocks]
