@@ -1,11 +1,12 @@
 import { inspect } from 'util';
-import { dirname, resolve } from 'path';
+import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { stat } from 'fs/promises';
 import { Book, Chapter, Context, Section, SectionChapter } from './types.js';
 import mdbook from '../book.toml';
 
 export const PATH_BOOK = resolve(dirname(fileURLToPath(import.meta.url)), '..', mdbook.book.src);
+export const PATH_SUMMARY = join(PATH_BOOK, 'SUMMARY.md');
 
 export function isFile(path: string): Promise<boolean> {
   return stat(path).then(

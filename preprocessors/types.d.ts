@@ -12,7 +12,8 @@ export interface Chapter {
   content: string;
   number: number[];
   sub_items: Section[];
-  path: string;
+  /** `null` when it's a "draft" chapter, i.e.: `[foo]()` */
+  path: string | null;
   source_path: string;
   parent_names: unknown[];
 }

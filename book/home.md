@@ -36,7 +36,8 @@
     "github": "<a href="https://github.com/acheronfail">https://github.com/acheronfail</a>"
   },
   "links": [
-    "<a href="about.html">stuff</a>",
+    "<a href="{{latest_post_url}}">my latest post</a>",
+    "<a href="about.html">internet stuff</a>",
     "<a href="https://js-puzzles.github.io/">js-puzzles</a>",
   ]
 }

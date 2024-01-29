@@ -6,6 +6,6 @@ li.chapter-item {
   padding-left: 1rem;
 }
 
-li.chapter-item > a > strong {
+li.chapter-item > * > strong {
   display: none;
 }

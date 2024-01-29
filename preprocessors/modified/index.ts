@@ -11,6 +11,8 @@ const DATE_FORMAT = '%A %B %d %Y, %H:%M';
 
 runPreprocessor(async (_context, book) => {
   await forEachChapter(book, async (chapter) => {
+    if (chapter.path === null) return;
+
     const argFile = relative(process.cwd(), join(PATH_BOOK, chapter.path));
     const argDate = `--date=format:${DATE_FORMAT}`;
 

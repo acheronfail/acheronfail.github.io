@@ -1,13 +1,29 @@
 #!/usr/bin/env bun
 
 import { join, relative } from 'path';
-import { readdir } from 'fs/promises';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, log } from '../common.js';
+import { readFile, readdir } from 'fs/promises';
+import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, log, PATH_SUMMARY } from '../common.js';
 import { Chapter } from '../types.js';
 
 declareSupports(['html']);
 
 const EMBEDS = new Map<RegExp, (chapter: Chapter) => (match: RegExpMatchArray) => string | Promise<string>>([
+  // {{latest_post_url}},
+  [
+    /{{latest_post_url}}/gi,
+    (_chapter) => async (_match) => {
+      const summary = await readFile(PATH_SUMMARY, 'utf-8');
+      for (const line of summary.split('\n')) {
+        const match = /\[.+?\]\((\.\/)?(?<mdPath>posts\/.+?)\)/.exec(line);
+        if (match) {
+          const href = match.groups!['mdPath']!.replace(/\.md$/i, '.html');
+          return encodeURIComponent(href);
+        }
+      }
+
+      throw new Error('Failed to find latest post!');
+    },
+  ],
   // {{youtube(id="foo")}}
   [
     /{{\s*youtube\(id="(?<id>[0-9a-zA-Z]+)"\)\s*}}/gi,
@@ -26,6 +42,8 @@ const EMBEDS = new Map<RegExp, (chapter: Chapter) => (match: RegExpMatchArray) =
   [
     /{{\s*filelist\((?<path>.+)\)\s*}}/gi,
     (chapter) => async (match) => {
+      if (!chapter.path) return '';
+
       const realPath = join(PATH_BOOK, chapter.path, match.groups!['path']!);
 
       const list: { mdName: string; mdPath: string }[] = [];

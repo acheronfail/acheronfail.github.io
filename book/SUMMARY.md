@@ -1,19 +1,27 @@
 # Summary
 
-- [Home](./home.md)
-- [About](./about.md)
+# acheronfail
+
+* [Home](./home.md)
+* [About](./about.md)
 
 # Posts
 
-- [Transferring Files over Serial](./posts/tx-over-serial/index.md)
-- [Picking pixels on macOS](./posts/pixel-picker/index.md)
-- [Picking pixels on X11](./posts/xcolor/index.md)
-- [Arch in macOS VM](./posts/arch-vm-apple-arm64/index.md)
-- [Diablo II Resurrected on Linux](./posts/d2r.md)
-- [Nox on Windows 10](./posts/nox.md)
-- [Quake on Linux](./posts/quake.md)
+* [2024]()
+    * [Arch in macOS VM](./posts/arch-vm-apple-arm64/index.md)
+* [2022]()
+    * [Transferring Files over Serial](./posts/tx-over-serial/index.md)
+* [2021]()
+    * [Diablo II Resurrected on Linux](./posts/d2r.md)
+    * [Quake on Linux](./posts/quake.md)
+* [2019]()
+    * [Picking pixels on X11](./posts/xcolor/index.md)
+    * [Picking pixels on macOS](./posts/pixel-picker/index.md)
+* [2018]()
+    * [Nox on Windows 10](./posts/nox.md)
 
-# Snippets
+# Miscellaneous
 
-- [`find`](./snippets/find.md)
-- [`ssh`](./snippets/ssh.md)
+* [snippets]()
+    * [`find`](./snippets/find.md)
+    * [`ssh`](./snippets/ssh.md)
