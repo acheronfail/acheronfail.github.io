@@ -12,7 +12,7 @@ setup: (_check "cargo" "bun")
 
 # setup hooks
 hooks:
-  echo -e "#!/usr/bin/env bash\njust test\n" > .git/hooks/pre-commit
+  echo "#!/usr/bin/env bash\njust test\n" > .git/hooks/pre-commit
   chmod +x .git/hooks/pre-commit
 
 # start a local server for developing
