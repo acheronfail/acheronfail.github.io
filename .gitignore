@@ -2,3 +2,4 @@ dist
 node_modules
 theme
 *.bundle.js
+mdbook-admonish.css

@@ -15,6 +15,10 @@ function _getTheme() {
     coal: 'github-dark',
     navy: 'dark-blue',
     ayu: 'photon-dark',
+    latte: 'github-light',
+    frappe: 'dark-blue',
+    macchiato: 'dark-blue',
+    mocha: 'dark-blue',
   };
 
   for (const cls of document.documentElement.classList) {

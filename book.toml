@@ -15,7 +15,7 @@ extra-watch-dirs = ["preprocessors"]
 command = "preprocessors/embeds/index.ts"
 [preprocessor.comments]
 command = "preprocessors/comments/index.ts"
-after = ['modified']
+after = ['modified', 'links']
 [preprocessor.modified]
 command = "preprocessors/modified/index.ts"
 [preprocessor.codeblocks]
@@ -26,6 +26,15 @@ command = "preprocessors/image-captions/index.ts"
 [preprocessor.katex]
 after = ["links"]
 no-css = true
+
+[preprocessor.catppuccin]
+assets_version = "2.1.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
+
+[preprocessor.admonish]
+assets_version = "3.0.2"    # do not edit: managed by `mdbook-admonish install`
+command = "mdbook-admonish"
+after = ['links']
+on_failure = "bail"
 
 [output.html]
 default-theme = "dark"
@@ -39,6 +48,9 @@ additional-css = [
   "preprocessors/modified/index.css",
   "preprocessors/codeblocks/index.css",
   "preprocessors/image-captions/index.css",
+  "./mdbook-admonish.css",
+  "./theme/catppuccin.css",
+  "./theme/catppuccin-admonish.css",
 ]
 additional-js = ["node_modules/katex/dist/katex.min.js"]
 no-section-label = false

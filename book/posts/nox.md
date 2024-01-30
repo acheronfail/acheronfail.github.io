@@ -14,12 +14,11 @@ First, you need to obtain the game. You can [get it on GOG](https://www.gog.com/
 2. Set `Nox.exe` and `Game.exe` in its installation directory to use compatibility mode `Windows 98/ME`
 3. Enjoy!
 
-<div class="warning">
-
+~~~admonish warning
 This worked well for me the first time, but for another computer I had to change the screen resolution.
 
 Try tweaking those settings until it works.
-</div>
+~~~
 
 ## How to get Nox Quest (expansion pack) working
 
