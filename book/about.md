@@ -47,6 +47,8 @@ In no particular order:
 * <https://datatracker.ietf.org/doc/html/rfc2549>
 * <https://web.archive.org/web/20201224091302/https://kernelmag.dailydot.com/issue-sections/features-issue-sections/12228/mac-plus-modern-web/>
 * <https://jroweboy.github.io/c/asm/2015/01/26/when-is-main-not-a-function.html>
+* <https://nee.lv/2021/02/28/How-I-cut-GTA-Online-loading-times-by-70/>
+* <https://www.muppetlabs.com/~breadbox/software/tiny/teensy.html>
 
 ### Informative
 
