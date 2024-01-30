@@ -1,5 +1,5 @@
 declare module 'link-check' {
-  interface LinkCheckResult {
+  export interface LinkCheckResult {
     statusCode: number;
     status: 'alive' | 'dead';
     err: Error | null;

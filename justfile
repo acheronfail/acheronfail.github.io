@@ -17,22 +17,23 @@ hooks:
   echo "#!/usr/bin/env bash\njust test\n" > .git/hooks/pre-commit
   chmod +x .git/hooks/pre-commit
 
-# start a local server for developing
 alias serve := dev
+# start a local server for developing
 dev: (_check "mdbook")
   mdbook serve
 
-# run the tests
 alias t := test
+# run the tests
 test: (_check "bun" "mdbook") build
   bun test
   mdbook test
 
+# test all external links
 test-links: (_check "bun")
   bun run ./tests/test-external-links.ts
 
-# build the book
 alias b := build
+# build the book
 build: (_check "mdbook")
   mdbook-admonish install
   mdbook-catppuccin install
