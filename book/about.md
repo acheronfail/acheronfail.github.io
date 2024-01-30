@@ -72,7 +72,7 @@ In no particular order:
 * <https://abiondo.me/2019/01/02/exploiting-math-expm1-v8/>
 * <http://newosxbook.com/tools/ojtool.html>
 * <http://newosxbook.com/articles/CasaDePPL.html>
-* <https://cybersophia.net/vulnerability/zero-day-vulnerability-in-macos-and-ios-cve-2021-30807/>
+* <https://saaramar.github.io/IOMobileFrameBuffer_LPE_POC/>
   * <https://github.com/saaramar/IOMobileFrameBuffer_LPE_POC>
   * <https://www.synacktiv.com/en/publications/analysis-and-exploitation-of-the-ios-kernel-vulnerability-cve-2021-1782.html>
 
