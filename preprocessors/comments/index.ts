@@ -44,30 +44,32 @@ function _watchThemeChanges() {
   observer.observe(document.documentElement, { attributes: true });
 }
 
-function _setInitialTheme() {
-  const utterancesEl = document.querySelector('#utterances');
-  utterancesEl.setAttribute('theme', _getTheme());
-}
-
 runPreprocessor(async (_context, book) => {
   await forEachChapter(book, async (chapter) => {
     if (chapter.path === null) return;
     if (!chapter.path.startsWith('posts/')) return;
 
     chapter.content += `
-<script type="text/javascript">window._getTheme = ${_getTheme.toString()};</script>
-<script type="text/javascript">window._watchThemeChanges = ${_watchThemeChanges.toString()};</script>
-<script id="utterances"
-    src="https://utteranc.es/client.js"
-    repo="acheronfail/acheronfail.github.io"
-    issue-term="pathname"
-    label="💬"
-    theme="preferred-color-scheme"
-    crossorigin="anonymous"
-    onload="_watchThemeChanges()"
-    async>
+<div id="comments" />
+<script type="text/javascript">
+  window._getTheme = ${_getTheme.toString()};
+  window._watchThemeChanges = ${_watchThemeChanges.toString()};
+  if (window.location.hostname == "acheronfail.github.io") {
+    var script = document.createElement("script");
+    script.src = "https://utteranc.es/client.js";
+    script.id = "utterances";
+    script.setAttribute("repo", "acheronfail/acheronfail.github.io");
+    script.setAttribute("issue-term", "pathname");
+    script.setAttribute("label", "💬");
+    script.setAttribute("theme", _getTheme());
+    script.setAttribute("crossorigin", "anonymous");
+    script.setAttribute("onload", "_watchThemeChanges()");
+    script.setAttribute("async", "");
+    document.querySelector('#comments').append(script);
+  } else {
+    document.querySelector('#comments').innerHTML = '<p style="margin: 1em;text-align: center">💬</p>'
+  }
 </script>
-<script type="text/javascript">(${_setInitialTheme.toString()})();</script>
 `;
   });
 });

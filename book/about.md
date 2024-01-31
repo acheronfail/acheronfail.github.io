@@ -40,6 +40,7 @@ In no particular order:
 
 ### The internet is the best
 
+* <https://www.cs.unm.edu/~dlchao/flake/doom/chi/chi.html>
 * <https://leftoversalad.com/c/015_programmingpeople/>
 * <http://joshworth.com/dev/pixelspace/pixelspace_solarsystem.html>
 * <https://int10h.org/oldschool-pc-fonts/fontlist/>
