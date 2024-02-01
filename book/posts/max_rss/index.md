@@ -29,7 +29,7 @@ Using this program, we can measure what the `rusage.ru_maxrss` field is for a an
 
 As far as I was concerned, the max RSS reported here was just fine. That was, until I noticed some odd behaviour, especially when running commands which used very little memory.
 
-I have a toy project which pits different programming languages against each other, and I started seeing these results when using `rusage.ru_maxrss`:
+I have a [toy project](https://github.com/acheronfail/count) which pits different programming languages against each other, and I started seeing these results when using `rusage.ru_maxrss`:
 
 <div style="text-align: center;">
 
