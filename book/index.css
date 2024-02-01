@@ -9,3 +9,15 @@ li.chapter-item {
 li.chapter-item > * > strong {
   display: none;
 }
+
+/**
+ * Make headers a little more obvious
+ */
+main h1:not(:first-child),
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+  border-bottom: 1px solid var(--theme-popup-border);
+}
