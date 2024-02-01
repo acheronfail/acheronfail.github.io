@@ -81,7 +81,7 @@ Resident Set Size: number of pages the process has in real memory. This is just 
 
 ...
 
-Some of these values are inaccurate because of a kernel-internal scalability optimization. If accurate values are required, use `/proc/pid/smaps` or `/proc/pid/smaps_rollup instead`, which are much slower but provide accurate, detailed information.
+Some of these values are inaccurate because of a kernel-internal scalability optimization. If accurate values are required, use `/proc/pid/smaps` or `/proc/pid/smaps_rollup` instead, which are much slower but provide accurate, detailed information.
 ~~~
 
 Ahh, there we go. So we've found the reason we're not getting good numbers from `rusage.ru_maxrss`, and we also potentially we have a workaround by reading `/proc/$PID/smaps` and its ilk.
