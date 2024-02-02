@@ -1,7 +1,7 @@
 .cb-title {
   font-size: 0.8em;
   padding: 0.25rem 1rem;
-  background-color: var(--table-header-bg);
+  background-color: var(--theme-popup-border);
 }
 
 .cb-wrapper pre {
