@@ -32,7 +32,7 @@ runPreprocessor(async (_context, book) => {
     const argFile = relative(process.cwd(), join(PATH_BOOK, chapter.path));
     const argDate = `--date=format:%s`;
 
-    let [{ stdout: creationStr }, { stdout: modifiedStr }, exists] = await Promise.all([
+    const [{ stdout: creationStr }, { stdout: modifiedStr }, exists] = await Promise.all([
       $`git log -1 --diff-filter=A --follow ${argDate} --format=%cd -- ${argFile}`,
       $`git log -1 ${argDate} --pretty=format:%cd -- ${argFile}`,
       isFile(argFile),
@@ -43,9 +43,8 @@ runPreprocessor(async (_context, book) => {
       throw new Error(`Failed to find file: ${argFile}`);
     }
 
-    let creationSecs = parseInt(creationStr);
-    let modifiedSecs = parseInt(modifiedStr);
-    if (modifiedSecs <= creationSecs) modifiedSecs = creationSecs;
+    const creationSecs = parseInt(creationStr);
+    const modifiedSecs = Math.max(parseInt(modifiedStr), creationSecs);
 
     chapter.content += `\n<div class="modified">
       Created: ${unixSecondsToDateString(creationSecs)}
