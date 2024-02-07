@@ -6,23 +6,45 @@ import { $ } from 'execa';
 
 declareSupports(['html']);
 
-const dateFormatter = new Intl.DateTimeFormat(undefined, {
-  hour12: false,
-  year: 'numeric',
-  month: 'long',
-  weekday: 'long',
-  day: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
-});
+const dateFormatter = (timeZone: string) =>
+  new Intl.DateTimeFormat(undefined, {
+    hour12: false,
+    year: 'numeric',
+    month: 'long',
+    weekday: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    timeZone,
+  });
 
-function unixSecondsToDateString(unixSeconds: number): string {
-  // This is NaN when git returned no output (it didn't know about the file).
-  if (Number.isNaN(unixSeconds)) {
+type GitDate = [number, string | undefined];
+function parseGitDate(gitDateStr: string): GitDate {
+  // git will return successfully but with no output if it didn't know about
+  // the file, so explicitly check if we got something
+  if (!gitDateStr.includes('-')) {
+    return [0, undefined];
+  }
+
+  const [secondsStr, timezone] = gitDateStr.split('-');
+  return [secondsStr ? parseInt(secondsStr) : 0, timezone];
+}
+
+function gitDateToDateString([unixSeconds, timezone]: GitDate): string {
+  if (unixSeconds === 0) {
     return '???';
   }
 
-  return dateFormatter.format(unixSeconds * 1000);
+  const fallbackTimezone = 'Australia/Melbourne';
+  return dateFormatter(
+    {
+      undefined: fallbackTimezone,
+      '+1000': 'Australia/Melbourne',
+      '+1100': 'Australia/Melbourne',
+      '+1030': 'Australia/Adelaide',
+      '+0930': 'Australia/Adelaide',
+    }[String(timezone)] ?? fallbackTimezone
+  ).format(unixSeconds * 1000);
 }
 
 runPreprocessor(async (_context, book) => {
@@ -30,7 +52,7 @@ runPreprocessor(async (_context, book) => {
     if (chapter.path === null) return;
 
     const argFile = relative(process.cwd(), join(PATH_BOOK, chapter.path));
-    const argDate = `--date=format:%s`;
+    const argDate = `--date=format:%s-%z`;
 
     const [{ stdout: creationStr }, { stdout: modifiedStr }, exists] = await Promise.all([
       $`git log -1 --diff-filter=A --follow ${argDate} --format=%cd -- ${argFile}`,
@@ -43,12 +65,13 @@ runPreprocessor(async (_context, book) => {
       throw new Error(`Failed to find file: ${argFile}`);
     }
 
-    const creationSecs = parseInt(creationStr);
-    const modifiedSecs = Math.max(parseInt(modifiedStr), creationSecs);
+    const creationDate = parseGitDate(creationStr);
+    let modifiedDate = parseGitDate(modifiedStr);
+    if (modifiedDate[0] <= creationDate[0]) modifiedDate = creationDate;
 
     chapter.content += `\n<div class="modified">
-      Created: ${unixSecondsToDateString(creationSecs)}
-      ${modifiedSecs != creationSecs ? `<br/>Last updated: ${unixSecondsToDateString(modifiedSecs)}` : ''}
+      Created: ${gitDateToDateString(creationDate)}
+      ${modifiedDate != creationDate ? `<br/>Last updated: ${gitDateToDateString(modifiedDate)}` : ''}
 </div>`;
   });
 });
