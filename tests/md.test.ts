@@ -164,4 +164,62 @@ describe('markdown tests', () => {
       );
     }
   });
+
+  /**
+   * Check that all [shorthand] [links] have an associated definition
+   * for them somewhere in the file. For example:
+   *
+   * [shorthand]: ...
+   * [links]: ...
+   */
+
+  test('no shorthand markdown links without links', async () => {
+    const reLink = /\[(?<name>.+?)\](?!\()/g;
+    const reLinkDef = /\[(?<name>.+?)\]:\s*.+?/g;
+
+    const files = await getAllFiles();
+    const results = await Promise.all(
+      files.map(async ({ markdownPath }) => {
+        const text = await Bun.file(markdownPath).text();
+
+        const allLinks = new Set();
+        const allLinkDefs = new Set();
+        let isInCodeblock = false;
+        for (let line of text.split('\n')) {
+          // skip codeblocks
+          if (line.startsWith('```') || line.startsWith('~~~')) isInCodeblock = !isInCodeblock;
+          if (isInCodeblock) continue;
+
+          // strip inline codeblocks
+          line = line.replace(/`.+?`/g, '');
+
+          for (const match of line.matchAll(reLink)) {
+            allLinks.add(match.groups!['name']);
+          }
+          for (const match of line.matchAll(reLinkDef)) {
+            allLinkDefs.add(match.groups!['name']);
+          }
+        }
+
+        return {
+          markdownPath,
+          missing: Array.from(allLinks.keys()).filter((name) => !allLinkDefs.has(name)),
+        };
+      })
+    ).then((results) => results.filter(({ missing }) => missing.length > 0));
+
+    if (results.length > 0) {
+      expect().fail(
+        c.bold.yellow(`Found some shorthand markdown links without definitions:\n`) +
+          results
+            .map(
+              ({ markdownPath, missing }) =>
+                `${missing
+                  .map((name) => `  No definition found for ${c.red(`[${name}]`)}`)
+                  .join('\n')}\n    at: ${c.grey(markdownPath)}`
+            )
+            .join('\n')
+      );
+    }
+  });
 });
