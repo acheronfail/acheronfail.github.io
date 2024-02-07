@@ -11,6 +11,8 @@
     * [Network change events on macOS](./posts/macos-network-changes.md)
     * [Measuring Max RSS](./posts/max_rss/index.md)
     * [Arch in macOS VM](./posts/arch-vm-apple-arm64/index.md)
+* [2023]()
+    * [Steam Deck & Battle.net issues](./posts/steamdeck-bnet-keyboard.md)
 * [2022]()
     * [Transferring Files over Serial](./posts/tx-over-serial/index.md)
 * [2021]()
