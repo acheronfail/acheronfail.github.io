@@ -34,6 +34,11 @@ export async function getAllFiles(): Promise<File[]> {
       }
     }
 
+    files.push({
+      markdownPath: join(BOOK_DIR, '404.md'),
+      htmlPath: join(HTML_DIR, '404.html'),
+    });
+
     return files;
   })());
 }

@@ -21,3 +21,13 @@ main h5,
 main h6 {
   border-bottom: 1px solid var(--theme-popup-border);
 }
+
+/**
+ * For the 404 page
+ */
+#_404 {
+  white-space: pre;
+  font-size: 1.5em;
+  font-style: italic;
+  text-indent: -1em;
+}
