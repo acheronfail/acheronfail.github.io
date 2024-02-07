@@ -8,6 +8,7 @@
 # Posts
 
 * [2024]()
+    * [Network change events on macOS](./posts/macos-network-changes.md)
     * [Measuring Max RSS](./posts/max_rss/index.md)
     * [Arch in macOS VM](./posts/arch-vm-apple-arm64/index.md)
 * [2022]()
