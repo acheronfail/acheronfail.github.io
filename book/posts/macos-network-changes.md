@@ -11,7 +11,6 @@ All that said, this is a short article on how to be notified about network chang
   - [Let's search the web](#lets-search-the-web)
   - [Looking around Apple's documentation](#looking-around-apples-documentation)
     - [The Solution](#the-solution)
-      - [Extra: line buffering with swift](#extra-line-buffering-with-swift)
 
 ## The goal
 
@@ -72,8 +71,6 @@ satisfied (Path is satisfied), interface: en1, ipv4, ipv6, dns
 ```
 
 This happens for WiFi adapters, ethernet adapters, VPN interfaces, etc. So it's perfect for what I wanted.
-
-#### Extra: line buffering with swift
 
 I also wanted the output to be line buffered, so I could easily consume network changes in a shell pipeline. All I had to do was manually write to standard out. Wasn't that hard:
 
