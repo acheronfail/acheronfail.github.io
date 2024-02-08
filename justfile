@@ -14,7 +14,7 @@ setup: (_check "cargo" "bun")
 
 # setup hooks
 hooks:
-  echo "#!/usr/bin/env bash\njust test\n" > .git/hooks/pre-commit
+  echo "#!/usr/bin/env bash\njust pre-commit\n" > .git/hooks/pre-commit
   chmod +x .git/hooks/pre-commit
 
 alias serve := dev
@@ -22,15 +22,18 @@ alias serve := dev
 dev: (_check "mdbook")
   mdbook serve
 
-alias t := test
-# run the tests
-test: (_check "bun" "mdbook" "git") build
+pre-commit: (_check "git")
   git diff > precommit.diff
   git apply -R precommit.diff
-  bun test
-  mdbook test
+  just test
   git apply precommit.diff
   rm precommit.diff
+
+alias t := test
+# run the tests
+test: (_check "bun" "mdbook") build
+  bun test
+  mdbook test
 
 # test all external links
 test-links: (_check "bun")
