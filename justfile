@@ -24,9 +24,13 @@ dev: (_check "mdbook")
 
 alias t := test
 # run the tests
-test: (_check "bun" "mdbook") build
+test: (_check "bun" "mdbook" "git") build
+  git diff > precommit.diff
+  git apply -R precommit.diff
   bun test
   mdbook test
+  git apply precommit.diff
+  rm precommit.diff
 
 # test all external links
 test-links: (_check "bun")

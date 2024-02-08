@@ -4,3 +4,5 @@ theme
 *.bundle.js
 mdbook-admonish.css
 target/
+
+precommit.diff
