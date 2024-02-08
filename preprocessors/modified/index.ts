@@ -35,7 +35,7 @@ function gitDateToDateString([unixSeconds, timezone]: GitDate): string {
     return '???';
   }
 
-  const fallbackTimezone = 'Australia/Melbourne';
+  const fallbackTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   return dateFormatter(
     {
       undefined: fallbackTimezone,
