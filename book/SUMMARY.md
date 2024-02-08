@@ -4,6 +4,7 @@
 
 * [Home](./home.md)
 * [About](./about.md)
+* [Nuggets](./nuggets.md)
 
 # Posts
 
