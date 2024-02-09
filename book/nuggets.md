@@ -9,6 +9,7 @@ Either way, I wanted to write these down somewhere, but didn't have the time to 
   - [Reaching out](#reaching-out)
   - [Working together](#working-together)
   - [Mentoring](#mentoring)
+  - [Other](#other)
 
 ## Self-improvement
 
@@ -47,3 +48,7 @@ Either way, I wanted to write these down somewhere, but didn't have the time to 
 > Anyone can learn anything;
 >
 > Some of us just need more time than others do.
+
+## Other
+
+> Laziness isn't about inaction, it's about optimal action.
