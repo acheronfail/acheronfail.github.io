@@ -28,7 +28,7 @@ pre-commit: (_check "git")
   needs_save=$?
 
   saved="precommit.diff"
-  if [ $needs_save -eq 0 ]; then
+  if [ $needs_save -ne 0 ]; then
     git diff > "$saved"
     git apply -R "$saved"
   fi
