@@ -11,8 +11,8 @@ build-dir = "dist"
 create-missing = true
 extra-watch-dirs = ["preprocessors"]
 
-[preprocessor.embeds]
-command = "preprocessors/embeds/index.ts"
+[preprocessor.replacers]
+command = "preprocessors/replacers/index.ts"
 before = ['admonish']
 [preprocessor.comments]
 command = "preprocessors/comments/index.ts"
@@ -42,7 +42,7 @@ mathjax-support = false
 additional-css = [
   "book/index.css",
   "node_modules/katex/dist/katex.min.css",
-  "preprocessors/embeds/index.css",
+  "preprocessors/replacers/index.css",
   "preprocessors/modified/index.css",
   "preprocessors/codeblocks/index.css",
   "preprocessors/image-captions/index.css",
