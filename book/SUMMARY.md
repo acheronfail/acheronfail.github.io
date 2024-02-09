@@ -6,7 +6,7 @@
 * [About](./about.md)
 * [Nuggets](./nuggets.md)
 
-# Posts
+# posts
 
 * [2024]()
     * [Network change events on macOS](./posts/macos-network-changes.md)
@@ -27,7 +27,7 @@
 * [2018]()
     * [Nox on Windows 10](./posts/nox.md)
 
-# Miscellaneous
+# miscellaneous
 
 * [snippets]()
     * [`find`](./snippets/find.md)

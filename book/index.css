@@ -1,4 +1,27 @@
 /**
+ * Bling for some titles
+ */
+h1.menu-title,
+li.part-title,
+li.chapter-item > div {
+  font-family: monospace;
+}
+
+li.part-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+li.part-title::after {
+  content: '';
+  width: 100%;
+  height: 1px;
+  background: var(--theme-popup-border);
+  margin-left: 1ex;
+  opacity: 0.5;
+}
+
+/**
  * Hide the numeric markers on the sidebar
  */
 

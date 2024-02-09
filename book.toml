@@ -1,7 +1,7 @@
 [book]
 title = "acheronfail"
-authors = ["acheronfail"]
-description = "description"
+authors = ["acheronfail <acheronfail@gmail.com>"]
+description = "Sometimes I write things..."
 language = "en"
 multilingual = false
 src = "book"
@@ -46,9 +46,9 @@ additional-css = [
   "preprocessors/modified/index.css",
   "preprocessors/codeblocks/index.css",
   "preprocessors/image-captions/index.css",
-  "./mdbook-admonish.css",
-  "./theme/catppuccin.css",
-  "./theme/catppuccin-admonish.css",
+  "mdbook-admonish.css",
+  "theme/catppuccin.css",
+  "theme/catppuccin-admonish.css",
 ]
 additional-js = ["node_modules/katex/dist/katex.min.js"]
 no-section-label = false
