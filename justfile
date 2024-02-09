@@ -23,11 +23,20 @@ dev: (_check "mdbook")
   mdbook serve
 
 pre-commit: (_check "git")
-  git diff > precommit.diff
-  git apply -R precommit.diff
+  #!/usr/bin/env bash
+  git diff --exit-code >/dev/null
+  needs_save=$?
+
+  saved="precommit.diff"
+  if [ $needs_save -eq 0 ]; then
+    git diff > "$saved"
+    git apply -R "$saved"
+  fi
   just test
-  git apply precommit.diff
-  rm precommit.diff
+  if [ -f "$saved" ]; then
+    git apply "$saved"
+    rm "$saved"
+  fi
 
 alias t := test
 # run the tests
