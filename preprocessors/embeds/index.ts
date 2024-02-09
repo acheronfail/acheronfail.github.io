@@ -8,6 +8,9 @@ import { Chapter } from '../types.js';
 declareSupports(['html']);
 
 const EMBEDS = new Map<RegExp, (chapter: Chapter) => (match: RegExpMatchArray) => string | Promise<string>>([
+  // shortcut for `~~~admonish`
+  // mainly here so we can have accurate IDE syntax highlighting in the admonish blocks
+  [/~~~md\s/gi, (_chapter) => async (_match) => '~~~admonish '],
   // {{latest_post_url}},
   [
     /{{latest_post_url}}/gi,

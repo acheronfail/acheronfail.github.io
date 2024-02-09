@@ -71,7 +71,7 @@ mv aopfm_v2 ~/.quakespasm/impel
 There are quite a few ports of the game, but the ones I've tried are [`darkplaces`](http://quakespasm.sourceforge.net/) and [`quakespasm`](https://icculus.org/twilight/darkplaces/).
 The latter being a closer representation of what the game was when it was released, and the former bring more modern, compatible and extendable.
 
-~~~admonish tip title="macOS"
+~~~md tip title="macOS"
 `darkplaces` doesn't work on modern versions of macOS due to it being 32bit only.
 
 `quakespasm` on the other hand doesn't have this problem. You can download it here: <http://quakespasm.sourceforge.net/download.htm>
@@ -80,7 +80,7 @@ The latter being a closer representation of what the game was when it was releas
 `quakespam` expects the game directories (i.e., `id1`, `hipnotic`, `rogue`, etc) to be placed at `~/.quakespasm`, and `darkplaces` just wants them in its game directory.
 For this guide we've placed them in `~/.quakespasm`, but we can easily run the game via `darkplaces` using its `-basedir` command line argument.
 
-~~~admonish bug collapsible=true title="Issues compiling?"
+~~~md bug collapsible=true title="Issues compiling?"
 I ran into some compilation issues when compiling `darkplaces` with GCC 11.
 Fortunately I found an [existing fix](https://bugs.gentoo.org/786288#c9): all you have to do is [use this patch](https://gitweb.gentoo.org/repo/gentoo.git/tree/games-fps/darkplaces/files/darkplaces-20140513-gcc-11.patch?id=bc2ba1cd6fdc5a7ad7d161efb21652b73c6b207e) and everything will compile just fine after that.
 ~~~

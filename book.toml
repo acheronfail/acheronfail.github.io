@@ -13,6 +13,7 @@ extra-watch-dirs = ["preprocessors"]
 
 [preprocessor.embeds]
 command = "preprocessors/embeds/index.ts"
+before = ['admonish']
 [preprocessor.comments]
 command = "preprocessors/comments/index.ts"
 after = ['modified', 'links']
@@ -22,14 +23,11 @@ command = "preprocessors/modified/index.ts"
 command = "preprocessors/codeblocks/index.ts"
 [preprocessor.image-captions]
 command = "preprocessors/image-captions/index.ts"
-
 [preprocessor.katex]
 after = ["links"]
 no-css = true
-
 [preprocessor.catppuccin]
 assets_version = "2.1.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
-
 [preprocessor.admonish]
 assets_version = "3.0.2" # do not edit: managed by `mdbook-admonish install`
 command = "mdbook-admonish"

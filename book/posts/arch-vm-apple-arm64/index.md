@@ -77,7 +77,7 @@ Now that archboot has booted, it will show a prompt. It's entirely up to you how
 
 ![quitting archboot to get a shell](images/install-arch-1.png)
 
-~~~admonish warning collapsible=true title="Issues installing packages with `pacman`?"
+~~~md warning collapsible=true title="Issues installing packages with `pacman`?"
 I had many `signature is marginal trust` issues when installing packages with `pacman` in the archboot environment. All the packages build by `Arch Linux ARM Build System <builder@archlinuxarm.org>` were breaking.
 
 I was able to fix this by locally signing the key:

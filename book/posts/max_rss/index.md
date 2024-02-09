@@ -68,7 +68,7 @@ And thus started the investigation. After some searching, I found others who had
 
 If you read those, you'll find that there's a this section in the Linux man pages:
 
-~~~admonish quote title="From `man 2 getrusage`"
+~~~md quote title="From `man 2 getrusage`"
 Resource usage metrics are preserved across an execve(2).
 ~~~
 
@@ -76,7 +76,7 @@ Well, that's going to definitely play a part in why I'm seeing the behaviour I'm
 
 But that's not all! Upon further inspection, I also discovered this:
 
-~~~admonish quote title="From `man 5 proc`"
+~~~md quote title="From `man 5 proc`"
 Resident Set Size: number of pages the process has in real memory. This is just the pages which count toward text, data, or stack space. This does not include pages which have not been demand-loaded in, or which are swapped out. **This value is inaccurate; see `/proc/pid/statm` below.**
 
 ...
