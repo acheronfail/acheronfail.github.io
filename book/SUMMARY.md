@@ -30,5 +30,6 @@
 # miscellaneous
 
 * [snippets]()
+    * [macOS `defaults`](./snippets/defaults.md)
     * [`find`](./snippets/find.md)
     * [`ssh`](./snippets/ssh.md)
