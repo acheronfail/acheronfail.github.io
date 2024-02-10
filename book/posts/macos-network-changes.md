@@ -46,7 +46,6 @@ To Apple's credit, this was an extremely simple API to consume. And they've done
  * Compile this with: `swiftc ./net-monitor.swift`
  */
 
-import Foundation
 import Network
 
 let monitor = NWPathMonitor()
@@ -74,5 +73,6 @@ This happens for WiFi adapters, ethernet adapters, VPN interfaces, etc. So it's 
 I also wanted the output to be line buffered, so I could easily consume network changes in a shell pipeline. All I had to do was manually write to standard out. Wasn't that hard:
 
 ```swift
+// Remember to `import Foundation` to use this:
 FileHandle.standardOutput.write("\(path)\n".data(using: .utf8)!)
 ```
