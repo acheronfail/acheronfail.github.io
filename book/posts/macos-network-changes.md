@@ -40,9 +40,8 @@ To Apple's credit, this was an extremely simple API to consume. And they've done
 
 ```swift title="net-monitor.swift"
 /**
- * A small program which outputs a line of interfaces (comma separated) on network
- * changes. It was the easiest way I could find to watch for network changes on
- * macOS without using a polling system.
+ * A small program which watches for network changes on macOS without using a
+ * polling system.
  *
  * Compile this with: `swiftc ./net-monitor.swift`
  */
