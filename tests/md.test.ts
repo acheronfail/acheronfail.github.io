@@ -4,6 +4,7 @@ import { dirname, resolve } from 'path';
 import { stat } from 'fs/promises';
 import { NodeWalkingStep, Parser } from 'commonmark';
 import c from 'chalk';
+import { splitFrontMatter } from '../preprocessors/common.js';
 
 describe('markdown tests', () => {
   /**
@@ -181,14 +182,7 @@ describe('markdown tests', () => {
     const results = await Promise.all(
       files.map(async ({ markdownPath }) => {
         const text = await Bun.file(markdownPath).text();
-        let lines = text.split('\n');
-
-        // skip frontmatter
-        if (lines[0]?.includes('+++')) {
-          let i = 1;
-          while (!lines[i]?.includes('+++')) ++i;
-          lines = lines.slice(i);
-        }
+        const [_, lines] = splitFrontMatter(text.split('\n'));
 
         const allLinks = new Set();
         const allLinkDefs = new Set();

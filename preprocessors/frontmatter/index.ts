@@ -1,39 +1,40 @@
 #!/usr/bin/env bun
 
-import { FrontMatter, declareSupports, forEachChapter, parseFrontMatter, runPreprocessor } from '../common.js';
+import {
+  FrontMatter,
+  declareSupports,
+  forEachChapter,
+  splitFrontMatter,
+  parseFrontMatter,
+  runPreprocessor,
+} from '../common.js';
 import { Chapter } from '../types.js';
 
 declareSupports(['html']);
-
-const FRONT_MATTER_PATTERNS = ['+++'];
 
 const allFrontMatter: { chapter: Chapter; frontMatter: FrontMatter }[] = [];
 let tagsChapter: Chapter | null = null;
 
 await runPreprocessor(async (_context, book) => {
   await forEachChapter(book, async (chapter) => {
-    if (chapter.path === 'tags.md') {
-      tagsChapter = chapter;
-    }
-
-    const lines = chapter.content.split('\n');
-    const hasFrontmatter = FRONT_MATTER_PATTERNS.includes(lines[0]?.trim() ?? '');
-    if (!hasFrontmatter) {
-      return;
-    }
-
-    let i = 1;
-    while (!FRONT_MATTER_PATTERNS.includes(lines[i]?.trim() ?? '')) {
-      i++;
-    }
-
-    chapter.content = lines.slice(i + 1).join('\n');
-
     if (!chapter.path) {
       return;
     }
 
-    const frontMatter = parseFrontMatter(lines.slice(1, i).join('\n'), chapter.path);
+    if (chapter.path === 'tags.md') {
+      tagsChapter = chapter;
+    }
+
+    const [frontMatterLines, lines] = splitFrontMatter(chapter.content.split('\n'));
+    if (!frontMatterLines.length) {
+      return;
+    }
+
+    // remove frontmatter from page
+    chapter.content = lines.join('\n');
+
+    // parse frontmatter
+    const frontMatter = parseFrontMatter(frontMatterLines.join('\n'), chapter.path);
     if (!frontMatter) {
       return;
     }

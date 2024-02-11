@@ -95,3 +95,16 @@ export function parseFrontMatter(input: string, path: string): FrontMatter | nul
     throw err;
   }
 }
+
+/**
+ * @returns returns `[FrontMatterLines[], RestLines[]]`
+ */
+export function splitFrontMatter(lines: string[]): [string[], string[]] {
+  if (!lines[0]?.includes('+++')) {
+    return [[], lines];
+  }
+
+  let i = 1;
+  while (!lines[i]?.includes('+++')) ++i;
+  return [lines.slice(1, i), lines.slice(i + 1)];
+}
