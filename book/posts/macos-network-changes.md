@@ -1,3 +1,7 @@
++++
+tags = ['macOS', 'network']
++++
+
 # Network change events on macOS
 
 I don't like polling.

@@ -1,3 +1,7 @@
++++
+tags = ['macos']
++++
+
 # Building a macOS Colour Picker
 
 A colour picker can be a useful tool. You see a colour on your screen and it just looks so good. So good, you think you want to use it somewhere else. Being able to hover over it and select it is neat.

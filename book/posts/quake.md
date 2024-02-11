@@ -1,6 +1,10 @@
-# 1996 Quake on 2020 Linux
++++
+tags = ['linux', 'macos', 'games']
++++
 
-Run the legendary 1996 game on on your modern Linux machine. You know you want to.
+# 1996 Quake in 2021
+
+Run the legendary 1996 game on on your modern Linux (or macOS) machine. You know you want to.
 
 <!-- more -->
 

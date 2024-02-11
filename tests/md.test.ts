@@ -181,11 +181,20 @@ describe('markdown tests', () => {
     const results = await Promise.all(
       files.map(async ({ markdownPath }) => {
         const text = await Bun.file(markdownPath).text();
+        let lines = text.split('\n');
+
+        // skip frontmatter
+        if (lines[0]?.includes('+++')) {
+          let i = 1;
+          while (!lines[i]?.includes('+++')) ++i;
+          lines = lines.slice(i);
+        }
 
         const allLinks = new Set();
         const allLinkDefs = new Set();
         let isInCodeblock = false;
-        for (let line of text.split('\n')) {
+
+        for (let line of lines) {
           // skip codeblocks
           if (line.startsWith('```') || line.startsWith('~~~')) isInCodeblock = !isInCodeblock;
           if (isInCodeblock) continue;

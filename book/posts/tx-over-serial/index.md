@@ -1,3 +1,7 @@
++++
+tags = ['openwrt']
++++
+
 # Transferring files over a serial connection
 
 I had an internet connection that required a DSL modem to use, and so I looked at [openwrt.org] for their DSL compatible modems, and found the [TP-Link TD-W8970 v1]. After an extremely quick glance at top of the page, I saw that ADSL/VDSL works, and proceeded to purchase one since they were quite cheap.

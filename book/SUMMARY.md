@@ -8,6 +8,7 @@
 
 # posts
 
+* [All posts by tag](./tags.md)
 * [2024]()
     * [Network change events on macOS](./posts/macos-network-changes.md)
     * [Measuring Max RSS](./posts/max_rss/index.md)
@@ -18,7 +19,7 @@
     * [Transferring Files over Serial](./posts/tx-over-serial/index.md)
 * [2021]()
     * [Diablo II Resurrected on Linux](./posts/d2r.md)
-    * [Quake on Linux](./posts/quake.md)
+    * [1996 Quake in 2021](./posts/quake.md)
 * [2020]()
     * [Working with humans](./posts/working-with-humans.md)
 * [2019]()

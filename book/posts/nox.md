@@ -1,3 +1,7 @@
++++
+tags = ['win10', 'games']
++++
+
 # Running Nox on Windows 10
 
 If you haven't played [Nox](https://en.wikipedia.org/wiki/Nox_(video_game)), then you're missing out on a seriously underrated game.

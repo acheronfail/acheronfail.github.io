@@ -1,3 +1,7 @@
++++
+tags = ['macos', 'arch']
++++
+
 # Creating an Arch Linux VM on an ARM MacBook
 
 This isn't a complete step-by-step guide to installing Arch Linux in a VM on an ARM Mac, but it should have enough information for you to figure the rest out yourself, and save you some time figuring out how to do things.

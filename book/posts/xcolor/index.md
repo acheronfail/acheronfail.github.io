@@ -1,3 +1,7 @@
++++
+tags = ['linux', 'x11']
++++
+
 # Building an X11 Colour Picker
 
 One day, I wanted a colour picker on Linux. When I used OS X in the past, [I built my own pixel picker](../pixel-picker/) to satisfy my needs.

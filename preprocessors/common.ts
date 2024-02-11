@@ -2,6 +2,7 @@ import { inspect } from 'util';
 import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { stat } from 'fs/promises';
+import { z } from 'zod';
 import { Book, Chapter, Context, Section, SectionChapter } from './types.js';
 import mdbook from '../book.toml';
 
@@ -20,10 +21,10 @@ export async function runPreprocessor(callback: (context: Context, book: Book) =
     const [context, book] = JSON.parse(await readProcessStdin());
     await callback(context, book);
     process.stdout.write(JSON.stringify(book));
-    process.exit(0);
+    process.exitCode = 0;
   } catch (err) {
     log(err);
-    process.exit(1);
+    process.exitCode = 1;
   }
 }
 
@@ -66,4 +67,31 @@ export function log(...args: unknown[]) {
   }
 
   process.stderr.write(`${things.join(' ')}\n`);
+}
+
+const FrontMatter = z.object({
+  tags: z.string().array(),
+});
+export type FrontMatter = z.infer<typeof FrontMatter>;
+
+// parse front matter
+export function parseFrontMatter(input: string, path: string): FrontMatter | null {
+  try {
+    const toml = Bun.TOML.parse(input);
+    return FrontMatter.parse(toml);
+  } catch (err) {
+    if (err instanceof BuildMessage) {
+      const msg = [`Error parsing frontmatter: "${err.message}"`];
+      if (err.position) {
+        msg.push(`at line ${err.position.line}, column ${err.position.column}`);
+      }
+      if (path) {
+        msg.push(`in ${path}`);
+      }
+      process.stderr.write(`${msg.join(' ')}\n`);
+      return null;
+    }
+
+    throw err;
+  }
 }

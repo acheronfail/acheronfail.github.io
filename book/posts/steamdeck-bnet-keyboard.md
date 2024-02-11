@@ -1,3 +1,7 @@
++++
+tags = ['steamdeck', 'games']
++++
+
 # Fixing the Steam Deck's on-screen keyboard in Battle.net
 
 So, Battle.net on the Steam Deck was working fine for me for quite some time, and then I started experiencing issues with Steam's on-screen keyboard. Maybe something changed with an update, I'm not sure what caused this.

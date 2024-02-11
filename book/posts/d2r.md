@@ -1,3 +1,7 @@
++++
+tags = ['linux', 'games']
++++
+
 # Running Diablo II Resurrected on Linux
 
 Ahh... Fresh meat!

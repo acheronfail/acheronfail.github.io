@@ -11,6 +11,8 @@ build-dir = "dist"
 create-missing = true
 extra-watch-dirs = ["preprocessors"]
 
+[preprocessor.frontmatter]
+command = "preprocessors/frontmatter/index.ts"
 [preprocessor.replacers]
 command = "preprocessors/replacers/index.ts"
 before = ['admonish']
@@ -48,7 +50,10 @@ additional-css = [
   "preprocessors/image-captions/index.css",
   "mdbook-admonish.css",
   "theme/catppuccin.css",
-  "theme/catppuccin-admonish.css", "./mdbook-admonish.css", "./theme/catppuccin.css", "./theme/catppuccin-admonish.css",
+  "theme/catppuccin-admonish.css",
+  "./mdbook-admonish.css",
+  "./theme/catppuccin.css",
+  "./theme/catppuccin-admonish.css",
 ]
 additional-js = ["node_modules/katex/dist/katex.min.js"]
 no-section-label = false

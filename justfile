@@ -24,6 +24,8 @@ dev: (_check "mdbook")
 
 pre-commit: (_check "git")
   #!/usr/bin/env bash
+  set -euo pipefail
+
   git diff --exit-code >/dev/null
   needs_save=$?
 
