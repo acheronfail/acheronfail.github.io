@@ -8,6 +8,7 @@ import mdbook from '../book.toml';
 
 export const PATH_BOOK = resolve(dirname(fileURLToPath(import.meta.url)), '..', mdbook.book.src);
 export const PATH_SUMMARY = join(PATH_BOOK, 'SUMMARY.md');
+export const TAGS_CHAPTER_PATH = 'tags.md';
 
 export function isFile(path: string): Promise<boolean> {
   return stat(path).then(

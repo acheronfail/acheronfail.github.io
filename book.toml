@@ -13,6 +13,7 @@ extra-watch-dirs = ["preprocessors"]
 
 [preprocessor.frontmatter]
 command = "preprocessors/frontmatter/index.ts"
+before = ['comments']
 [preprocessor.replacers]
 command = "preprocessors/replacers/index.ts"
 before = ['admonish']
@@ -21,6 +22,7 @@ command = "preprocessors/comments/index.ts"
 after = ['modified', 'links']
 [preprocessor.modified]
 command = "preprocessors/modified/index.ts"
+before = ['frontmatter']
 [preprocessor.codeblocks]
 command = "preprocessors/codeblocks/index.ts"
 [preprocessor.image-captions]
@@ -47,6 +49,7 @@ additional-css = [
   "preprocessors/replacers/index.css",
   "preprocessors/modified/index.css",
   "preprocessors/codeblocks/index.css",
+  "preprocessors/frontmatter/index.css",
   "preprocessors/image-captions/index.css",
   "mdbook-admonish.css",
   "theme/catppuccin.css",

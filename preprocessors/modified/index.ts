@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 
 import { join, relative } from 'path';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, isFile } from '../common.js';
+import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, isFile, TAGS_CHAPTER_PATH } from '../common.js';
 import { $ } from 'execa';
 
 declareSupports(['html']);
@@ -49,7 +49,7 @@ function gitDateToDateString([unixSeconds, timezone]: GitDate): string {
 
 runPreprocessor(async (_context, book) => {
   await forEachChapter(book, async (chapter) => {
-    if (chapter.path === null) return;
+    if (chapter.path === null || chapter.path === TAGS_CHAPTER_PATH) return;
 
     const argFile = relative(process.cwd(), join(PATH_BOOK, chapter.path));
     const argDate = `--date=format:%s-%z`;

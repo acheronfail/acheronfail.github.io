@@ -7,11 +7,13 @@ import {
   splitFrontMatter,
   parseFrontMatter,
   runPreprocessor,
+  TAGS_CHAPTER_PATH,
 } from '../common.js';
 import { Chapter } from '../types.js';
 
 declareSupports(['html']);
 
+const keyFromTag = (tag: string): string => tag.trim().toLowerCase();
 const allFrontMatter: { chapter: Chapter; frontMatter: FrontMatter }[] = [];
 let tagsChapter: Chapter | null = null;
 
@@ -21,7 +23,7 @@ await runPreprocessor(async (_context, book) => {
       return;
     }
 
-    if (chapter.path === 'tags.md') {
+    if (chapter.path === TAGS_CHAPTER_PATH) {
       tagsChapter = chapter;
     }
 
@@ -40,6 +42,13 @@ await runPreprocessor(async (_context, book) => {
     }
 
     allFrontMatter.push({ chapter, frontMatter });
+
+    // add tags to the end of the page if there were any
+    if (frontMatter.tags.length) {
+      chapter.content += `\n<div class="tags">\n\nTags: ${frontMatter.tags
+        .map((tag) => `[\`${tag}\`](/${TAGS_CHAPTER_PATH}#${keyFromTag(tag)})`)
+        .join(', ')}</div>`;
+    }
   });
 
   if (!tagsChapter) {
@@ -53,7 +62,7 @@ await runPreprocessor(async (_context, book) => {
 
     const file = { name: chapter.name, path: chapter.path };
     frontMatter.tags.forEach((tag) => {
-      const key = tag.trim().toLowerCase();
+      const key = keyFromTag(tag);
       const existing = tags.get(key);
       if (existing) {
         existing.push(file);
@@ -71,7 +80,7 @@ await runPreprocessor(async (_context, book) => {
       .sort(([a], [b]) => a.localeCompare(b))
       .flatMap(([tag, files]) => [
         '',
-        `\`${tag}\``,
+        `#### \`${tag}\``,
         ...files.sort((a, b) => a.name.localeCompare(b.name)).map(({ name, path }) => `* [${name}](${path})`),
       ]),
   ];
