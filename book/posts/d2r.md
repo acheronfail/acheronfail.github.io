@@ -8,9 +8,11 @@ Ahh... Fresh meat!
 
 <!-- more -->
 
-I had to do this twice and it bothered me to have to look a few things up again, so here it is for next time (if there is a next time).
+I had to do this twice and it bothered me to have to look a few things up again, so here it is for next time (if there is a next time, I reckon this will be fixed fairly soon in wine/proton/etc).
 
-> The following instructions are for [Arch Linux](https://archlinux.org/), but they'll be very similar for any other distribution.
+~~~md info title="Please note"
+The following instructions are for [Arch Linux](https://archlinux.org/), but they'll be very similar for any other distribution.
+~~~
 
 ## Battle.net
 
@@ -22,8 +24,10 @@ $ pacman -S lutris
 
 Once you've installed Lutris, install Battle.net as per its instructions.
 
-> I found that I also had to install `lib32-gnutls` in order for the Battle.net login window to work properly.
-> This package lives in the `multilib` repository, so make sure you've [enabled that](https://wiki.archlinux.org/title/official_repositories#Enabling_multilib) if you haven't already.
+~~~md tip title="Trouble logging in?"
+I found that I also had to install `lib32-gnutls` in order for the Battle.net login window to work properly.
+This package lives in the `multilib` repository, so make sure you've [enabled that](https://wiki.archlinux.org/title/official_repositories#Enabling_multilib) if you haven't already.
+~~~
 
 ## Installing Diablo II Resurrected
 
