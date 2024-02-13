@@ -86,7 +86,7 @@ origin/bookmarks/esr115
 
 And checkout the particular branch you want to build.
 
-~~~md tip
+~~~md info
 Keep in mind that branches have different build configurations. For example, the `bookmarks/release` branch doesn't automatically include `--enable-bootstrap` like the `bookmarks/central` branch does.
 
 I recommend just keeping `--enable-bootstrap` in there since it means you don't need to make any changes to your machine's build system.
