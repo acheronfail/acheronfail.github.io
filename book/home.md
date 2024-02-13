@@ -38,7 +38,7 @@
   "links": [
     "<a href="{{latest_post_url}}">my latest post</a>",
     "<a href="about.html">internet stuff</a>",
-    "<a href="https://js-puzzles.github.io/">js-puzzles</a>",
+    "<a href="https://codepuzzle.dev/">code puzzles</a>",
   ]
 }
 
