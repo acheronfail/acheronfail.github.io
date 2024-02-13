@@ -40,7 +40,7 @@ on_failure = "bail"
 
 [output.html]
 default-theme = "dark"
-preferred-dark-theme = "mocha"
+preferred-dark-theme = "ayu"
 curly-quotes = true
 mathjax-support = false
 additional-css = [

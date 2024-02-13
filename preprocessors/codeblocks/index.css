@@ -1,7 +1,9 @@
 .cb-title {
   font-size: 0.8em;
   padding: 0.25rem 1rem;
-  background-color: var(--theme-popup-border);
+  color: var(--theme-popup-border);
+  background: var(--sidebar-bg);
+  border-bottom: 1px dotted var(--theme-popup-border);
 }
 
 .cb-wrapper pre {
