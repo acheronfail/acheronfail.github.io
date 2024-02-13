@@ -34,9 +34,9 @@ no-css = true
 assets_version = "2.1.0" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
 [preprocessor.admonish]
 assets_version = "3.0.2" # do not edit: managed by `mdbook-admonish install`
-command = "mdbook-admonish"
 after = ['links']
 on_failure = "bail"
+command = "mdbook-admonish"
 
 [output.html]
 default-theme = "dark"
