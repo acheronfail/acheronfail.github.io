@@ -85,3 +85,10 @@ h6 code {
   font-style: italic;
   text-indent: -1em;
 }
+
+/**
+ * Make the admonish blocks font size a little smaller
+ */
+.admonition {
+  font-size: 0.9em;
+}
