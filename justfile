@@ -24,10 +24,12 @@ dev: (_check "mdbook")
 
 pre-commit: (_check "git")
   #!/usr/bin/env bash
-  set -euo pipefail
+  set -uo pipefail
 
   git diff --exit-code >/dev/null
   needs_save=$?
+
+  set -e
 
   saved="precommit.diff"
   if [ $needs_save -ne 0 ]; then
