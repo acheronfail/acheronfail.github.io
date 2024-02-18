@@ -4,7 +4,7 @@
 h1.menu-title,
 li.part-title,
 li.chapter-item > div {
-  font-family: monospace;
+  font-family: Unifont, monospace;
 }
 
 li.part-title {
