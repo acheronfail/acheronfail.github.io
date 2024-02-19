@@ -46,7 +46,11 @@ jobs:
             ~/.cargo/.crates.toml
             ~/.cargo/.crates2.json
             target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('/home/runner/.cargo/.crates2.json') }}
+          # `hashFiles` can only access things in the GITHUB_WORKSPACE, but all the files we want to
+          # cache are in HOME and not the workspace - so just update the cache every time
+          key: ${{ runner.os }}-cargo-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
       - uses: actions/cache@v3
         with:
           path: node_modules
