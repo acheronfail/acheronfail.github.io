@@ -1,13 +1,35 @@
 #!/usr/bin/env bun
 
-import { join, relative } from 'path';
+import { dirname, join, relative } from 'path';
 import { readFile, readdir } from 'fs/promises';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, log, PATH_SUMMARY } from '../common.js';
+import {
+  runPreprocessor,
+  forEachChapter,
+  declareSupports,
+  PATH_BOOK,
+  log,
+  PATH_SUMMARY,
+  PATH_ROOT,
+} from '../common.js';
 import { Chapter } from '../types.js';
 
 declareSupports(['html']);
 
+const GITHUB_PATH_PREFIX = 'https://github.com/acheronfail/acheronfail.github.io/blob/master';
+
 const EMBEDS = new Map<RegExp, (chapter: Chapter) => (match: RegExpMatchArray) => string | Promise<string>>([
+  // put a `github:` prefix in a markdown link to link directly to that file in the repository
+  // e.g.: `[text](github:path)`
+  [
+    /(?!\]\()github:(?<path>.+)(?!\))/gi,
+    (chapter) => (match) => {
+      if (!chapter.path) {
+        throw new Error('Chapter path required for this replacer!');
+      }
+
+      return join(GITHUB_PATH_PREFIX, relative(PATH_ROOT, PATH_BOOK), dirname(chapter.path), match.groups!['path']!);
+    },
+  ],
   // shortcut for `~~~admonish`
   // mainly here so we can have accurate IDE syntax highlighting in the admonish blocks
   [/~~~md\s/gi, (_chapter) => async (_match) => '~~~admonish '],

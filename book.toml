@@ -16,7 +16,7 @@ command = "preprocessors/frontmatter/index.ts"
 before = ['comments']
 [preprocessor.replacers]
 command = "preprocessors/replacers/index.ts"
-before = ['admonish']
+before = ['admonish', 'links']
 [preprocessor.comments]
 command = "preprocessors/comments/index.ts"
 after = ['modified', 'links']

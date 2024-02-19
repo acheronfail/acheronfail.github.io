@@ -6,7 +6,8 @@ import { z } from 'zod';
 import { Book, Chapter, Context, Section, SectionChapter } from './types.js';
 import mdbook from '../book.toml';
 
-export const PATH_BOOK = resolve(dirname(fileURLToPath(import.meta.url)), '..', mdbook.book.src);
+export const PATH_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+export const PATH_BOOK = join(PATH_ROOT, mdbook.book.src);
 export const PATH_SUMMARY = join(PATH_BOOK, 'SUMMARY.md');
 export const TAGS_CHAPTER_PATH = 'tags.md';
 

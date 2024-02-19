@@ -70,4 +70,4 @@ print(who_won) # either "input" or "timeout" depending on which finished first
 
 As you can see there's not much code to this, and it can work for more advanced use-cases, too. Again, I'm sure there are some gems in `asyncio`, but for simple Python programs and scripts, I'll be reaching for this instead.
 
-You can [see a small example script here](./race.py) if you're interested.
+You can [see a small example script here](github:./race.py) if you're interested.
