@@ -25,6 +25,8 @@ Either way, I wanted to write these down somewhere, but didn't have the time to 
 
 > Act, don't react.
 
+> The embarrassed person cannot learn.
+
 ## Reaching out
 
 > The world is full of lonely people afraid to make the first move.
