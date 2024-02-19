@@ -10,6 +10,7 @@
 
 * [All posts by tag](./tags.md)
 * [2024]()
+    * [Race threads without asyncio](./posts/python-threading/index.md)
     * [Building Firefox in 2024](./posts/building-firefox-in-2024.md)
     * [Network change events on macOS](./posts/macos-network-changes.md)
     * [Measuring Max RSS](./posts/max_rss/index.md)
