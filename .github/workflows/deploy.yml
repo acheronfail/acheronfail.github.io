@@ -46,7 +46,7 @@ jobs:
             ~/.cargo/.crates.toml
             ~/.cargo/.crates2.json
             target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('~/.cargo/.crates2.json') }}
+          key: ${{ runner.os }}-cargo-${{ hashFiles('/home/runner/.cargo/.crates2.json') }}
       - uses: actions/cache@v3
         with:
           path: node_modules
