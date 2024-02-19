@@ -1,4 +1,4 @@
-# Race threads in Python without asyncio
+# Race threads in Python without `asyncio`
 
 While writing a small python script, I faced a challenge where I needed to:
 
@@ -9,7 +9,7 @@ Both of these functions were _blocking_ - meaning they halt the program's execut
 
 So then, how could I run two blocking calls simultaneously?
 
-- [Race threads in Python without asyncio](#race-threads-in-python-without-asyncio)
+- [Race threads in Python without `asyncio`](#race-threads-in-python-without-asyncio)
   - [Some setup](#some-setup)
   - [Threads to the res-`Queue`](#threads-to-the-res-queue)
 
