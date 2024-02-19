@@ -1,3 +1,6 @@
++++
+tags = ['python']
++++
 # Race threads in Python without `asyncio`
 
 While writing a small python script, I faced a challenge where I needed to:
