@@ -27,7 +27,10 @@ const EMBEDS = new Map<RegExp, (chapter: Chapter) => (match: RegExpMatchArray) =
         throw new Error('Chapter path required for this replacer!');
       }
 
-      return join(GITHUB_PATH_PREFIX, relative(PATH_ROOT, PATH_BOOK), dirname(chapter.path), match.groups!['path']!);
+      return [
+        GITHUB_PATH_PREFIX,
+        join(relative(PATH_ROOT, PATH_BOOK), dirname(chapter.path), match.groups!['path']!),
+      ].join('/');
     },
   ],
   // shortcut for `~~~admonish`
