@@ -36,3 +36,4 @@
     * [macOS `defaults`](./snippets/defaults.md)
     * [`find`](./snippets/find.md)
     * [`ssh`](./snippets/ssh.md)
+    * [Steam Deck](./snippets/steamdeck.md)
