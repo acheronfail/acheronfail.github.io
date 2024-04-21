@@ -1,5 +1,9 @@
 # Steam Deck things
 
+- [Steam Deck things](#steam-deck-things)
+  - [Create a development environment](#create-a-development-environment)
+  - [Automatically configure Yuzu with EmuDeck](#automatically-configure-yuzu-with-emudeck)
+
 ## Create a development environment
 
 Ensure your deck is SteamOS 3.5 or later. That way `podman` and `distrobox` already come pre-installed!
