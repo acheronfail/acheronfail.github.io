@@ -40,6 +40,8 @@ In no particular order:
 
 ### The internet is the best
 
+* <https://jasoneckert.github.io/myblog/the-galaga-no-fire-cheat-mystery/>
+    * <https://www.computerarcheology.com/Arcade/Galaga/>
 * <https://www.cs.unm.edu/~dlchao/flake/doom/chi/chi.html>
 * <https://leftoversalad.com/c/015_programmingpeople/>
 * <http://joshworth.com/dev/pixelspace/pixelspace_solarsystem.html>
@@ -56,7 +58,7 @@ In no particular order:
 * <https://marijnhaverbeke.nl/blog/>
 * <https://www.bamsoftware.com/hacks/zipbomb/>
 * <http://www.welchlabs.com/imaginarynumbersbook>
-  * (accompanying YouTube series) <https://www.youtube.com/watch?v=T647CGsuOVU&list=PLiaHhY2iBX9g6KIvZ_703G3KJXapKkNaF&index=1>
+    * (accompanying YouTube series) <https://www.youtube.com/watch?v=T647CGsuOVU&list=PLiaHhY2iBX9g6KIvZ_703G3KJXapKkNaF&index=1>
 * <https://javascript.info/event-loop#macrotasks-and-microtasks>
 * <http://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/>
 * <https://blog.codinghorror.com/the-best-code-is-no-code-at-all/>
@@ -76,8 +78,8 @@ In no particular order:
 * <http://newosxbook.com/tools/ojtool.html>
 * <http://newosxbook.com/articles/CasaDePPL.html>
 * <https://saaramar.github.io/IOMobileFrameBuffer_LPE_POC/>
-  * <https://github.com/saaramar/IOMobileFrameBuffer_LPE_POC>
-  * <https://www.synacktiv.com/en/publications/analysis-and-exploitation-of-the-ios-kernel-vulnerability-cve-2021-1782.html>
+    * <https://github.com/saaramar/IOMobileFrameBuffer_LPE_POC>
+    * <https://www.synacktiv.com/en/publications/analysis-and-exploitation-of-the-ios-kernel-vulnerability-cve-2021-1782.html>
 
 ### Hehehe
 
