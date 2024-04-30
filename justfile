@@ -11,10 +11,11 @@ setup: (_check "cargo" "bun")
   cargo install mdbook-catppuccin
   bun install
   if [ -z ${CI:-} ]; then just hooks; fi
+  just build
 
 # setup hooks
 hooks:
-  echo "#!/usr/bin/env bash\njust pre-commit\n" > .git/hooks/pre-commit
+  echo -e "#!/usr/bin/env bash\njust pre-commit\n" > .git/hooks/pre-commit
   chmod +x .git/hooks/pre-commit
 
 alias serve := dev
