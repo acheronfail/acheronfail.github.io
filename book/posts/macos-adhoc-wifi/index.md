@@ -28,7 +28,7 @@ sudo networksetup -createnetworkservice AdHoc lo0
 
 ### Step 2: create the Wi-Fi service
 
-Next we have to create the local wireless network.
+Now it's time to create your wireless network.
 
 To do this, open **System Settings** and navigate to:
 
@@ -38,13 +38,13 @@ To do this, open **System Settings** and navigate to:
 
 ![General -> Sharing](images/general_sharing.png)
 
-Next, select the network you created (it's called `AdHoc`) in the **Share your connection from:** select box.
+Next, select the network you created (it's called `AdHoc`) in the `Share your connection from` select box.
 
-Then, enable the **Wi-Fi** toggle in the **To devices using:** - a configuration dialog will appear where you can define your wireless network's settings.
+Then, enable the `Wi-Fi` toggle in the `To devices using` and a configuration dialog will appear where you can define your wireless network's settings.
 
 ![Configure your Wireless Network](images/configure_wireless_network.png)
 
-You're not done yet! Make sure you enable the **Internet Sharing** toggle at the top of the dialog and click done. Also make sure the toggle is on in the previous view.
+You're not done yet! Make sure you enable the `Internet Sharing: On` toggle at the top of the dialog and click done. Also make sure the toggle is on in the previous view.
 
 ![Internet Sharing Settings](images/internet_sharing_settings.png)
 
