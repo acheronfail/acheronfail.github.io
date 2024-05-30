@@ -42,6 +42,8 @@ Next, select the network you created (it's called `AdHoc`) in the **Share your c
 
 Then, enable the **Wi-Fi** toggle in the **To devices using:** - a configuration dialog will appear where you can define your wireless network's settings.
 
+![Configure your Wireless Network](images/configure_wireless_network.png)
+
 You're not done yet! Make sure you enable the **Internet Sharing** toggle at the top of the dialog and click done. Also make sure the toggle is on in the previous view.
 
 ![Internet Sharing Settings](images/internet_sharing_settings.png)
