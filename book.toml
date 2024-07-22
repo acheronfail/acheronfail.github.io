@@ -41,7 +41,7 @@ command = "mdbook-admonish"
 [output.html]
 default-theme = "dark"
 preferred-dark-theme = "ayu"
-curly-quotes = true
+smart-punctuation = true
 mathjax-support = false
 additional-css = [
   "book/index.css",

@@ -36,17 +36,17 @@ To do this, open **System Settings** and navigate to:
   * **Sharing**
     * **Internet Sharing** (click the `i` icon)
 
-![General -> Sharing](images/general_sharing.png)
+![General -> Sharing](general_sharing.png)
 
 Next, select the network you created (it's called `AdHoc`) in the `Share your connection from` select box.
 
 Then, enable the `Wi-Fi` toggle in the `To devices using` and a configuration dialog will appear where you can define your wireless network's settings.
 
-![Configure your Wireless Network](images/configure_wireless_network.png)
+![Configure your Wireless Network](configure_wireless_network.png)
 
 You're not done yet! Make sure you enable the `Internet Sharing: On` toggle at the top of the dialog and click done. Also make sure the toggle is on in the previous view.
 
-![Internet Sharing Settings](images/internet_sharing_settings.png)
+![Internet Sharing Settings](internet_sharing_settings.png)
 
 The wireless network should now be created and running!
 
