@@ -35,6 +35,7 @@
 
 * [snippets]()
     * [macOS `defaults`](./snippets/defaults.md)
+    * [`ffmpeg`](./snippets/ffmpeg.md)
     * [`find`](./snippets/find.md)
     * [`ssh`](./snippets/ssh.md)
     * [Steam Deck](./snippets/steamdeck.md)

@@ -1,4 +1,4 @@
-# ssh
+# `ssh`
 
 ```bash
 # You can enter ssh prompt via ~C
