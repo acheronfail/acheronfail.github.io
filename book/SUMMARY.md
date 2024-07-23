@@ -10,6 +10,7 @@
 
 * [All posts by tag](./tags.md)
 * [2024]()
+    * [How to synchronously block in nodejs](./posts/nodejs-sync-blocking.md)
     * [AdHoc Wi-Fi LAN networks on macOS](./posts/macos-adhoc-wifi/index.md)
     * [Race threads without asyncio](./posts/python-threading/index.md)
     * [Building Firefox in 2024](./posts/building-firefox-in-2024.md)
