@@ -38,6 +38,7 @@
   "links": [
     "<a href="{{latest_post_url}}">my latest post</a>",
     "<a href="about.html">internet stuff</a>",
+    "<a href="https://acheronfail.github.io/float-view/">Float View</a>",
     "<a href="https://codepuzzle.dev/">code puzzles</a>",
   ]
 }
