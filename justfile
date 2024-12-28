@@ -8,7 +8,6 @@ _default:
 setup: (_check "cargo" "bun")
   cargo install mdbook-katex
   cargo install mdbook-admonish
-  cargo install mdbook-catppuccin
   bun install
   if [ -z ${CI:-} ]; then just hooks; fi
   just build
@@ -57,5 +56,4 @@ alias b := build
 # build the book
 build: (_check "mdbook")
   mdbook-admonish install
-  mdbook-catppuccin install
   mdbook build
