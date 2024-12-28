@@ -10,6 +10,8 @@
 
 * [All posts by tag](./tags.md)
 * [2024]()
+    * [Unraid - change encryption key](./posts/unraid-change-encryption-key.md)
+    * [Unraid - auto-start encrypted array](./posts/unraid-auto-start-encrypted.md)
     * [How to synchronously block in nodejs](./posts/nodejs-sync-blocking.md)
     * [AdHoc Wi-Fi LAN networks on macOS](./posts/macos-adhoc-wifi/index.md)
     * [Race threads without asyncio](./posts/python-threading/index.md)
