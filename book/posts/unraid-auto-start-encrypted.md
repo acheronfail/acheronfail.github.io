@@ -27,7 +27,7 @@ I've chosen `/boot/custom/bin/fetch_key` as the location for this script. You ca
 
 # securely copy the keyfile from another server, in this example we simply
 # cat the file over an SSH connection - but your needs could be different
-ssh my_secure_sever cat /path/to/unraid/keyfile > /root/keyfile
+ssh my_secure_server cat /path/to/unraid/keyfile > /root/keyfile
 ```
 
 As long as your keyfile ends up in `/root/keyfile` you should be good to go.
