@@ -6,6 +6,12 @@
 * [About](./about.md)
 * [Nuggets](./nuggets.md)
 
+# information
+
+* [The Golden Eye]()
+    * [Home page](./info/the_golden_eye/home.md)
+    * [Privacy Policy](./info/the_golden_eye/privacy.md)
+
 # posts
 
 * [All posts by tag](./tags.md)

@@ -1,11 +1,26 @@
+MDBOOK_VERSION := "0.4.43"
+
 _default:
   just -l
 
 @_check +CMDS:
     echo {{CMDS}} | xargs -n1 sh -c 'if ! command -v $1 >/dev/null 2>&1 /dev/null; then echo "$1 is required!"; exit 1; fi' bash
 
+# verify the local mdbook version matches the repository pin
+check-mdbook: (_check "mdbook")
+  #!/usr/bin/env bash
+  set -euo pipefail
+  actual="$(mdbook --version | awk '{print $2}')"
+  expected="v{{MDBOOK_VERSION}}"
+  if [ "$actual" != "$expected" ]; then
+    echo "mdbook $expected is required, but found $actual."
+    echo "Run: cargo install mdbook --version {{MDBOOK_VERSION}} --locked --force"
+    exit 1
+  fi
+
 # install and setup dependencies
 setup: (_check "cargo" "bun")
+  cargo install mdbook --version {{MDBOOK_VERSION}} --locked --force
   cargo install mdbook-katex
   cargo install mdbook-admonish
   bun install
@@ -19,7 +34,7 @@ hooks:
 
 alias serve := dev
 # start a local server for developing
-dev: (_check "mdbook")
+dev: check-mdbook
   mdbook serve
 
 pre-commit: (_check "git")
@@ -44,7 +59,7 @@ pre-commit: (_check "git")
 
 alias t := test
 # run the tests
-test: (_check "bun" "mdbook") build
+test: (_check "bun") build
   bun test
   mdbook test
 
@@ -54,6 +69,6 @@ test-links: (_check "bun")
 
 alias b := build
 # build the book
-build: (_check "mdbook")
+build: check-mdbook
   mdbook-admonish install
   mdbook build
