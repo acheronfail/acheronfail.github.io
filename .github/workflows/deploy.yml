@@ -54,10 +54,13 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
       # install dependencies
       - uses: extractions/setup-just@v1
-      - uses: oven-sh/setup-bun@v1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
       - name: Install pinned mdbook
         env:
           MDBOOK_VERSION: v0.4.43

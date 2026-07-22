@@ -1,10 +1,12 @@
-import { expect, test, describe } from 'bun:test';
-import { File, getAllFiles, getAllHtmlHeaders, getAllMarkdownLinks } from './util.js';
+import { expect, test, describe } from 'vitest';
+import { getAllFiles, getAllHtmlHeaders, getAllMarkdownLinks } from './util.ts';
+import type { File } from './util.ts';
 import { dirname, resolve } from 'path';
-import { stat } from 'fs/promises';
-import { NodeWalkingStep, Parser } from 'commonmark';
+import { readFile, stat } from 'fs/promises';
+import { Parser } from 'commonmark';
+import type { NodeWalkingStep } from 'commonmark';
 import c from 'chalk';
-import { splitFrontMatter } from '../preprocessors/common.js';
+import { splitFrontMatter } from '../preprocessors/common.ts';
 
 describe('markdown tests', () => {
   /**
@@ -22,7 +24,7 @@ describe('markdown tests', () => {
 
   test('no TODO or FIXME in files referenced from summary', async () => {
     const checkForTodos = async ({ markdownPath }: File) => {
-      const text = await Bun.file(markdownPath).text();
+      const text = await readFile(markdownPath, 'utf8');
       const matches: TodoSearchResult[] = [];
 
       text.split('\n').forEach((line, index) => {
@@ -44,7 +46,7 @@ describe('markdown tests', () => {
     const checks = (await getAllFiles()).map(checkForTodos);
     const allMatches = (await Promise.all(checks)).flat();
     if (allMatches.length > 0) {
-      expect().fail(
+      expect.fail(
         c.bold.yellow(`Found unfinished indicators:\n`) +
           allMatches
             .map(
@@ -98,7 +100,7 @@ describe('markdown tests', () => {
     ).then((results) => results.filter((x) => !x.exists));
 
     if (brokenLinks.length > 0) {
-      expect().fail(
+      expect.fail(
         c.bold.yellow(`Found broken internal links:\n`) +
           brokenLinks.map(({ to, from }) => `  Invalid link: ${c.red(to)}\n\t${c.gray(`from ${from}`)}`).join('\n')
       );
@@ -121,7 +123,7 @@ describe('markdown tests', () => {
     const files = await getAllFiles();
     const results = await Promise.all(
       files.map(async ({ markdownPath }) => {
-        const text = await Bun.file(markdownPath).text();
+        const text = await readFile(markdownPath, 'utf8');
         const ast = new Parser().parse(text);
         const walker = ast.walker();
 
@@ -154,7 +156,7 @@ describe('markdown tests', () => {
     ).then((results) => results.flat());
 
     if (results.length > 0) {
-      expect().fail(
+      expect.fail(
         c.bold.yellow(`Found <div class="warning"> block whose content is not parsed as markdown:\n`) +
           results
             .map(
@@ -181,7 +183,7 @@ describe('markdown tests', () => {
     const files = await getAllFiles();
     const results = await Promise.all(
       files.map(async ({ markdownPath }) => {
-        const text = await Bun.file(markdownPath).text();
+        const text = await readFile(markdownPath, 'utf8');
         const [_, lines] = splitFrontMatter(text.split('\n'));
 
         const allLinks = new Set();
@@ -212,7 +214,7 @@ describe('markdown tests', () => {
     ).then((results) => results.filter(({ missing }) => missing.length > 0));
 
     if (results.length > 0) {
-      expect().fail(
+      expect.fail(
         c.bold.yellow(`Found some shorthand markdown links without definitions:\n`) +
           results
             .map(

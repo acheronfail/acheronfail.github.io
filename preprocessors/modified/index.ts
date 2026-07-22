@@ -1,7 +1,7 @@
-#!/usr/bin/env bun
+#!/usr/bin/env -S node --experimental-strip-types
 
 import { join, relative } from 'path';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, isFile, TAGS_CHAPTER_PATH } from '../common.js';
+import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, isFile, TAGS_CHAPTER_PATH } from '../common.ts';
 import { $ } from 'execa';
 
 declareSupports(['html']);

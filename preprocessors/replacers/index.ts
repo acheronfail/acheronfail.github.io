@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+#!/usr/bin/env -S node --experimental-strip-types
 
 import { dirname, join, relative } from 'path';
 import { readFile, readdir } from 'fs/promises';
@@ -10,8 +10,8 @@ import {
   log,
   PATH_SUMMARY,
   PATH_ROOT,
-} from '../common.js';
-import { Chapter } from '../types.js';
+} from '../common.ts';
+import type { Chapter } from '../types.d.ts';
 
 declareSupports(['html']);
 

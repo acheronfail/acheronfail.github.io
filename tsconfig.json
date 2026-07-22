@@ -2,10 +2,10 @@
   "extends": ["@tsconfig/strictest/tsconfig"],
   "exclude": ["**/dist/**/*", "**/theme/**/*"],
   "compilerOptions": {
-    "composite": true,
     "checkJs": false,
-    "module": "Node16",
-    "types": ["node", "bun-types"],
+    "module": "NodeNext",
+    "allowImportingTsExtensions": true,
+    "types": ["node", "vitest/globals"],
     "lib": []
   }
 }

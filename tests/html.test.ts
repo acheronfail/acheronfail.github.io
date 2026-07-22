@@ -1,5 +1,6 @@
-import { expect, test, describe } from 'bun:test';
-import { getAllFiles } from './util.js';
+import { expect, test, describe } from 'vitest';
+import { readFile } from 'fs/promises';
+import { getAllFiles } from './util.ts';
 import chalk from 'chalk';
 
 describe('html tests', () => {
@@ -9,7 +10,7 @@ describe('html tests', () => {
     const errors: string[] = [];
     await Promise.all(
       files.map(async ({ htmlPath }) => {
-        const text = await Bun.file(htmlPath).text();
+        const text = await readFile(htmlPath, 'utf8');
         const lines = text.split('\n');
         for (const [i, line] of lines.entries()) {
           const match = /{{.+}}/g.exec(line);
@@ -25,7 +26,7 @@ describe('html tests', () => {
     );
 
     if (errors.length) {
-      expect().fail(errors.join('\n'));
+      expect.fail(errors.join('\n'));
     }
   });
 });

@@ -1,6 +1,6 @@
-#!/usr/bin/env bun
+#!/usr/bin/env -S node --experimental-strip-types
 
-import { declareSupports, runPreprocessor, forEachChapter } from '../common.js';
+import { declareSupports, runPreprocessor, forEachChapter } from '../common.ts';
 
 const RE_CODEBLOCK = /^```(?<info>.*)\n([\s\S]+?)```$/gim;
 const RE_TITLE = /title="(?<title>.+)"/i;

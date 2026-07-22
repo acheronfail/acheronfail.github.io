@@ -1,6 +1,6 @@
-#!/usr/bin/env bun
+#!/usr/bin/env -S node --experimental-strip-types
 
-import { runPreprocessor, forEachChapter, declareSupports } from '../common.js';
+import { runPreprocessor, forEachChapter, declareSupports } from '../common.ts';
 
 declareSupports(['html']);
 

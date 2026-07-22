@@ -1,11 +1,17 @@
 import { dirname, join, resolve } from 'path';
-import { NodeWalkingStep, Parser } from 'commonmark';
+import { Parser } from 'commonmark';
+import type { NodeWalkingStep } from 'commonmark';
 import { fileURLToPath } from 'url';
+import { readFile } from 'fs/promises';
 import html from 'node-html-parser';
-import mdbook from '../book.toml';
+import { parse } from 'smol-toml';
+import { z } from 'zod';
 
 const DIRNAME = dirname(fileURLToPath(import.meta.url));
-const BOOK_DIR = resolve(DIRNAME, '..', mdbook.book.src);
+const ROOT_DIR = resolve(DIRNAME, '..');
+const config = parse(await readFile(join(ROOT_DIR, 'book.toml'), 'utf8'));
+const sourceDirectory = z.object({ book: z.object({ src: z.string() }) }).parse(config).book.src;
+const BOOK_DIR = resolve(ROOT_DIR, sourceDirectory);
 const HTML_DIR = resolve(DIRNAME, '..', 'dist');
 
 export interface File {
@@ -17,7 +23,7 @@ let allFiles: Promise<File[]> | null = null;
 export async function getAllFiles(): Promise<File[]> {
   if (allFiles) return allFiles;
   return (allFiles = (async () => {
-    const text = await Bun.file(join(BOOK_DIR, 'SUMMARY.md')).text();
+    const text = await readFile(join(BOOK_DIR, 'SUMMARY.md'), 'utf8');
     const ast = new Parser().parse(text);
     const walker = ast.walker();
 
@@ -63,7 +69,7 @@ export async function getAllHtmlHeaders(): Promise<Header[]> {
   await Promise.all(
     await getAllFiles().then(async (paths) =>
       paths.map(async (file) => {
-        const text = await Bun.file(file.htmlPath).text();
+        const text = await readFile(file.htmlPath, 'utf8');
         const root = html.parse(text);
         allHeaders.push({
           ...file,
@@ -88,7 +94,7 @@ export async function getAllMarkdownLinks(): Promise<AllLinks> {
   await Promise.all(
     await getAllFiles().then((paths) =>
       paths.map(async ({ markdownPath }) => {
-        const text = await Bun.file(markdownPath).text();
+        const text = await readFile(markdownPath, 'utf8');
         const ast = new Parser().parse(text);
         const walker = ast.walker();
 
