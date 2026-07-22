@@ -51,6 +51,11 @@ describe('html tests', () => {
       expect(text.indexOf('if (is_home_page)')).toBeLessThan(text.indexOf('<nav id="mdbook-sidebar"'));
     }
 
+    for (const text of [homepage, index]) {
+      expect(text).toContain('<pre class="home-json">');
+      expect(text).toMatch(/pre\.home-json > \.buttons \.clip-button \{\s+display: none;/);
+    }
+
     expect(about).toContain('const is_home_page = ["home.md", "index.md"].includes("about.md");');
   });
 

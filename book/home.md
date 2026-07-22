@@ -12,12 +12,16 @@
     text-decoration: underline;
   }
 
+  pre.home-json > .buttons .clip-button {
+    display: none;
+  }
+
   .modified {
     display: none;
   }
 </style>
 
-<pre>
+<pre class="home-json">
 <code class="language-json">
 
 
