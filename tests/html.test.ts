@@ -4,6 +4,16 @@ import { getAllFiles } from './util.ts';
 import chalk from 'chalk';
 
 describe('html tests', () => {
+  test('homepage hides the mdBook sidebar', async () => {
+    const homepage = (await getAllFiles()).find(({ htmlPath }) => htmlPath.endsWith('/dist/home.html'));
+    expect(homepage, 'homepage was not included in the generated book').toBeDefined();
+
+    const text = await readFile(homepage!.htmlPath, 'utf8');
+    expect(text).toContain("document.documentElement.classList.remove('sidebar-visible')");
+    expect(text).toContain("document.getElementById('mdbook-sidebar-toggle-anchor')");
+    expect(text).not.toContain("document.getElementById('sidebar-toggle-anchor')");
+  });
+
   test('no unprocessed {{blocks}}', async () => {
     const files = await getAllFiles();
 
