@@ -44,11 +44,12 @@ cryptsetup luksAddKey /dev/md4p1 path/to/new/keyfile
 cryptsetup luksAddKey /dev/sdX1 path/to/new/keyfile
 ```
 
-~~~md warning title="Be careful when using a keyfile"
-If you're using a `keyfile`, make sure you have a backup of it somewhere safe. If you lose it, you won't be able to unlock your disks.
-
-Also, think about how you're storing it - if you just store it directly on the unraid USB stick, you're effectively not using encryption at all.
-~~~
+> [!WARNING]
+> **Be careful when using a keyfile**
+>
+> If you're using a `keyfile`, make sure you have a backup of it somewhere safe. If you lose it, you won't be able to unlock your disks.
+>
+> Also, think about how you're storing it - if you just store it directly on the unraid USB stick, you're effectively not using encryption at all.
 
 ## Testing the new key
 
@@ -56,11 +57,12 @@ Now's the time to reboot your array.
 
 When it starts back up, try using your new `passphrase` or `keyfile` to unlock it.
 
-~~~md warning title="Do not skip this step"
-If the new key you're adding doesn't work, and you proceed onwards and remove your old key, you'll have lost access to all your data.
-
-Ensure using the new key works and unlocks _all_ your encrypted disks before proceeding to remove the old key.
-~~~
+> [!WARNING]
+> **Do not skip this step**
+>
+> If the new key you're adding doesn't work, and you proceed onwards and remove your old key, you'll have lost access to all your data.
+>
+> Ensure using the new key works and unlocks _all_ your encrypted disks before proceeding to remove the old key.
 
 If it worked, let's move on to removing the old key.
 

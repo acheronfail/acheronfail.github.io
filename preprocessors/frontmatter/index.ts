@@ -1,15 +1,15 @@
-#!/usr/bin/env bun
+#!/usr/bin/env -S node --experimental-strip-types
 
 import {
-  FrontMatter,
   declareSupports,
   forEachChapter,
   splitFrontMatter,
   parseFrontMatter,
   runPreprocessor,
   TAGS_CHAPTER_PATH,
-} from '../common.js';
-import { Chapter } from '../types.js';
+} from '../common.ts';
+import type { FrontMatter } from '../common.ts';
+import type { Chapter } from '../types.d.ts';
 
 declareSupports(['html']);
 
@@ -45,9 +45,9 @@ await runPreprocessor(async (_context, book) => {
 
     // add tags to the end of the page if there were any
     if (frontMatter.tags.length) {
-      chapter.content += `\n<div class="tags">\n\nTags: ${frontMatter.tags
+      chapter.content += `\n\n<span class="tags">Tags: ${frontMatter.tags
         .map((tag) => `[\`${tag}\`](/${TAGS_CHAPTER_PATH}#${keyFromTag(tag)})`)
-        .join(', ')}</div>`;
+        .join(', ')}</span>\n`;
     }
   });
 

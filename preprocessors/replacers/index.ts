@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+#!/usr/bin/env -S node --experimental-strip-types
 
 import { dirname, join, relative } from 'path';
 import { readFile, readdir } from 'fs/promises';
@@ -10,8 +10,8 @@ import {
   log,
   PATH_SUMMARY,
   PATH_ROOT,
-} from '../common.js';
-import { Chapter } from '../types.js';
+} from '../common.ts';
+import type { Chapter } from '../types.d.ts';
 
 declareSupports(['html']);
 
@@ -33,9 +33,6 @@ const EMBEDS = new Map<RegExp, (chapter: Chapter) => (match: RegExpMatchArray) =
       ].join('/');
     },
   ],
-  // shortcut for `~~~admonish`
-  // mainly here so we can have accurate IDE syntax highlighting in the admonish blocks
-  [/~~~md\s/gi, (_chapter) => async (_match) => '~~~admonish '],
   // {{latest_post_url}},
   [
     /{{latest_post_url}}/gi,

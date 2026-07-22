@@ -1,13 +1,15 @@
 import { inspect } from 'util';
 import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import { stat } from 'fs/promises';
+import { readFile, stat } from 'fs/promises';
+import { parse } from 'smol-toml';
 import { z } from 'zod';
-import { Book, Chapter, Context, Section, SectionChapter } from './types.js';
-import mdbook from '../book.toml';
+import type { Book, Chapter, Context, Section, SectionChapter } from './types.d.ts';
 
 export const PATH_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-export const PATH_BOOK = join(PATH_ROOT, mdbook.book.src);
+const config = parse(await readFile(join(PATH_ROOT, 'book.toml'), 'utf8'));
+const sourceDirectory = z.object({ book: z.object({ src: z.string() }) }).parse(config).book.src;
+export const PATH_BOOK = join(PATH_ROOT, sourceDirectory);
 export const PATH_SUMMARY = join(PATH_BOOK, 'SUMMARY.md');
 export const TAGS_CHAPTER_PATH = 'tags.md';
 
@@ -38,13 +40,13 @@ export function declareSupports(outputs: [string, ...string[]]) {
 }
 
 // read all stdin into a string
-function readProcessStdin(): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const chunks: Buffer[] = [];
-    process.stdin.on('error', (err) => reject(err));
-    process.stdin.on('data', (chunk) => chunks.push(chunk));
-    process.stdin.on('end', () => resolve(Buffer.concat(chunks).toString('utf-8')));
-  });
+async function readProcessStdin(): Promise<string> {
+  process.stdin.setEncoding('utf8');
+  let input = '';
+  for await (const chunk of process.stdin) {
+    input += chunk;
+  }
+  return input;
 }
 
 // recursively iterate over each chapter in the book
@@ -58,7 +60,7 @@ export async function forEachChapter(book: Book, callback: (chapter: Chapter) =>
         await Promise.all(recurse(s.Chapter.sub_items));
       });
 
-  await Promise.all(recurse(book.sections));
+  await Promise.all(recurse(book.items));
 }
 
 // log to stderr
@@ -79,14 +81,11 @@ export type FrontMatter = z.infer<typeof FrontMatter>;
 // parse front matter
 export function parseFrontMatter(input: string, path: string): FrontMatter | null {
   try {
-    const toml = Bun.TOML.parse(input);
+    const toml = parse(input);
     return FrontMatter.parse(toml);
   } catch (err) {
-    if (err instanceof BuildMessage) {
+    if (err instanceof Error) {
       const msg = [`Error parsing frontmatter: "${err.message}"`];
-      if (err.position) {
-        msg.push(`at line ${err.position.line}, column ${err.position.column}`);
-      }
       if (path) {
         msg.push(`in ${path}`);
       }

@@ -72,21 +72,21 @@ And thus started the investigation. After some searching, I found others who had
 
 If you read those, you'll find that there's a this section in the Linux man pages:
 
-~~~md quote title="From `man 2 getrusage`"
+> **From `man 2 getrusage`**
+>
 > Resource usage metrics are preserved across an execve(2).
-~~~
 
 Well, that's going to definitely play a part in why I'm seeing the behaviour I'm seeing.
 
 But that's not all! Upon further inspection, I also discovered this:
 
-~~~md quote title="From `man 5 proc`"
+> **From `man 5 proc`**
+>
 > Resident Set Size: number of pages the process has in real memory. This is just the pages which count toward text, data, or stack space. This does not include pages which have not been demand-loaded in, or which are swapped out. **This value is inaccurate; see `/proc/pid/statm` below.**
 >
 > ...
 >
 > Some of these values are inaccurate because of a kernel-internal scalability optimization. If accurate values are required, use `/proc/pid/smaps` or `/proc/pid/smaps_rollup` instead, which are much slower but provide accurate, detailed information.
-~~~
 
 Ahh, there we go. So we've found the reason we're not getting good numbers from `rusage.ru_maxrss`, and we also potentially we have a workaround by reading `/proc/$PID/smaps` and its ilk.
 

@@ -1,7 +1,7 @@
-#!/usr/bin/env bun
+#!/usr/bin/env -S node --experimental-strip-types
 
 import { join, relative } from 'path';
-import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, isFile, TAGS_CHAPTER_PATH } from '../common.js';
+import { runPreprocessor, forEachChapter, declareSupports, PATH_BOOK, isFile, TAGS_CHAPTER_PATH } from '../common.ts';
 import { $ } from 'execa';
 
 declareSupports(['html']);
@@ -69,9 +69,8 @@ runPreprocessor(async (_context, book) => {
     let modifiedDate = parseGitDate(modifiedStr);
     if (modifiedDate[0] <= creationDate[0]) modifiedDate = creationDate;
 
-    chapter.content += `\n<div class="modified">
-      Created: ${gitDateToDateString(creationDate)}
-      ${modifiedDate != creationDate ? `<br/>Last updated: ${gitDateToDateString(modifiedDate)}` : ''}
-</div>`;
+    chapter.content += `\n\n<span class="modified">Created: ${gitDateToDateString(creationDate)}${
+      modifiedDate != creationDate ? `<br>Last updated: ${gitDateToDateString(modifiedDate)}` : ''
+    }</span>\n`;
   });
 });

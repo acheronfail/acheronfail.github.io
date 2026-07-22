@@ -1,5 +1,6 @@
-import linkCheck, { LinkCheckResult } from 'link-check';
-import { getAllMarkdownLinks } from './util.js';
+import linkCheck from 'link-check';
+import type { LinkCheckResult } from 'link-check';
+import { getAllMarkdownLinks } from './util.ts';
 import pLimit from 'p-limit';
 import c from 'chalk';
 

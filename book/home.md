@@ -12,18 +12,16 @@
     text-decoration: underline;
   }
 
+  pre.home-json > .buttons .clip-button {
+    display: none;
+  }
+
   .modified {
     display: none;
   }
 </style>
 
-<script>
-  document.body.classList.remove('sidebar-visible')
-  document.body.classList.add('sidebar-hidden')
-  document.getElementById('sidebar-toggle-anchor').checked = false
-</script>
-
-<pre>
+<pre class="home-json">
 <code class="language-json">
 
 
