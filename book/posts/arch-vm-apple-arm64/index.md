@@ -81,10 +81,9 @@ Now that archboot has booted, it will show a prompt. It's entirely up to you how
 
 ![quitting archboot to get a shell](images/install-arch-1.png)
 
-<details>
-<summary>Issues installing packages with <code>pacman</code>?</summary>
-
 > [!WARNING]
+> **Issues installing packages with `pacman`?**
+>
 > I had many `signature is marginal trust` issues when installing packages with `pacman` in the archboot environment. All the packages build by `Arch Linux ARM Build System <builder@archlinuxarm.org>` were breaking.
 >
 > I was able to fix this by locally signing the key:
@@ -92,8 +91,6 @@ Now that archboot has booted, it will show a prompt. It's entirely up to you how
 > ```bash,title="Locally sign key"
 > pacman-key --lsign-key $(pacman-key --list-sig Build | head -2 | tail -1)
 > ```
-
-</details>
 
 Useful information:
 

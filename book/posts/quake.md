@@ -85,14 +85,11 @@ The latter being a closer representation of what the game was when it was releas
 `quakespam` expects the game directories (i.e., `id1`, `hipnotic`, `rogue`, etc) to be placed at `~/.quakespasm`, and `darkplaces` just wants them in its game directory.
 For this guide we've placed them in `~/.quakespasm`, but we can easily run the game via `darkplaces` using its `-basedir` command line argument.
 
-<details>
-<summary>Issues compiling?</summary>
-
 > [!CAUTION]
+> **Issues compiling?**
+>
 > I ran into some compilation issues when compiling `darkplaces` with GCC 11.
 > Fortunately I found an [existing fix](https://bugs.gentoo.org/786288#c9): all you have to do is [use this patch](https://gitweb.gentoo.org/repo/gentoo.git/tree/games-fps/darkplaces/files/darkplaces-20140513-gcc-11.patch?id=bc2ba1cd6fdc5a7ad7d161efb21652b73c6b207e) and everything will compile just fine after that.
-
-</details>
 
 With `darkplaces`, here are a few tips:
 
