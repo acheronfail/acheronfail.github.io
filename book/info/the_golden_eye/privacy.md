@@ -1,4 +1,4 @@
-# The Golden Eye Privacy Policy
+# The Golden Eye • Privacy Policy
 
 The Golden Eye is an OBS Studio plugin for recording GoldenEye 007 (N64) speedruns. It includes an **optional** YouTube upload feature. The plugin runs locally inside OBS Studio on the user's computer and does not operate a developer backend service for user data.
 

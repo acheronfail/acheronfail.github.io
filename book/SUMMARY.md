@@ -11,6 +11,7 @@
 * [The Golden Eye]()
     * [Home page](./info/the_golden_eye/home.md)
     * [Privacy Policy](./info/the_golden_eye/privacy.md)
+    * [Terms of Service](./info/the_golden_eye/tos.md)
 
 # posts
 
