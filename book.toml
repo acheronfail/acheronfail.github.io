@@ -46,6 +46,7 @@ additional-js = [
   "book/comments.js",
 ]
 no-section-label = false
+sidebar-header-nav = false
 git-repository-url = "https://github.com/acheronfail/acheronfail.github.io"
 edit-url-template = "https://github.com/acheronfail/acheronfail.github.io/edit/master/{path}"
 # cname = "myproject.rs"
