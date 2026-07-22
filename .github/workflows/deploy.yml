@@ -59,7 +59,7 @@ jobs:
       - uses: extractions/setup-just@v1
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
       - name: Install pinned mdbook
         env:
