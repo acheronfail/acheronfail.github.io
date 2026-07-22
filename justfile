@@ -1,4 +1,4 @@
-MDBOOK_VERSION := "0.4.43"
+MDBOOK_VERSION := "0.5.4"
 
 _default:
   just -l
@@ -21,8 +21,6 @@ check-mdbook: (_check "mdbook")
 # install and setup dependencies
 setup: (_check "cargo" "npm")
   cargo install mdbook --version {{MDBOOK_VERSION}} --locked --force
-  cargo install mdbook-katex
-  cargo install mdbook-admonish
   npm ci
   if [ -z ${CI:-} ]; then just hooks; fi
   just build
@@ -71,5 +69,4 @@ test-links: (_check "npm")
 alias b := build
 # build the book
 build: check-mdbook
-  mdbook-admonish install
   mdbook build

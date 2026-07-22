@@ -60,7 +60,7 @@ export async function forEachChapter(book: Book, callback: (chapter: Chapter) =>
         await Promise.all(recurse(s.Chapter.sub_items));
       });
 
-  await Promise.all(recurse(book.sections));
+  await Promise.all(recurse(book.items));
 }
 
 // log to stderr

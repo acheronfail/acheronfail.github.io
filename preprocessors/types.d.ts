@@ -1,6 +1,5 @@
 export interface Book {
-  sections: Section[];
-  __non_exhaustive: null;
+  items: Section[];
 }
 
 export type SectionTitle = { PartTitle: string };
@@ -10,12 +9,12 @@ export type Section = SectionTitle | SectionChapter | 'Separator';
 export interface Chapter {
   name: string;
   content: string;
-  number: number[];
+  number: number[] | null;
   sub_items: Section[];
   /** `null` when it's a "draft" chapter, i.e.: `[foo]()` */
   path: string | null;
-  source_path: string;
-  parent_names: unknown[];
+  source_path: string | null;
+  parent_names: string[];
 }
 
 export interface Context {}

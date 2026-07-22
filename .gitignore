@@ -1,7 +1,6 @@
 dist
 node_modules
 *.bundle.js
-mdbook-admonish.css
 target/
 
 precommit.diff

@@ -33,9 +33,6 @@ const EMBEDS = new Map<RegExp, (chapter: Chapter) => (match: RegExpMatchArray) =
       ].join('/');
     },
   ],
-  // shortcut for `~~~admonish`
-  // mainly here so we can have accurate IDE syntax highlighting in the admonish blocks
-  [/~~~md\s/gi, (_chapter) => async (_match) => '~~~admonish '],
   // {{latest_post_url}},
   [
     /{{latest_post_url}}/gi,

@@ -23,12 +23,13 @@ Just make sure when you bootstrap the code, you bootstrap it to use `git` - thei
 $ python3 bootstrap.py --vcs=git
 ```
 
-~~~md tip title="Firefox is officially migrating to git"
-Firefox is migrating to `git`, so it's likely that these instructions will be out of date by the time you read this. More on that here:
-
-* <https://glandium.org/blog/?p=4346>
-* <https://groups.google.com/a/mozilla.org/g/firefox-dev/c/QnfydsDj48o/m/8WadV0_dBQAJ?pli=1>
-~~~
+> [!TIP]
+> **Firefox is officially migrating to git**
+>
+> Firefox is migrating to `git`, so it's likely that these instructions will be out of date by the time you read this. More on that here:
+>
+> * <https://glandium.org/blog/?p=4346>
+> * <https://groups.google.com/a/mozilla.org/g/firefox-dev/c/QnfydsDj48o/m/8WadV0_dBQAJ?pli=1>
 
 ## Building Firefox
 
@@ -86,11 +87,10 @@ origin/bookmarks/esr115
 
 And checkout the particular branch you want to build.
 
-~~~md info
-Keep in mind that branches have different build configurations. For example, the `bookmarks/release` branch doesn't automatically include `--enable-bootstrap` like the `bookmarks/central` branch does.
-
-I recommend just keeping `--enable-bootstrap` in there since it means you don't need to make any changes to your machine's build system.
-~~~
+> [!NOTE]
+> Keep in mind that branches have different build configurations. For example, the `bookmarks/release` branch doesn't automatically include `--enable-bootstrap` like the `bookmarks/central` branch does.
+>
+> I recommend just keeping `--enable-bootstrap` in there since it means you don't need to make any changes to your machine's build system.
 
 
 ## Where to ask for help

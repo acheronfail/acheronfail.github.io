@@ -45,9 +45,9 @@ await runPreprocessor(async (_context, book) => {
 
     // add tags to the end of the page if there were any
     if (frontMatter.tags.length) {
-      chapter.content += `\n<div class="tags">\n\nTags: ${frontMatter.tags
+      chapter.content += `\n\n<span class="tags">Tags: ${frontMatter.tags
         .map((tag) => `[\`${tag}\`](/${TAGS_CHAPTER_PATH}#${keyFromTag(tag)})`)
-        .join(', ')}</div>`;
+        .join(', ')}</span>\n`;
     }
   });
 

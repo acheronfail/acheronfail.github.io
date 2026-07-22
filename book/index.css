@@ -87,8 +87,8 @@ h6 code {
 }
 
 /**
- * Make the admonish blocks font size a little smaller
+ * Make admonition blocks font size a little smaller
  */
-.admonition {
+.blockquote-tag {
   font-size: 0.9em;
 }

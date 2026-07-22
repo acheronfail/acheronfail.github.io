@@ -69,9 +69,8 @@ runPreprocessor(async (_context, book) => {
     let modifiedDate = parseGitDate(modifiedStr);
     if (modifiedDate[0] <= creationDate[0]) modifiedDate = creationDate;
 
-    chapter.content += `\n<div class="modified">
-      Created: ${gitDateToDateString(creationDate)}
-      ${modifiedDate != creationDate ? `<br/>Last updated: ${gitDateToDateString(modifiedDate)}` : ''}
-</div>`;
+    chapter.content += `\n\n<span class="modified">Created: ${gitDateToDateString(creationDate)}${
+      modifiedDate != creationDate ? `<br>Last updated: ${gitDateToDateString(modifiedDate)}` : ''
+    }</span>\n`;
   });
 });

@@ -734,6 +734,11 @@
   --search-mark-bg: #fe640b;
   --warning-border: #fe640b;
   --color-scheme: light;
+  --copy-button-filter: none;
+  --copy-button-filter-hover: none;
+  --footnote-highlight: #1e66f5;
+  --overlay-bg: rgb(76 79 105 / 40%);
+  --sidebar-header-border-color: #1e66f5;
 }
 
 .frappe {
@@ -767,6 +772,11 @@
   --search-mark-bg: #ef9f76;
   --warning-border: #ef9f76;
   --color-scheme: dark;
+  --copy-button-filter: invert(90%);
+  --copy-button-filter-hover: invert(70%);
+  --footnote-highlight: #8caaee;
+  --overlay-bg: rgb(35 38 52 / 40%);
+  --sidebar-header-border-color: #8caaee;
 }
 
 .macchiato {
@@ -800,6 +810,11 @@
   --search-mark-bg: #f5a97f;
   --warning-border: #f5a97f;
   --color-scheme: dark;
+  --copy-button-filter: invert(90%);
+  --copy-button-filter-hover: invert(70%);
+  --footnote-highlight: #8aadf4;
+  --overlay-bg: rgb(24 25 38 / 40%);
+  --sidebar-header-border-color: #8aadf4;
 }
 
 .mocha {
@@ -833,4 +848,9 @@
   --search-mark-bg: #fab387;
   --warning-border: #fab387;
   --color-scheme: dark;
+  --copy-button-filter: invert(90%);
+  --copy-button-filter-hover: invert(70%);
+  --footnote-highlight: #89b4fa;
+  --overlay-bg: rgb(17 17 27 / 40%);
+  --sidebar-header-border-color: #89b4fa;
 }

@@ -195,6 +195,9 @@ describe('markdown tests', () => {
           if (line.startsWith('```') || line.startsWith('~~~')) isInCodeblock = !isInCodeblock;
           if (isInCodeblock) continue;
 
+          // mdBook's native admonitions use link-like markers such as `> [!WARNING]`.
+          if (/^>\s*\[!(?:NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*$/.test(line)) continue;
+
           // strip inline codeblocks
           line = line.replace(/`.+?`/g, '');
 

@@ -1,63 +1,31 @@
-.latte .mdbook-alerts-note {
-  --mdbook-alerts-color: #1e66f5;
-}
-.latte .mdbook-alerts-tip {
-  --mdbook-alerts-color: #40a02b;
-}
-.latte .mdbook-alerts-important {
-  --mdbook-alerts-color: #8839ef;
-}
-.latte .mdbook-alerts-warning {
-  --mdbook-alerts-color: #df8e1d;
-}
-.latte .mdbook-alerts-caution {
-  --mdbook-alerts-color: #d20f39;
+.latte {
+  --blockquote-note-color: #1e66f5;
+  --blockquote-tip-color: #40a02b;
+  --blockquote-important-color: #8839ef;
+  --blockquote-warning-color: #df8e1d;
+  --blockquote-caution-color: #d20f39;
 }
 
-.frappe .mdbook-alerts-note {
-  --mdbook-alerts-color: #8caaee;
-}
-.frappe .mdbook-alerts-tip {
-  --mdbook-alerts-color: #a6d189;
-}
-.frappe .mdbook-alerts-important {
-  --mdbook-alerts-color: #ca9ee6;
-}
-.frappe .mdbook-alerts-warning {
-  --mdbook-alerts-color: #e5c890;
-}
-.frappe .mdbook-alerts-caution {
-  --mdbook-alerts-color: #e78284;
+.frappe {
+  --blockquote-note-color: #8caaee;
+  --blockquote-tip-color: #a6d189;
+  --blockquote-important-color: #ca9ee6;
+  --blockquote-warning-color: #e5c890;
+  --blockquote-caution-color: #e78284;
 }
 
-.macchiato .mdbook-alerts-note {
-  --mdbook-alerts-color: #8aadf4;
-}
-.macchiato .mdbook-alerts-tip {
-  --mdbook-alerts-color: #a6da95;
-}
-.macchiato .mdbook-alerts-important {
-  --mdbook-alerts-color: #c6a0f6;
-}
-.macchiato .mdbook-alerts-warning {
-  --mdbook-alerts-color: #eed49f;
-}
-.macchiato .mdbook-alerts-caution {
-  --mdbook-alerts-color: #ed8796;
+.macchiato {
+  --blockquote-note-color: #8aadf4;
+  --blockquote-tip-color: #a6da95;
+  --blockquote-important-color: #c6a0f6;
+  --blockquote-warning-color: #eed49f;
+  --blockquote-caution-color: #ed8796;
 }
 
-.mocha .mdbook-alerts-note {
-  --mdbook-alerts-color: #89b4fa;
-}
-.mocha .mdbook-alerts-tip {
-  --mdbook-alerts-color: #a6e3a1;
-}
-.mocha .mdbook-alerts-important {
-  --mdbook-alerts-color: #cba6f7;
-}
-.mocha .mdbook-alerts-warning {
-  --mdbook-alerts-color: #f9e2af;
-}
-.mocha .mdbook-alerts-caution {
-  --mdbook-alerts-color: #f38ba8;
+.mocha {
+  --blockquote-note-color: #89b4fa;
+  --blockquote-tip-color: #a6e3a1;
+  --blockquote-important-color: #cba6f7;
+  --blockquote-warning-color: #f9e2af;
+  --blockquote-caution-color: #f38ba8;
 }

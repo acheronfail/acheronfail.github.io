@@ -3,7 +3,6 @@ title = "acheronfail"
 authors = ["acheronfail <acheronfail@gmail.com>"]
 description = "Sometimes I write things..."
 language = "en"
-multilingual = false
 src = "book"
 
 [build]
@@ -13,13 +12,10 @@ extra-watch-dirs = ["preprocessors"]
 
 [preprocessor.frontmatter]
 command = "preprocessors/frontmatter/index.ts"
-before = ['comments']
+before = ['links']
 [preprocessor.replacers]
 command = "preprocessors/replacers/index.ts"
-before = ['admonish', 'links']
-[preprocessor.comments]
-command = "preprocessors/comments/index.ts"
-after = ['modified', 'links']
+before = ['links']
 [preprocessor.modified]
 command = "preprocessors/modified/index.ts"
 before = ['frontmatter']
@@ -27,15 +23,6 @@ before = ['frontmatter']
 command = "preprocessors/codeblocks/index.ts"
 [preprocessor.image-captions]
 command = "preprocessors/image-captions/index.ts"
-[preprocessor.katex]
-after = ["links"]
-no-css = true
-[preprocessor.admonish]
-assets_version = "3.0.2" # do not edit: managed by `mdbook-admonish install`
-after = ['links']
-on_failure = "bail"
-command = "mdbook-admonish"
-
 [output.html]
 default-theme = "latte"
 preferred-dark-theme = "ayu"
@@ -49,15 +36,17 @@ additional-css = [
   "preprocessors/codeblocks/index.css",
   "preprocessors/frontmatter/index.css",
   "preprocessors/image-captions/index.css",
-  "mdbook-admonish.css",
   "theme/catppuccin.css",
   "theme/catppuccin-alerts.css",
-  "theme/catppuccin-admonish.css", "./mdbook-admonish.css",
 ]
-additional-js = ["node_modules/katex/dist/katex.min.js"]
+additional-js = [
+  "node_modules/katex/dist/katex.min.js",
+  "node_modules/katex/dist/contrib/auto-render.min.js",
+  "book/katex.js",
+  "book/comments.js",
+]
 no-section-label = false
 git-repository-url = "https://github.com/acheronfail/acheronfail.github.io"
-git-repository-icon = "fa-github"
 edit-url-template = "https://github.com/acheronfail/acheronfail.github.io/edit/master/{path}"
 # cname = "myproject.rs"
 
