@@ -110,8 +110,12 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             let sidebar = null;
+            const is_home_page = ["home.md", "index.md"].includes("{{ path }}");
             const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
-            if (document.body.clientWidth >= 1080) {
+            if (is_home_page) {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            } else if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {

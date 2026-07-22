@@ -17,19 +17,6 @@
   }
 </style>
 
-<script>
-  const sidebar = document.getElementById('mdbook-sidebar')
-  const sidebarToggle = document.getElementById('mdbook-sidebar-toggle')
-  const sidebarCheckbox = document.getElementById('mdbook-sidebar-toggle-anchor')
-
-  document.documentElement.classList.remove('sidebar-visible')
-  sidebar.style.display = 'none'
-  sidebar.setAttribute('aria-hidden', 'true')
-  sidebarToggle.setAttribute('aria-expanded', 'false')
-  sidebarCheckbox.checked = false
-  document.querySelectorAll('#mdbook-sidebar a').forEach((link) => link.setAttribute('tabindex', '-1'))
-</script>
-
 <pre>
 <code class="language-json">
 

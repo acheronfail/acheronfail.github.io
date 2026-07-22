@@ -20,13 +20,23 @@ describe('html tests', () => {
   });
 
   test('homepage hides the mdBook sidebar', async () => {
-    const homepage = (await getAllFiles()).find(({ htmlPath }) => htmlPath.endsWith('/dist/home.html'));
-    expect(homepage, 'homepage was not included in the generated book').toBeDefined();
+    const dist = new URL('../dist/', import.meta.url);
+    const [homepage, index, about] = await Promise.all([
+      readFile(new URL('home.html', dist), 'utf8'),
+      readFile(new URL('index.html', dist), 'utf8'),
+      readFile(new URL('about.html', dist), 'utf8'),
+    ]);
 
-    const text = await readFile(homepage!.htmlPath, 'utf8');
-    expect(text).toContain("document.documentElement.classList.remove('sidebar-visible')");
-    expect(text).toContain("document.getElementById('mdbook-sidebar-toggle-anchor')");
-    expect(text).not.toContain("document.getElementById('sidebar-toggle-anchor')");
+    for (const [text, path] of [
+      [homepage, 'home.md'],
+      [index, 'index.md'],
+    ] as const) {
+      expect(text).toContain(`const is_home_page = ["home.md", "index.md"].includes("${path}");`);
+      expect(text).toMatch(/if \(is_home_page\) \{\s+sidebar = 'hidden';\s+sidebar_toggle\.checked = false;/);
+      expect(text.indexOf('if (is_home_page)')).toBeLessThan(text.indexOf('<nav id="mdbook-sidebar"'));
+    }
+
+    expect(about).toContain('const is_home_page = ["home.md", "index.md"].includes("about.md");');
   });
 
   test('no unprocessed {{blocks}}', async () => {
