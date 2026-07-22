@@ -45,7 +45,7 @@ additional-js = [
   "book/katex.js",
   "book/comments.js",
 ]
-no-section-label = false
+no-section-label = true
 sidebar-header-nav = false
 git-repository-url = "https://github.com/acheronfail/acheronfail.github.io"
 edit-url-template = "https://github.com/acheronfail/acheronfail.github.io/edit/master/{path}"

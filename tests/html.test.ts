@@ -19,6 +19,21 @@ describe('html tests', () => {
     expect(text).not.toContain('Support for dynamically adding headers to the sidebar');
   });
 
+  test('sidebar does not include section numbers', async () => {
+    const dist = new URL('../dist/', import.meta.url);
+    const tocScript = (await readdir(dist)).find((file) => /^toc-.+\.js$/.test(file));
+    expect(tocScript, 'generated table-of-contents script was not found').toBeDefined();
+
+    const [html, script] = await Promise.all([
+      readFile(new URL('toc.html', dist), 'utf8'),
+      readFile(new URL(tocScript!, dist), 'utf8'),
+    ]);
+
+    for (const text of [html, script]) {
+      expect(text).not.toMatch(/<strong aria-hidden="true">\d+(?:\.\d+)*\.<\/strong>/);
+    }
+  });
+
   test('homepage hides the mdBook sidebar', async () => {
     const dist = new URL('../dist/', import.meta.url);
     const [homepage, index, about] = await Promise.all([
