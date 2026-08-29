@@ -84,4 +84,51 @@ describe('html tests', () => {
       expect.fail(errors.join('\n'));
     }
   });
+
+  test('indexable pages declare one canonical URL and appear in the sitemap', async () => {
+    const dist = new URL('../dist/', import.meta.url);
+    const sitemap = await readFile(new URL('sitemap.xml', dist), 'utf8');
+    const files = await getAllFiles();
+
+    for (const { htmlPath } of files) {
+      const html = await readFile(htmlPath, 'utf8');
+      if (html.includes('<meta name="robots" content="noindex">') || html.includes('http-equiv="refresh"')) {
+        expect(html).not.toContain('rel="canonical"');
+        continue;
+      }
+
+      const canonicals = [...html.matchAll(/<link rel="canonical" href="([^"]+)">/g)];
+      expect(canonicals, `${htmlPath} should have one canonical URL`).toHaveLength(1);
+      expect(sitemap).toContain(`<loc>${canonicals[0]![1]}</loc>`);
+    }
+
+    expect(await readFile(new URL('index.html', dist), 'utf8')).toContain(
+      '<link rel="canonical" href="https://www.acheron.fail/">'
+    );
+    expect(await readFile(new URL('home.html', dist), 'utf8')).toContain(
+      '<link rel="canonical" href="https://www.acheron.fail/">'
+    );
+    expect(await readFile(new URL('posts/pixel-picker/index.html', dist), 'utf8')).toContain(
+      '<link rel="canonical" href="https://www.acheron.fail/posts/pixel-picker/">'
+    );
+  });
+
+  test('moved posts retain redirects from their old public URLs', async () => {
+    const dist = new URL('../dist/', import.meta.url);
+    const sitemap = await readFile(new URL('sitemap.xml', dist), 'utf8');
+    const redirects = [
+      ['guides/games/d2r.html', '/posts/d2r.html'],
+      ['guides/arch-vm-apple-arm64/index.html', '/posts/arch-vm-apple-arm64/'],
+      ['stories/pixel-picker/index.html', '/posts/pixel-picker/'],
+      ['stories/tx-over-serial/index.html', '/posts/tx-over-serial/'],
+      ['stories/xcolor/index.html', '/posts/xcolor/'],
+    ] as const;
+
+    for (const [oldPath, newPath] of redirects) {
+      const html = await readFile(new URL(oldPath, dist), 'utf8');
+      expect(html).toContain(`http-equiv="refresh" content="0; URL=${newPath}"`);
+      expect(html).toContain(`rel="canonical" href="${newPath}"`);
+      expect(sitemap).not.toContain(`https://www.acheron.fail/${oldPath}`);
+    }
+  });
 });

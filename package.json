@@ -13,6 +13,7 @@
   "scripts": {
     "test": "vitest run",
     "test:links": "node --experimental-strip-types ./tests/test-external-links.ts",
+    "seo": "node --experimental-strip-types ./scripts/seo.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
