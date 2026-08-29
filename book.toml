@@ -26,6 +26,8 @@ command = "preprocessors/image-captions/index.ts"
 [output.html]
 default-theme = "latte"
 preferred-dark-theme = "ayu"
+site-url = "/"
+cname = "www.acheron.fail"
 smart-punctuation = true
 mathjax-support = false
 additional-css = [
@@ -49,7 +51,6 @@ no-section-label = true
 sidebar-header-nav = false
 git-repository-url = "https://github.com/acheronfail/acheronfail.github.io"
 edit-url-template = "https://github.com/acheronfail/acheronfail.github.io/edit/master/{path}"
-# cname = "myproject.rs"
 
 [output.html.print]
 enable = true     # include support for printable output
@@ -84,3 +85,13 @@ heading-split-level = 3 # link results to heading levels
 copy-js = true          # include Javascript code for search
 
 [output.html.redirect]
+"/guides/arch-vm-apple-arm64.html" = "/posts/arch-vm-apple-arm64/"
+"/guides/arch-vm-apple-arm64/index.html" = "/posts/arch-vm-apple-arm64/"
+"/guides/games/d2r.html" = "/posts/d2r.html"
+"/guides/games/nox.html" = "/posts/nox.html"
+"/guides/games/quake.html" = "/posts/quake.html"
+"/guides/games/index.html" = "/tags.html#games"
+"/guides/index.html" = "/tags.html"
+"/stories/pixel-picker/index.html" = "/posts/pixel-picker/"
+"/stories/tx-over-serial/index.html" = "/posts/tx-over-serial/"
+"/stories/xcolor/index.html" = "/posts/xcolor/"

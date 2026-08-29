@@ -7,6 +7,9 @@
         {{#if is_print }}
         <meta name="robots" content="noindex">
         {{/if}}
+        {{#if (eq path "404.md")}}
+        <meta name="robots" content="noindex">
+        {{/if}}
         {{#if base_url}}
         <base href="{{ base_url }}">
         {{/if}}

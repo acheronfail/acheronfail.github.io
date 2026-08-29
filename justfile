@@ -70,3 +70,4 @@ alias b := build
 # build the book
 build: check-mdbook
   mdbook build
+  node --experimental-strip-types scripts/seo.ts
