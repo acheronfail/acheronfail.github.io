@@ -36,7 +36,8 @@
   "links": [
     "<a href="{{latest_post_url}}">my latest post</a>",
     "<a href="about.html">internet stuff</a>",
-    "<a href="https://www.acheron.fail/float-view/">Float View</a>",
+    "<a href="https://github.com/acheronfail/float-view-mobile">Float View</a>",
+    "<a href="https://www.acheron.fail/float-web/">Float Web</a>",
     "<a href="https://www.acheron.fail/chords/">Chords</a>",
     "<a href="https://codepuzzle.dev/">code puzzles</a>",
   ]
